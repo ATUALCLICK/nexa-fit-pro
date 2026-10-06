@@ -22,3 +22,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+Kimi_*
+*.mp4
+!public/videos/*.mp4
