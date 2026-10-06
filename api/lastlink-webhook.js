@@ -1,10 +1,11 @@
 // Vercel Serverless API Route: /api/lastlink-webhook
-// URL: https://[SEU-DOMINIO-VERCEL]/api/lastlink-webhook?token=0e0071cf2ab14a2a9bbb0b5aec9d622c
+// URL: https://www.nexafitpro.store/api/lastlink-webhook?token=5d5ce2c8369d46d49a581c9ad022106a
 
 import { createClient } from '@supabase/supabase-js'
 
-const LASTLINK_SECRET_TOKEN = '0e0071cf2ab14a2a9bbb0b5aec9d622c'
+const LASTLINK_SECRET_TOKEN = '5d5ce2c8369d46d49a581c9ad022106a'
 const VALID_TOKENS = new Set([
+  '5d5ce2c8369d46d49a581c9ad022106a',
   '0e0071cf2ab14a2a9bbb0b5aec9d622c',
   '6d9a16cc47634266a6983c8aec4ce319',
   'a342d08de5754a8abfa9e79c27aa060c',
