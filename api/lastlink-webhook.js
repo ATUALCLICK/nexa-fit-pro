@@ -67,11 +67,15 @@ export default async function handler(req, res) {
 
     console.log('LastLink Webhook received payload:', JSON.stringify(body))
 
-    // Identificação do Evento
-    const eventType = (body.event || body.type || body.status || body.event_name || 'venda-aprovada').toString().toLowerCase()
+    // Identificação do Evento (suporta Event, event, type, etc)
+    const eventType = (body.Event || body.event || body.type || body.status || body.event_name || 'venda-aprovada').toString().toLowerCase()
 
-    // Extração dos dados do comprador
+    // Extração dos dados do comprador (suporta Data.Buyer.Email, buyer.email, etc)
     const buyerEmail = (
+      body.Data?.Buyer?.Email ||
+      body.Data?.Buyer?.email ||
+      body.Buyer?.Email ||
+      body.Buyer?.email ||
       body.buyer?.email ||
       body.customer?.email ||
       body.client?.email ||
@@ -82,6 +86,10 @@ export default async function handler(req, res) {
     ).toString().toLowerCase().trim()
 
     const buyerName = (
+      body.Data?.Buyer?.Name ||
+      body.Data?.Buyer?.name ||
+      body.Buyer?.Name ||
+      body.Buyer?.name ||
       body.buyer?.name ||
       body.customer?.name ||
       body.client?.name ||
@@ -92,21 +100,32 @@ export default async function handler(req, res) {
       'Aluno Nexa Fit'
     ).toString().trim()
 
-    // Identificação do Produto / Plano
+    // Identificação do Produto / Plano via Offer URL, Offer Name, Product ID
+    const offerUrl = (body.Data?.Offer?.Url || body.Offer?.Url || '').toUpperCase()
+    const offerName = (body.Data?.Offer?.Name || body.Offer?.Name || '').toLowerCase()
     const rawProductId = (
+      body.Data?.Products?.[0]?.Id ||
       body.product?.id ||
       body.product?.code ||
       body.product_id ||
       body.productId ||
       body.data?.product?.id ||
       body.data?.product?.code ||
-      body.offer_id ||
-      body.offerCode ||
+      body.Offer?.Id ||
+      body.Data?.Offer?.Id ||
       ''
     ).toString().toUpperCase().trim()
 
-    const planConfig = PRODUCT_MAP[rawProductId] || PRODUCT_MAP['C3DFDBF21'] // Default Anual
-    const transactionId = body.transaction_id || body.order_id || body.id || `LL-${Date.now()}`
+    let planConfig = PRODUCT_MAP['C3DFDBF21'] // Default Anual
+    if (offerUrl.includes('C29E63DD9') || offerName.includes('1 mes') || offerName.includes('mensal') || rawProductId === 'C29E63DD9') {
+      planConfig = PRODUCT_MAP['C29E63DD9']
+    } else if (offerUrl.includes('CD478083B') || offerName.includes('6 mes') || offerName.includes('semestral') || rawProductId === 'CD478083B') {
+      planConfig = PRODUCT_MAP['CD478083B']
+    } else if (offerUrl.includes('C3DFDBF21') || offerName.includes('12 mes') || offerName.includes('anual') || rawProductId === 'C3DFDBF21') {
+      planConfig = PRODUCT_MAP['C3DFDBF21']
+    }
+
+    const transactionId = body.Id || body.id || body.transaction_id || body.order_id || `LL-${Date.now()}`
 
     if (!buyerEmail) {
       return res.status(400).json({ error: 'No buyer email found in payload', received: body })
