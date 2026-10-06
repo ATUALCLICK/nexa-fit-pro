@@ -153,6 +153,19 @@ export default async function handler(req, res) {
       console.error('Supabase profile upsert error:', profileErr)
     }
 
+    // Grava também na tabela de histórico 'webhook_logs' no Supabase
+    try {
+      await supabase.from('webhook_logs').insert({
+        email: buyerEmail,
+        event: eventType,
+        source: 'lastlink',
+        payload: body,
+        status: subscriptionRecord.status
+      })
+    } catch (logErr) {
+      // Continua caso a tabela não exista ainda
+    }
+
     return res.status(200).json({
       success: true,
       message: isCancelled ? 'Access revoked successfully' : 'Access granted successfully',

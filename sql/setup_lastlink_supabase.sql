@@ -41,6 +41,17 @@ CREATE TABLE IF NOT EXISTS public.subscriptions (
   updated_at TIMESTAMPTZ DEFAULT now()
 );
 
+-- 3. Tabela de Logs de Webhook (para você ver cada disparo em tempo real no Supabase Table Editor)
+CREATE TABLE IF NOT EXISTS public.webhook_logs (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT,
+  event TEXT,
+  source TEXT DEFAULT 'lastlink',
+  status TEXT,
+  payload JSONB,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
 -- 3. Índices para busca ultra rápida no login por e-mail
 CREATE INDEX IF NOT EXISTS idx_profiles_email ON public.profiles(email);
 CREATE INDEX IF NOT EXISTS idx_subscriptions_email ON public.subscriptions(email);
