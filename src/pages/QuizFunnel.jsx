@@ -2399,16 +2399,16 @@ function ResultScreen({ answers, onContinue }) {
         marginBottom: 12
       }}>
         <div style={{
-          borderRadius: 12,
+          borderRadius: 14,
           overflow: 'hidden',
           marginBottom: 10,
           border: '1px solid #222',
-          maxHeight: 180
+          background: '#000'
         }}>
           <img
             src={isMale ? '/images/male-transformation.jpg' : '/images/jennifer-transformation.jpg'}
             alt="Transformação Real"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            style={{ width: '100%', height: 'auto', objectFit: 'contain', display: 'block' }}
           />
         </div>
 
@@ -2455,7 +2455,7 @@ function ResultScreen({ answers, onContinue }) {
         </div>
       </div>
 
-      <div className="quiz-result-cards" style={{ marginBottom: 14 }}>
+      <div className="quiz-result-cards" style={{ marginBottom: 12 }}>
         <div className="quiz-result-card" style={{ padding: '8px 10px' }}>
           <div className="quiz-result-card-label" style={{ fontSize: 10 }}>Diagnóstico</div>
           <div className="quiz-result-card-value" style={{ fontSize: 11 }}>{diag.title}</div>
@@ -2464,6 +2464,71 @@ function ResultScreen({ answers, onContinue }) {
           <div className="quiz-result-card-label" style={{ fontSize: 10 }}>Modalidade</div>
           <div className="quiz-result-card-value" style={{ fontSize: 11 }}>Casa ou Academia</div>
         </div>
+      </div>
+
+      {/* ── BARRA DE AVALIAÇÃO DA PESSOA NA FOTO ── */}
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(163,230,53,0.06) 0%, #141414 100%)',
+        border: '1.5px solid rgba(163,230,53,0.3)',
+        borderRadius: 16,
+        padding: '12px 14px',
+        marginBottom: 16,
+        boxShadow: '0 6px 20px rgba(0,0,0,0.4)',
+        textAlign: 'left'
+      }}>
+        {/* Header da Avaliação */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8, flexWrap: 'wrap', gap: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            <div style={{
+              width: 32,
+              height: 32,
+              borderRadius: '50%',
+              background: 'var(--neon)',
+              color: '#000',
+              fontWeight: 900,
+              fontSize: 13,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 0 10px rgba(163,230,53,0.3)'
+            }}>
+              {isMale ? 'C' : 'J'}
+            </div>
+            <div>
+              <div style={{ fontSize: 12, fontWeight: 900, color: '#fff', display: 'flex', alignItems: 'center', gap: 4 }}>
+                <span>{isMale ? 'Carlos Eduardo, 36 anos' : 'Jennifer Souza, 34 anos'}</span>
+                <span style={{ fontSize: 9, color: '#22C55E', background: 'rgba(34,197,94,0.15)', padding: '1px 6px', borderRadius: 6, fontWeight: 800 }}>
+                  ✓ Verificada
+                </span>
+              </div>
+              <div style={{ fontSize: 10, color: 'var(--neon)', fontWeight: 800 }}>
+                {isMale ? '🔥 -18 kg eliminados com este protocolo' : '🔥 -15 kg eliminados com este protocolo'}
+              </div>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 3, color: '#FBBF24', fontSize: 12 }}>
+            <span>⭐⭐⭐⭐⭐</span>
+            <span style={{ fontSize: 11, fontWeight: 900, color: '#fff', marginLeft: 2 }}>5.0</span>
+          </div>
+        </div>
+
+        {/* Citação do Depoimento */}
+        <p style={{
+          fontSize: 11.5,
+          color: '#ddd',
+          lineHeight: 1.45,
+          margin: 0,
+          fontStyle: 'italic',
+          background: 'rgba(0,0,0,0.35)',
+          padding: '8px 10px',
+          borderRadius: 10,
+          border: '1px solid rgba(255,255,255,0.06)'
+        }}>
+          {isMale
+            ? '“Eu sempre desistia de dietas restritivas. O Nexa Fit Pro montou treinos diretos de 20min e cardápios com o que eu gosto. Em 60 dias perdi 18kg e recuperei meu tônus muscular!”'
+            : '“Eu achava que precisava passar fome pra perder a barriga. Com o protocolo personalizado do app, comi bem, treinei em casa e o resultado na foto fala por si só. Valeu cada segundo!”'}
+        </p>
       </div>
 
       <StickyBottomAction onClick={onContinue} text="CONTINUAR" />
