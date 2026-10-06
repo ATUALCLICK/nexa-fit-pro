@@ -13,10 +13,6 @@ export default function Login() {
   const [error, setError] = useState('')
   const [hint, setHint] = useState('')
   const [successInfo, setSuccessInfo] = useState(null)
-  const [showDemoModal, setShowDemoModal] = useState(false)
-  const [demoName, setDemoName] = useState('')
-  const [demoEmail, setDemoEmail] = useState('')
-  const [demoPlan, setDemoPlan] = useState('12m')
   const navigate = useNavigate()
 
   const handleLogin = async (e) => {
@@ -49,28 +45,6 @@ export default function Login() {
       setError('Erro ao validar acesso. Tente novamente em instantes.')
     } finally {
       setLoading(false)
-    }
-  }
-
-  // Criar compra de teste rápida (para o administrador / cliente testar planos)
-  const handleCreateDemoPurchase = async () => {
-    if (!demoEmail || !demoEmail.includes('@')) {
-      alert('Informe um e-mail para o teste.')
-      return
-    }
-    await registerWebhookPurchase({
-      email: demoEmail,
-      name: demoName || 'Aluno VIP',
-      planId: demoPlan,
-      status: 'paid'
-    })
-    setEmail(demoEmail)
-    setShowDemoModal(false)
-    // Tenta logar automaticamente com a conta criada
-    const res = await validatePurchaseEmail(demoEmail)
-    if (res.success) {
-      setSuccessInfo(res.subscription)
-      setTimeout(() => navigate('/'), 1000)
     }
   }
 
@@ -250,114 +224,17 @@ export default function Login() {
 
         </div>
 
-        {/* Links de Suporte & Testes */}
-        <div style={{ textAlign: 'center', marginTop: 22, display: 'flex', flexDirection: 'column', gap: 10 }}>
+        {/* Link para o Quiz/Compra */}
+        <div style={{ textAlign: 'center', marginTop: 22 }}>
           <p style={{ fontSize: 13, color: '#aaa', margin: 0 }}>
             Ainda não adquiriu o seu plano?{' '}
             <Link to="/quiz" style={{ color: 'var(--neon)', fontWeight: 800, textDecoration: 'none' }}>
               Fazer Avaliação & Comprar
             </Link>
           </p>
-
-          <button
-            onClick={() => setShowDemoModal(true)}
-            style={{
-              background: 'transparent',
-              border: '1px dashed rgba(163,230,53,0.4)',
-              color: 'var(--neon)',
-              padding: '8px 14px',
-              borderRadius: 10,
-              fontSize: 11,
-              fontWeight: 800,
-              cursor: 'pointer',
-              margin: '6px auto 0',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 6
-            }}
-          >
-            <span>🛠️</span>
-            <span>Simulador de Webhook / Testar Planos (1m, 3m, 12m)</span>
-          </button>
         </div>
 
       </div>
-
-      {/* Modal de Simulação de Webhook / Teste Rápido de Planos */}
-      {showDemoModal && (
-        <div style={{
-          position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(12px)',
-          zIndex: 500, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 16
-        }}>
-          <div style={{
-            background: '#161616', borderRadius: 20, padding: 20, width: '100%', maxWidth: 400,
-            border: '1.5px solid var(--neon)', boxShadow: '0 10px 40px rgba(0,0,0,0.9)'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 14 }}>
-              <h3 style={{ fontSize: 16, fontWeight: 900, color: 'var(--neon)', margin: 0 }}>
-                ⚡ Simulador de Webhook de Pagamento
-              </h3>
-              <button
-                onClick={() => setShowDemoModal(false)}
-                style={{ background: '#222', border: 'none', color: '#fff', width: 28, height: 28, borderRadius: '50%', cursor: 'pointer' }}
-              >
-                ✕
-              </button>
-            </div>
-
-            <p style={{ fontSize: 12, color: '#ccc', marginBottom: 14 }}>
-              Cadastre um e-mail de compra simulado para testar o login imediato em qualquer plano:
-            </p>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 16 }}>
-              <div>
-                <label style={{ fontSize: 11, color: '#888', fontWeight: 700 }}>Nome do Aluno:</label>
-                <input
-                  type="text"
-                  placeholder="Ex: João Victor"
-                  value={demoName}
-                  onChange={e => setDemoName(e.target.value)}
-                  style={{ width: '100%', height: 42, background: '#222', border: '1px solid #333', borderRadius: 8, padding: '0 10px', color: '#fff', marginTop: 4, boxSizing: 'border-box' }}
-                />
-              </div>
-
-              <div>
-                <label style={{ fontSize: 11, color: '#888', fontWeight: 700 }}>E-mail da Compra:</label>
-                <input
-                  type="email"
-                  placeholder="exemplo@teste.com"
-                  value={demoEmail}
-                  onChange={e => setDemoEmail(e.target.value)}
-                  style={{ width: '100%', height: 42, background: '#222', border: '1px solid #333', borderRadius: 8, padding: '0 10px', color: '#fff', marginTop: 4, boxSizing: 'border-box' }}
-                />
-              </div>
-
-              <div>
-                <label style={{ fontSize: 11, color: '#888', fontWeight: 700 }}>Plano Adquirido:</label>
-                <select
-                  value={demoPlan}
-                  onChange={e => setDemoPlan(e.target.value)}
-                  style={{ width: '100%', height: 42, background: '#222', border: '1px solid #333', borderRadius: 8, padding: '0 10px', color: '#fff', marginTop: 4, boxSizing: 'border-box' }}
-                >
-                  <option value="12m">Plano Anual (12 Meses • 365 dias) — R$ 78,46</option>
-                  <option value="6m">Plano Semestral (6 Meses • 180 dias) — R$ 47,90</option>
-                  <option value="1m">Plano Mensal (1 Mês • 30 dias) — R$ 29,90</option>
-                </select>
-              </div>
-            </div>
-
-            <button
-              onClick={handleCreateDemoPurchase}
-              style={{
-                width: '100%', height: 48, borderRadius: 12, border: 'none',
-                background: 'var(--neon)', color: '#000', fontWeight: 900, fontSize: 14, cursor: 'pointer'
-              }}
-            >
-              Simular Pagamento Aprovado & Entrar 🚀
-            </button>
-          </div>
-        </div>
-      )}
 
     </div>
   )
