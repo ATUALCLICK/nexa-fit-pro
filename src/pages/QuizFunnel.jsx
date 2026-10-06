@@ -2838,8 +2838,8 @@ function CheckoutScreen({ answers, onPurchase }) {
 
   const handleCheckout = (customPlanId) => {
     playQuizBeep(880, 0.1)
-    const targetId = customPlanId || selectedPlan
-    const plan = plans.find(p => p.id === targetId) || plans[2]
+    const planKey = (typeof customPlanId === 'string' && customPlanId) ? customPlanId : selectedPlan
+    const plan = plans.find(p => p.id === planKey) || plans.find(p => p.id === selectedPlan) || plans[0]
     
     // Salva rascunho temporário do quiz para montar o plano pós-compra
     try {
@@ -2849,8 +2849,8 @@ function CheckoutScreen({ answers, onPurchase }) {
       }
     } catch (e) {}
 
-    // Redireciona imediatamente para o checkout da Lastlink
-    if (plan.checkoutUrl) {
+    // Redireciona imediatamente para o checkout da Lastlink correspondente
+    if (plan && plan.checkoutUrl) {
       window.location.href = plan.checkoutUrl
     } else {
       onPurchase()
@@ -3247,7 +3247,7 @@ function CheckoutScreen({ answers, onPurchase }) {
 
         {/* Botão Principal de Compra */}
         <button
-          onClick={handleCheckout}
+          onClick={() => handleCheckout(selectedPlan)}
           className="quiz-cta"
           style={{
             width: '100%',
