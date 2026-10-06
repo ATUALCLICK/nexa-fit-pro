@@ -1,12 +1,13 @@
 // Supabase Edge Function: lastlink-webhook
 // Endpoint: https://zebunzuydwsudexdvmhu.supabase.co/functions/v1/lastlink-webhook
-// Token de Validação: 6d9a16cc47634266a6983c8aec4ce319
+// Token de Validação: 0e0071cf2ab14a2a9bbb0b5aec9d622c
 
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.8"
 
-const LASTLINK_SECRET_TOKEN = "6d9a16cc47634266a6983c8aec4ce319"
+const LASTLINK_SECRET_TOKEN = "0e0071cf2ab14a2a9bbb0b5aec9d622c"
 const VALID_TOKENS = new Set([
+  "0e0071cf2ab14a2a9bbb0b5aec9d622c",
   "6d9a16cc47634266a6983c8aec4ce319",
   "a342d08de5754a8abfa9e79c27aa060c",
   "9af28bbe1fea4c16a2e4f860e2b388cd"
