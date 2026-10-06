@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockups — Medidor de plano nos ecos</title>
+<style>
+  :root{
+    --ink:#1C1917; --body:#57534E; --muted:#A8A29E; --muted2:#78716C;
+    --accent:#B57E5B; --cream:#F3EFE8; --border:#E7E2DA;
+    --sage:#7D8F74; --gold:#D9A05B; --page:#EFEAE2;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--page);color:var(--ink);padding:48px 20px 96px}
+  h1,h2,h3,p,span,button{text-wrap:balance}
+
+  .page-head{max-width:1240px;margin:0 auto 40px;text-align:center}
+  .page-head .kicker{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+  .page-head h1{font-size:28px;font-weight:700;letter-spacing:-.01em;margin-top:10px}
+  .page-head p{margin-top:10px;font-size:15px;line-height:1.6;color:var(--body);max-width:640px;margin-left:auto;margin-right:auto}
+
+  .variants{display:flex;flex-wrap:wrap;gap:40px;justify-content:center;max-width:1240px;margin:0 auto}
+  .variant{width:430px}
+  .variant-tag{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+  .variant-tag .letter{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:700}
+  .variant-tag h2{font-size:17px;font-weight:700;letter-spacing:-.01em}
+  .variant-tag span{font-size:12.5px;color:var(--muted2)}
+  .variant-desc{font-size:13.5px;line-height:1.55;color:var(--body);margin-bottom:16px;min-height:64px}
+  .variant-desc b{color:var(--ink)}
+
+  /* ===== moldura do eco (réplica fiel da tela) ===== */
+  .frame{background:#fff;border-radius:28px;box-shadow:0 24px 60px -24px rgba(28,25,23,.25),0 2px 8px rgba(28,25,23,.06);overflow:hidden;position:relative}
+  .q-header{padding:18px 16px 0;position:relative}
+  .q-back{position:absolute;left:16px;top:18px;width:32px;height:32px;border-radius:50%;background:var(--cream);display:flex;align-items:center;justify-content:center;color:var(--body)}
+  .q-title{text-align:center;font-size:14px;font-weight:500;color:var(--body);padding-top:6px}
+  .q-progress{height:3px;background:var(--cream);margin-top:16px}
+  .q-progress i{display:block;height:100%;width:38%;background:var(--ink);border-radius:99px}
+  .eco{padding:36px 20px 120px;display:flex;flex-direction:column;align-items:center}
+  .eco-hero{position:relative;width:120px;height:120px;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+  .eco-hero::before{content:'';position:absolute;inset:0;border-radius:50%;background:var(--cream)}
+  .eco-hero img{position:relative;width:88px;height:88px;object-fit:contain}
+  .eco h3{font-size:26px;font-weight:600;line-height:1.18;letter-spacing:-.01em;text-align:center}
+  .eco .sub{margin-top:12px;font-size:15px;line-height:1.65;color:var(--body);text-align:center;max-width:340px}
+  .eco .sub b{color:var(--ink)}
+  .proof{margin-top:24px;width:100%;display:flex;align-items:center;gap:16px;border:1px solid var(--border);border-radius:16px;padding:20px;background:#fff}
+  .proof .stat{flex-shrink:0;font-size:32px;font-weight:800;line-height:1;letter-spacing:-.02em;color:var(--accent)}
+  .proof p{font-size:14px;line-height:1.45;color:var(--body)}
+  .cta{position:absolute;left:0;right:0;bottom:0;padding:16px 20px 24px;background:linear-gradient(to top,#fff 70%,rgba(255,255,255,0))}
+  .cta button{width:100%;max-width:360px;margin:0 auto;display:block;background:var(--ink);color:#fff;border:0;border-radius:99px;padding:18px;font-size:14px;font-weight:700;letter-spacing:.06em;cursor:default}
+
+  /* ===== VARIANTE A — anel ===== */
+  .meter-a{margin-top:16px;width:100%;display:flex;align-items:center;gap:16px;border:1px solid var(--border);border-radius:16px;padding:16px 20px;background:#fff}
+  .ring{position:relative;width:64px;height:64px;flex-shrink:0}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .track{stroke:var(--cream)}
+  .ring .fill{stroke:var(--accent);stroke-linecap:round;transition:stroke-dashoffset 1.2s cubic-bezier(.22,1,.36,1)}
+  .ring .pct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  .meter-a .info{flex:1;min-width:0}
+  .meter-a .k{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .meter-a .t{margin-top:3px;font-size:14.5px;font-weight:600;color:var(--ink)}
+  .meter-a .b{margin-top:2px;font-size:12.5px;color:var(--muted2)}
+  .meter-a .segs{display:flex;gap:4px;margin-top:8px}
+  .meter-a .segs i{height:4px;flex:1;border-radius:99px;background:var(--cream)}
+  .meter-a .segs i.done{background:var(--accent)}
+  .meter-a .segs i.now{background:linear-gradient(90deg,var(--accent) 40%,var(--cream) 40%)}
+
+  /* ===== VARIANTE B — barra ===== */
+  .meter-b{margin-top:16px;width:100%;border:1px solid var(--border);border-radius:16px;padding:18px 20px;background:#fff}
+  .meter-b .row{display:flex;align-items:baseline;justify-content:space-between}
+  .meter-b .k{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .meter-b .pct{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--accent)}
+  .meter-b .bar{height:8px;border-radius:99px;background:var(--cream);margin-top:10px;overflow:hidden}
+  .meter-b .bar i{display:block;height:100%;width:0;border-radius:99px;background:linear-gradient(90deg,#C98F6B,var(--accent));transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+  .meter-b .b{margin-top:10px;font-size:12.5px;color:var(--muted2)}
+
+  /* ===== VARIANTE C — trilha de blocos ===== */
+  .meter-c{margin-top:16px;width:100%;border:1px solid var(--border);border-radius:16px;padding:18px 20px;background:#fff}
+  .meter-c .row{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:14px}
+  .meter-c .k{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .meter-c .pct{font-size:24px;font-weight:800;letter-spacing:-.02em;color:var(--accent)}
+  .trail{display:flex;align-items:flex-start;position:relative}
+  .trail::before{content:'';position:absolute;top:11px;left:18px;right:18px;height:2px;background:var(--cream)}
+  .trail .line-fill{position:absolute;top:11px;left:18px;height:2px;width:0;background:var(--accent);transition:width 1.2s cubic-bezier(.22,1,.36,1)}
+  .node{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:6px}
+  .node .dot{width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;position:relative;z-index:1}
+  .node.done .dot{background:var(--accent);border-color:var(--accent)}
+  .node.done .dot svg{width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none}
+  .node.now .dot{border-color:var(--accent)}
+  .node.now .dot::after{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);animation:pulse 1.6s ease-in-out infinite}
+  .node span{font-size:10px;font-weight:500;color:var(--muted);text-align:center;line-height:1.2}
+  .node.done span,.node.now span{color:var(--ink);font-weight:600}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.5);opacity:.5}}
+
+  /* ===== estado MARCO (variante A celebrando) ===== */
+  .meter-marco{margin-top:16px;width:100%;border:1px solid #DED2C4;border-radius:16px;padding:16px 20px;background:linear-gradient(135deg,#FDF9F4,#FBF3EA);position:relative}
+  .meter-marco .top{display:flex;align-items:center;gap:16px}
+  .meter-marco .k{font-size:10.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+  .seal{margin-top:12px;display:inline-flex;align-items:center;gap:7px;background:var(--sage);color:#fff;font-size:12px;font-weight:600;padding:7px 12px;border-radius:99px}
+  .seal svg{width:13px;height:13px;stroke:#fff;stroke-width:3;fill:none}
+  .confetti{position:absolute;border-radius:2px;opacity:.9;animation:drift 2.8s ease-in-out infinite}
+  @keyframes drift{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-6px) rotate(12deg)}}
+  .gold-pulse{animation:goldpulse 1.8s ease-in-out infinite}
+  @keyframes goldpulse{0%,100%{filter:drop-shadow(0 0 0 rgba(217,160,91,0))}50%{filter:drop-shadow(0 0 10px rgba(217,160,91,.55))}}
+
+  @media (max-width:520px){.variant{width:100%}.variant-desc{min-height:0}}
+</style>
+</head>
+<body>
+
+<div class="page-head">
+  <p class="kicker">Viva Pilates · brainstorm de ecos</p>
+  <h1>Medidor de plano — 3 variantes + estado de marco</h1>
+  <p>O mesmo eco real (<b>Na mira: braços</b>, com proof de 63%) recebendo cada formato do medidor. As animações de conta-up e preenchimento rodam ao abrir a página; no funil, elas disparam a cada entrada no eco. O burst de partículas + selo aparece <b>só nos ecos que fecham um bloco</b>.</p>
+</div>
+
+<div class="variants">
+
+  <!-- ============ VARIANTE A ============ -->
+  <div class="variant">
+    <div class="variant-tag"><span class="letter">A</span><h2>Anel de progresso</h2><span>minha recomendação</span></div>
+    <p class="variant-desc">Círculo que preenche com o % no centro — fala a mesma língua do halo circular do herói. Compacto, número grande e âncora visual forte. <b>Mini-segmentos de bloco embaixo dão noção de jornada sem pesar.</b></p>
+    <div class="frame" style="min-height:790px">
+      <div class="q-header">
+        <div class="q-back"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></div>
+        <p class="q-title">Atividade</p>
+        <div class="q-progress"><i></i></div>
+      </div>
+      <div class="eco">
+        <div class="eco-hero"><img src="../icons/thiings/flexibility.png" alt=""></div>
+        <h3>Na mira: <b>braços</b>.</h3>
+        <p class="sub">Essas são regiões que respondem rápido ao Pilates. Agora vamos medir o seu ponto de partida — <b>para você acompanhar o progresso semana a semana.</b></p>
+        <div class="proof"><span class="stat">63%</span><p>das usuárias que escolheram os braços ganharam firmeza usando só o peso do próprio corpo.</p></div>
+
+        <div class="meter-a">
+          <div class="ring">
+            <svg width="64" height="64" viewBox="0 0 64 64">
+              <circle class="track" cx="32" cy="32" r="27" fill="none" stroke-width="6"/>
+              <circle class="fill" cx="32" cy="32" r="27" fill="none" stroke-width="6" stroke-dasharray="169.6" stroke-dashoffset="169.6" data-pct="34"/>
+            </svg>
+            <span class="pct" data-count="34">0%</span>
+          </div>
+          <div class="info">
+            <p class="k">Seu plano</p>
+            <p class="t">34% montado</p>
+            <p class="b">Bloco 2 de 5 · Corpo &amp; medidas</p>
+            <div class="segs"><i class="done"></i><i class="now"></i><i></i><i></i><i></i></div>
+          </div>
+        </div>
+      </div>
+      <div class="cta"><button>CONTINUAR</button></div>
+    </div>
+  </div>
+
+  <!-- ============ VARIANTE B ============ -->
+  <div class="variant">
+    <div class="variant-tag"><span class="letter">B</span><h2>Barra de progresso</h2><span>o clássico</span></div>
+    <p class="variant-desc">Barra horizontal com gradiente terracota e % grande à direita. O formato mais lido da categoria (apps de fitness e bancos usam). <b>Simples e inequívoco, mas genérico — não conversa com o halo do herói.</b></p>
+    <div class="frame" style="min-height:790px">
+      <div class="q-header">
+        <div class="q-back"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></div>
+        <p class="q-title">Atividade</p>
+        <div class="q-progress"><i></i></div>
+      </div>
+      <div class="eco">
+        <div class="eco-hero"><img src="../icons/thiings/flexibility.png" alt=""></div>
+        <h3>Na mira: <b>braços</b>.</h3>
+        <p class="sub">Essas são regiões que respondem rápido ao Pilates. Agora vamos medir o seu ponto de partida — <b>para você acompanhar o progresso semana a semana.</b></p>
+        <div class="proof"><span class="stat">63%</span><p>das usuárias que escolheram os braços ganharam firmeza usando só o peso do próprio corpo.</p></div>
+
+        <div class="meter-b">
+          <div class="row"><span class="k">Seu plano</span><span class="pct" data-count="34">0%</span></div>
+          <div class="bar"><i data-pct="34"></i></div>
+          <p class="b">Bloco 2 de 5 · Corpo &amp; medidas</p>
+        </div>
+      </div>
+      <div class="cta"><button>CONTINUAR</button></div>
+    </div>
+  </div>
+
+  <!-- ============ VARIANTE C ============ -->
+  <div class="variant">
+    <div class="variant-tag"><span class="letter">C</span><h2>Trilha de blocos</h2><span>o mapa da jornada</span></div>
+    <p class="variant-desc">Stepper com os 5 blocos nomeados: completos com check, atual pulsando, futuros apagados. <b>Dá o mapa inteiro da jornada e prepara o terreno para selos colecionáveis depois</b> — mas é o mais alto e disputa mais atenção.</p>
+    <div class="frame" style="min-height:790px">
+      <div class="q-header">
+        <div class="q-back"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></div>
+        <p class="q-title">Atividade</p>
+        <div class="q-progress"><i></i></div>
+      </div>
+      <div class="eco">
+        <div class="eco-hero"><img src="../icons/thiings/flexibility.png" alt=""></div>
+        <h3>Na mira: <b>braços</b>.</h3>
+        <p class="sub">Essas são regiões que respondem rápido ao Pilates. Agora vamos medir o seu ponto de partida — <b>para você acompanhar o progresso semana a semana.</b></p>
+        <div class="proof"><span class="stat">63%</span><p>das usuárias que escolheram os braços ganharam firmeza usando só o peso do próprio corpo.</p></div>
+
+        <div class="meter-c">
+          <div class="row"><span class="k">Seu plano</span><span class="pct" data-count="34">0%</span></div>
+          <div class="trail">
+            <span class="line-fill" data-fill="27%"></span>
+            <div class="node done"><span class="dot"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span><span>Início</span></div>
+            <div class="node now"><span class="dot"></span><span>Corpo</span></div>
+            <div class="node"><span class="dot"></span><span>Rotina</span></div>
+            <div class="node"><span class="dot"></span><span>Metab.</span></div>
+            <div class="node"><span class="dot"></span><span>Plano</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cta"><button>CONTINUAR</button></div>
+    </div>
+  </div>
+
+  <!-- ============ MARCO ============ -->
+  <div class="variant">
+    <div class="variant-tag"><span class="letter">★</span><h2>Estado de marco</h2><span>só ao fechar um bloco</span></div>
+    <p class="variant-desc">A variante vencedora em modo celebração: fundo dourado suave, anel com brilho, <b>selo "Bloco completo" e partículas discretas nas cores da marca</b>. Aparece ~5 vezes no funil inteiro — uma por bloco. (Exibida aqui sobre a variante A.)</p>
+    <div class="frame frame-marco" style="min-height:790px">
+      <div class="q-header">
+        <div class="q-back"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg></div>
+        <p class="q-title">Atividade</p>
+        <div class="q-progress"><i style="width:46%"></i></div>
+      </div>
+      <div class="eco">
+        <div class="eco-hero gold-pulse"><img src="../icons/thiings/flexibility.png" alt=""></div>
+        <h3>Medidas <b>no papel</b>.</h3>
+        <p class="sub">Ponto de partida registrado. Daqui a 4 semanas, <b>é esse número que vai contar a sua evolução.</b></p>
+        <div class="proof"><span class="stat">72%</span><p>das usuárias que registram as medidas no início concluem o primeiro mês do programa.</p></div>
+
+        <div class="meter-marco">
+          <span class="confetti" style="top:10px;right:18px;width:7px;height:7px;background:var(--gold)"></span>
+          <span class="confetti" style="top:26px;right:44px;width:5px;height:5px;background:var(--accent);animation-delay:.4s"></span>
+          <span class="confetti" style="bottom:14px;right:26px;width:6px;height:6px;background:var(--sage);border-radius:50%;animation-delay:.9s"></span>
+          <span class="confetti" style="top:14px;right:70px;width:5px;height:5px;background:var(--gold);border-radius:50%;animation-delay:1.3s"></span>
+          <div class="top">
+            <div class="ring">
+              <svg width="64" height="64" viewBox="0 0 64 64">
+                <circle class="track" cx="32" cy="32" r="27" fill="none" stroke-width="6"/>
+                <circle class="fill" cx="32" cy="32" r="27" fill="none" stroke-width="6" stroke-dasharray="169.6" stroke-dashoffset="169.6" data-pct="40" style="stroke:var(--gold)"/>
+              </svg>
+              <span class="pct" data-count="40">0%</span>
+            </div>
+            <div class="info">
+              <p class="k">Seu plano</p>
+              <p class="t" style="font-size:14.5px;font-weight:600">40% montado</p>
+              <p class="b" style="margin-top:2px;font-size:12.5px;color:var(--muted2)">Bloco 3 de 5 · Rotina</p>
+            </div>
+          </div>
+          <span class="seal"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg>Bloco Corpo &amp; medidas completo</span>
+        </div>
+      </div>
+      <div class="cta"><button>CONTINUAR</button></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // conta-up dos números
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = +el.dataset.count, t0 = performance.now(), dur = 1200
+    const tick = t => {
+      const k = Math.min((t - t0) / dur, 1), e = 1 - Math.pow(1 - k, 3)
+      el.textContent = Math.round(target * e) + '%'
+      if (k < 1) requestAnimationFrame(tick)
+    }
+    setTimeout(() => requestAnimationFrame(tick), 350)
+  })
+  // anel
+  document.querySelectorAll('.ring .fill').forEach(c => {
+    const r = 27, circ = 2 * Math.PI * r, pct = +c.dataset.pct
+    setTimeout(() => { c.style.strokeDashoffset = circ * (1 - pct / 100) }, 350)
+  })
+  // barras
+  document.querySelectorAll('.meter-b .bar i').forEach(i => {
+    setTimeout(() => { i.style.width = i.dataset.pct + '%' }, 350)
+  })
+  // trilha
+  document.querySelectorAll('.trail .line-fill').forEach(l => {
+    setTimeout(() => { l.style.width = l.dataset.fill }, 350)
+  })
+</script>
+
+</body>
+</html>

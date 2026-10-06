@@ -1,0 +1,2448 @@
+{
+  "versao": 1,
+  "nome": "Esqueleto de Jornada — Transformação Corporal (62 slots + checkout)",
+  "derivadoDe": "pilates.json (seed) · mapeamento-telas-objetivos.md · auditoria F0–F10",
+  "contratoSlot": [
+    "papel (tag fechada)",
+    "descricao (papel persuasivo)",
+    "captura (dado→consumidores)",
+    "instrucao (contrato de copy)",
+    "invariantes (o que não muda)"
+  ],
+  "regraInvariancia": "Estrutura fixa: template, ordem, interação, saveAs, guards, progresso. Conteúdo gerado: copy, opções, diagnósticos, tokens, personas, planos.",
+  "vocabularioPapeis": {
+    "micro-compromisso": "Primeiro clique com fricção quase zero; inicia o efeito de comprometimento.",
+    "prova-social": "Outras pessoas como ela validam a decisão (números, depoimentos, mídia).",
+    "declaracao": "Ela declara algo sobre si (objetivo, razão, aspiração) — consistência que o funil ecoa depois.",
+    "eco": "O funil devolve o que ela disse — a sensação de \"isso é pra mim\".",
+    "diagnostico": "Nomeia o problema com rótulo personalizado — virada de consciência.",
+    "medicao": "Auto-avaliação que monta o baseline (corpo, hábitos, capacidades) e calibra o plano.",
+    "autoridade": "Credenciais, experts, prêmios, mídia — por que confiar neste método.",
+    "tangibilizacao": "Mostra o produto concreto (refeições, aulas, plano) antes de vender.",
+    "projecao": "Transforma desejo em plano com número e data — o maior propulsor ao CTA.",
+    "compromisso": "Declaração pública de intenção/confiança que o funil usa para fechar (Cialdini).",
+    "captura": "Pede algo valioso (email, nome, dados) — sempre blindada pelo que veio antes.",
+    "blindagem": "Responde uma objeção específica no ponto em que ela aparece.",
+    "recompensa": "Payoff pelo investimento: perfil, plano pronto, loading teatral, cupom.",
+    "consentimento": "Permissão legal/segura para dados sensíveis — texto fixo, nunca gerado."
+  },
+  "fases": [
+    {
+      "id": "F0",
+      "nome": "Entrada",
+      "slots": [
+        1,
+        2
+      ],
+      "consciencia": "N0→N1",
+      "objetivo": "Compromisso mínimo (1 clique) + relevância imediata. Custo de entrada quase zero."
+    },
+    {
+      "id": "F1",
+      "nome": "Objetivo",
+      "slots": [
+        3,
+        6
+      ],
+      "consciencia": "N1",
+      "objetivo": "Ela declara o objetivo; o funil devolve eco. O \"sim, é pra mim\" acontece aqui."
+    },
+    {
+      "id": "F2",
+      "nome": "Aprofundamento do problema",
+      "slots": [
+        7,
+        12
+      ],
+      "consciencia": "N1→N2",
+      "objetivo": "Streak de 5 investindo na auto-imagem até o diagnóstico — a virada de consciência do funil."
+    },
+    {
+      "id": "F3",
+      "nome": "Avaliação física",
+      "slots": [
+        13,
+        22
+      ],
+      "consciencia": "N2",
+      "objetivo": "Baseline mensurável (força, amplitude, dores). Zona de maior risco: recompensas curtas quebram o streak."
+    },
+    {
+      "id": "F4",
+      "nome": "Estilo de vida",
+      "slots": [
+        23,
+        26
+      ],
+      "consciencia": "N2",
+      "objetivo": "Hábitos neutros de baixo custo emocional (descanso) + eco de energia."
+    },
+    {
+      "id": "F5",
+      "nome": "Nutrição",
+      "slots": [
+        27,
+        38
+      ],
+      "consciencia": "N2→N3",
+      "objetivo": "Hábitos alimentares até a tangibilização (refeições dela) + autoridade que blinda os dados sensíveis."
+    },
+    {
+      "id": "F6",
+      "nome": "Dados + Perfil",
+      "slots": [
+        39,
+        44
+      ],
+      "consciencia": "N3",
+      "objetivo": "Inputs com feedback instantâneo (IMC, meta) culminando no perfil montado — prova de personalização."
+    },
+    {
+      "id": "F7",
+      "nome": "Emoção → Projeção",
+      "slots": [
+        45,
+        52
+      ],
+      "consciencia": "N3→N4",
+      "objetivo": "Gatilhos emocionais, falas por persona e a projeção com data — desejo vira plano concreto."
+    },
+    {
+      "id": "F8",
+      "nome": "Compromisso",
+      "slots": [
+        53,
+        57
+      ],
+      "consciencia": "N4",
+      "objetivo": "Sequência Cialdini: razão declarada → confiança declarada → prova → loading com depoimentos → prova social."
+    },
+    {
+      "id": "F9",
+      "nome": "Captura",
+      "slots": [
+        58,
+        62
+      ],
+      "consciencia": "N4",
+      "objetivo": "Email blindado, nome, plano pronto, cupom raspado — dopamina máxima empurrando ao checkout."
+    },
+    {
+      "id": "F10",
+      "nome": "Checkout",
+      "slots": null,
+      "consciencia": "N4→compra",
+      "objetivo": "Remover fricção, urgência honesta, CTA. Ver seção \"checkout\"."
+    }
+  ],
+  "slots": [
+    {
+      "ordem": 1,
+      "id": "age",
+      "fase": "F0",
+      "template": "select-cards",
+      "papel": "micro-compromisso",
+      "descricao": "Primeiro clique com fricção quase zero; segmenta por idade para personalizar já a tela seguinte.",
+      "captura": {
+        "saveAs": "ageBucket"
+      },
+      "instrucao": "Pergunta trivial de faixa etária do público-alvo (4-6 faixas). Cards visuais grandes, zero texto de apoio. Deve alimentar {{ageLabel}} em pt-BR natural (\"casa dos 30 e 40 anos\").",
+      "invariantes": [
+        "template select-cards",
+        "posição 1 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'ageBucket'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "social-proof",
+      "natureza": "H",
+      "camadaVisual": "ilustração SVG por opção (silhuetas por faixa etária) desenhada no template — ÚNICO asset com acoplamento ao nicho; nicho novo = redesenhar as silhuetas",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-stagger",
+          "M-popSelecao",
+          "M-haptics"
+        ],
+        "detalhe": "Cards entram em stagger; seleção com pop de escala + vibração."
+      }
+    },
+    {
+      "ordem": 2,
+      "id": "social-proof",
+      "fase": "F0",
+      "template": "interstitial",
+      "papel": "prova-social",
+      "descricao": "Ancora relevância (\"pessoas como você usam\") + autoridade de mídia logo na 2ª tela.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Headline com número grande (dezenas de milhares) + segmento do nicho + {{ageLabel}}. Corpo com menções de mídia plausíveis do nicho. Consome ageBucket — é a 1ª personalização visível do funil.",
+      "invariantes": [
+        "template interstitial",
+        "posição 2 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "experience",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-checklist",
+          "M-stagger"
+        ],
+        "detalhe": "Padrão: checklist ou destaque hero (o que couber na copy) + entrada em stagger."
+      }
+    },
+    {
+      "ordem": 3,
+      "id": "experience",
+      "fase": "F1",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Calibra a familiaridade da usuária com o método — binária, respondida em <2s.",
+      "captura": {
+        "saveAs": "experience"
+      },
+      "instrucao": "\"Você já praticou {método}?\" com 2-4 níveis de familiaridade. Alimenta flag de iniciante e {{pilatesLevel}} (renomear o token por nicho, manter a chave).",
+      "invariantes": [
+        "template question-single",
+        "posição 3 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'experience'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-welcome",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 4,
+      "id": "i-welcome",
+      "fase": "F1",
+      "template": "interstitial",
+      "papel": "blindagem",
+      "descricao": "Acolhe e desmonta a objeção nº1 do nicho antes que ela vire abandono.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Tom de boas-vindas + resposta à maior objeção do nicho (\"não precisa de experiência/equipamento/muito tempo\"). Curto: headline + 1-2 frases.",
+      "invariantes": [
+        "template interstitial",
+        "posição 4 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "goal",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-destaqueHero",
+          "D-provaResposta"
+        ],
+        "detalhe": "Nome/promessa do método em tipografia hero; corpo curto."
+      }
+    },
+    {
+      "ordem": 5,
+      "id": "goal",
+      "fase": "F1",
+      "template": "question-single",
+      "papel": "declaracao",
+      "descricao": "Ela declara o objetivo principal — o eixo de copy do funil inteiro.",
+      "captura": {
+        "saveAs": "goal"
+      },
+      "instrucao": "3-5 objetivos típicos do nicho na linguagem DELA (não técnica). O valor alimenta {{goalLabel}}, diagnósticos, @switch do i-goal e headlines do checkout. É a chave mais consumida do funil.",
+      "invariantes": [
+        "template question-single",
+        "posição 5 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'goal'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-goal",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 6,
+      "id": "i-goal",
+      "fase": "F1",
+      "template": "interstitial",
+      "papel": "eco",
+      "descricao": "O funil responde ao que ela declarou — primeira prova de \"isso é pra mim\".",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "@switch por goal: valida o objetivo escolhido + \"nós sabemos como fazer isso acontecer\" (solução implícita, sem nomear produto). 1 variação por valor de goal.",
+      "invariantes": [
+        "template interstitial",
+        "posição 6 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "secondary-goals",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-checklist",
+          "D-destaqueHero",
+          "D-provaResposta"
+        ],
+        "detalhe": "Hoje: 625 chars de eco do objetivo. Depois: o objetivo dela (token) em tipografia hero + 3 checks de como o método ataca. Eco vira espelho visual."
+      }
+    },
+    {
+      "ordem": 7,
+      "id": "secondary-goals",
+      "fase": "F2",
+      "template": "question-multi",
+      "papel": "declaracao",
+      "descricao": "Amplia o desejo para além do objetivo principal — mais respostas para ecoar depois.",
+      "captura": {
+        "saveAs": "secondaryGoals"
+      },
+      "instrucao": "Multi-select de 5-7 benefícios secundários do nicho + opção exclusiva \"nenhum\". Alimenta {{secundarios}} (join pt-BR) e a badge correspondente no plan-ready.",
+      "invariantes": [
+        "template question-multi",
+        "posição 7 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'secondaryGoals'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "body-type",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-selCount"
+        ],
+        "detalhe": "Ícone por objetivo + contador \"N selecionadas\"."
+      }
+    },
+    {
+      "ordem": 8,
+      "id": "body-type",
+      "fase": "F2",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Auto-imagem atual — primeiro investimento emocional do funil.",
+      "captura": {
+        "saveAs": "bodyType"
+      },
+      "instrucao": "4-6 opções visuais (silhuetas/tipos do nicho) com labels neutros, sem julgamento. Ilustrações do nicho.",
+      "invariantes": [
+        "template question-single",
+        "posição 8 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'bodyType'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "dream-body",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 9,
+      "id": "dream-body",
+      "fase": "F2",
+      "template": "question-single",
+      "papel": "declaracao",
+      "descricao": "A versão desejada dela — contraste aspiracional com a tela anterior.",
+      "captura": {
+        "saveAs": "dreamBody"
+      },
+      "instrucao": "Espelha a estrutura da tela body-type no futuro desejado, com labels aspiracionais. Alimenta dreamLabel usado no hero do checkout.",
+      "invariantes": [
+        "template question-single",
+        "posição 9 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'dreamBody'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "best-shape",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 10,
+      "id": "best-shape",
+      "fase": "F2",
+      "template": "question-single",
+      "papel": "declaracao",
+      "descricao": "Nostalgia da melhor forma — evoca memória emocional do corpo/estado desejado.",
+      "captura": {
+        "saveAs": "bestShape"
+      },
+      "instrucao": "Opções temporais (\"nunca estive\", \"há 3+ anos\", \"no último ano\"...). Tom de memória, não de cobrança.",
+      "invariantes": [
+        "template question-single",
+        "posição 10 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'bestShape'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "weight-pattern",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 11,
+      "id": "weight-pattern",
+      "fase": "F2",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Padrão histórico do problema — prepara o terreno para o diagnóstico.",
+      "captura": {
+        "saveAs": "weightPattern"
+      },
+      "instrucao": "4-5 trajetórias típicas do problema do nicho (\"sempre lutei\", \"piorou depois dos X\", \"efeito sanfona\"...). Alimenta variantes de diagnóstico (diagnoses[].when).",
+      "invariantes": [
+        "template question-single",
+        "posição 11 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'weightPattern'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-diagnosis",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 12,
+      "id": "i-diagnosis",
+      "fase": "F2",
+      "template": "interstitial",
+      "papel": "diagnostico",
+      "descricao": "★ Nomeia o problema com rótulo personalizado — a maior virada de consciência (N1→N2) do funil.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Formato \"Parece que você tem o perfil de X\". 6-8 diagnósticos do nicho com regras when declarativas sobre respostas anteriores + 1 fallback sem when. Cada um: título, copy de 2-3 frases (valida + explica + esperança), cardLabel/cardValue curtos. Tom de descoberta, nunca de julgamento.",
+      "invariantes": [
+        "template interstitial",
+        "posição 12 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "flexibility",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-destaqueHero",
+          "M-pulse",
+          "M-stagger",
+          "D-provaResposta"
+        ],
+        "detalhe": "Rótulo do diagnóstico (token) em hero com pulso — a virada de consciência precisa de peso visual, não confete."
+      }
+    },
+    {
+      "ordem": 13,
+      "id": "flexibility",
+      "fase": "F3",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Auto-avaliação física 1/N — começa o baseline mensurável.",
+      "captura": {
+        "saveAs": "flexibility"
+      },
+      "instrucao": "Capacidade física central do nicho (\"você se considera flexível?\") com 4 níveis ordenados. Alimenta {{flexibilityLabel}}.",
+      "invariantes": [
+        "template question-single",
+        "posição 13 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'flexibility'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "frequency",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 14,
+      "id": "frequency",
+      "fase": "F3",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Frequência atual de prática — calibra a intensidade do plano.",
+      "captura": {
+        "saveAs": "frequency"
+      },
+      "instrucao": "4 opções de frequência (nunca → quase todo dia). Baixo custo emocional.",
+      "invariantes": [
+        "template question-single",
+        "posição 14 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'frequency'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "focus-zones",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 15,
+      "id": "focus-zones",
+      "fase": "F3",
+      "template": "question-multi",
+      "papel": "declaracao",
+      "descricao": "Regiões/áreas-alvo — o dado mais ecoado do funil inteiro.",
+      "captura": {
+        "saveAs": "focusZones"
+      },
+      "instrucao": "Multi-select de 5-7 zonas do nicho. Alimenta {{foco}} (join pt-BR), ecoado em i-foco, i-activity e wellness-profile. As opções precisam de labels curtos (1-2 palavras).",
+      "invariantes": [
+        "template question-multi",
+        "posição 15 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'focusZones'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-foco",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-selCount"
+        ],
+        "detalhe": "Padrão: ícone por opção + contador \"N selecionadas\"."
+      }
+    },
+    {
+      "ordem": 16,
+      "id": "i-foco",
+      "fase": "F3",
+      "template": "interstitial",
+      "papel": "eco",
+      "descricao": "Quebra o streak de perguntas ecoando as zonas escolhidas; transforma medição em propósito.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Headline \"Na mira: {{foco}}.\" + corpo curto: essas regiões respondem rápido ao método + progresso mensurável semana a semana.",
+      "invariantes": [
+        "template interstitial",
+        "posição 16 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "plank",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-checklist",
+          "M-stagger",
+          "D-provaResposta"
+        ],
+        "detalhe": "Padrão: checklist ou destaque hero (o que couber na copy) + entrada em stagger."
+      }
+    },
+    {
+      "ordem": 17,
+      "id": "plank",
+      "fase": "F3",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Teste de força/resistência — auto-exposição com esforço imaginado (zona de risco de abandono).",
+      "captura": {
+        "saveAs": "plank"
+      },
+      "instrucao": "\"Quanto tempo você consegue X?\" com 4 faixas. Pergunta direta, sem subheadline longa — o streak está longo aqui.",
+      "invariantes": [
+        "template question-single",
+        "posição 17 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'plank'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "toe-touch",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 18,
+      "id": "toe-touch",
+      "fase": "F3",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Teste de amplitude/mobilidade.",
+      "captura": {
+        "saveAs": "toeTouch"
+      },
+      "instrucao": "\"Você consegue fazer Y?\" com 4 níveis (de \"com folga\" a \"nem perto\").",
+      "invariantes": [
+        "template question-single",
+        "posição 18 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'toeTouch'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "balance",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 19,
+      "id": "balance",
+      "fase": "F3",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Teste de equilíbrio — com variante por idade.",
+      "captura": {
+        "saveAs": "balance"
+      },
+      "instrucao": "Pergunta base + variante 55+ (variantRules) com referência do cotidiano (\"descer escadas\"). Modelo de como variantes por persona funcionam.",
+      "invariantes": [
+        "template question-single",
+        "posição 19 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'balance'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "pain-points",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-iconOpcao"
+        ],
+        "detalhe": "Ícones para conceitos corporais abstratos (equilíbrio, postura)."
+      }
+    },
+    {
+      "ordem": 20,
+      "id": "pain-points",
+      "fase": "F3",
+      "template": "question-multi",
+      "papel": "medicao",
+      "descricao": "Mapeia dores/limitações — alimenta diagnóstico, adaptações, FAQ e persona de dor.",
+      "captura": {
+        "saveAs": "painPoints"
+      },
+      "instrucao": "Multi-select das dores/limitações típicas do nicho + exclusiva \"nenhuma\". Alimenta {{dorAlvo}}, {{dorAlvoFrase}}, {{dorAdaptacao}}, o guard do i-adaptacao e FAQs condicionais.",
+      "invariantes": [
+        "template question-multi",
+        "posição 20 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'painPoints'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-activity",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-selCount"
+        ],
+        "detalhe": "Ícone por região de dor + contador de seleções."
+      }
+    },
+    {
+      "ordem": 21,
+      "id": "i-activity",
+      "fase": "F3",
+      "template": "interstitial",
+      "papel": "eco",
+      "descricao": "Consolida a avaliação física: eco duplo (foco + dor) + promessa de método suave.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "\"Vamos montar sequências para {{foco}} que fortalecem o core, {{dorAlvoFrase}} e melhoram o condicionamento de forma suave\" — adaptar a estrutura ao nicho mantendo os dois ecos.",
+      "invariantes": [
+        "template interstitial",
+        "posição 21 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-adaptacao",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-checklist"
+        ],
+        "detalhe": "Benefícios em 3 checks em vez de parágrafo."
+      }
+    },
+    {
+      "ordem": 22,
+      "id": "i-adaptacao",
+      "fase": "F3",
+      "template": "interstitial",
+      "papel": "blindagem",
+      "descricao": "◆ Responde a objeção \"vai doer / vai piorar?\" antes que ela abandone por medo.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Guard: painPoints ≠ nenhuma. Texto com {{dorAdaptacao}}: as adaptações/variações do método para a dor dela. Tom de cuidado técnico.",
+      "invariantes": [
+        "template interstitial",
+        "posição 22 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)",
+        "guard condicional (estrutura fixa; a regra pode mudar de conteúdo, não de existência)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": true,
+      "guardSeed": {
+        "all": [
+          {
+            "key": "painPoints",
+            "op": "not-empty"
+          },
+          {
+            "key": "painPoints",
+            "op": "excludes",
+            "value": "nenhuma"
+          }
+        ]
+      },
+      "nextSeed": "work-routine",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-checklist",
+          "M-stagger"
+        ],
+        "detalhe": "Padrão: checklist ou destaque hero (o que couber na copy) + entrada em stagger."
+      }
+    },
+    {
+      "ordem": 23,
+      "id": "work-routine",
+      "fase": "F4",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Contexto de agenda — prepara o \"o plano cabe na sua vida\".",
+      "captura": {
+        "saveAs": "workRoutine"
+      },
+      "instrucao": "4-5 janelas de rotina de trabalho típicas do público. Baixo custo emocional (descanso do bloco físico).",
+      "invariantes": [
+        "template question-single",
+        "posição 23 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'workRoutine'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "typical-day",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 24,
+      "id": "typical-day",
+      "fase": "F4",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Nível de sedentarismo/movimento do dia a dia.",
+      "captura": {
+        "saveAs": "typicalDay"
+      },
+      "instrucao": "4 opções de padrão de dia (parada, em pé, mista, muito ativa).",
+      "invariantes": [
+        "template question-single",
+        "posição 24 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'typicalDay'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "energy",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 25,
+      "id": "energy",
+      "fase": "F4",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Horário de queda de energia — amplia o problema para além do corpo.",
+      "captura": {
+        "saveAs": "energy"
+      },
+      "instrucao": "4-5 janelas do dia (\"manhã\", \"pós-almoço\", \"fim da tarde\", \"noite\"). Alimenta o @switch do i-energy.",
+      "invariantes": [
+        "template question-single",
+        "posição 25 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'energy'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-energy",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 26,
+      "id": "i-energy",
+      "fase": "F4",
+      "template": "interstitial",
+      "papel": "eco",
+      "descricao": "Eco do horário de energia + conecta o método à disposição diária.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "@switch por energy: nomeia o momento de queda dela + promete disposição constante com a rotina do método.",
+      "invariantes": [
+        "template interstitial",
+        "posição 26 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "water",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-checklist",
+          "D-statCallout",
+          "M-stagger",
+          "D-provaResposta"
+        ],
+        "detalhe": "Hoje: 723 chars de eco em prosa. Depois: statCallout com o número-chave (ex.: \"% de energia\") + 3 checks curtos. O eco vira estrutura, não parágrafo."
+      }
+    },
+    {
+      "ordem": 27,
+      "id": "water",
+      "fase": "F5",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Hidratação — abre o bloco de nutrição com a pergunta de menor custo emocional.",
+      "captura": {
+        "saveAs": "water"
+      },
+      "instrucao": "4 faixas de copos/garrafas por dia. Rápida.",
+      "invariantes": [
+        "template question-single",
+        "posição 27 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'water'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "sleep",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 28,
+      "id": "sleep",
+      "fase": "F5",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Sono — segundo hábito neutro do trio.",
+      "captura": {
+        "saveAs": "sleep"
+      },
+      "instrucao": "4 faixas de horas por noite.",
+      "invariantes": [
+        "template question-single",
+        "posição 28 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'sleep'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "stress",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 29,
+      "id": "stress",
+      "fase": "F5",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Estresse — fecha o trio de estilo de vida.",
+      "captura": {
+        "saveAs": "stress"
+      },
+      "instrucao": "4 níveis (\"baixo\" a \"muito alto\").",
+      "invariantes": [
+        "template question-single",
+        "posição 29 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'stress'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "breakfast",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 30,
+      "id": "breakfast",
+      "fase": "F5",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Rotina de refeições 1/3 — detecta quem pula refeição.",
+      "captura": {
+        "saveAs": "breakfast"
+      },
+      "instrucao": "Janelas de horário + opção \"pulo\". A resposta alimenta a regra do i-jejum e {{refeicaoPulada}}.",
+      "invariantes": [
+        "template question-single",
+        "posição 30 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'breakfast'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "lunch",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 31,
+      "id": "lunch",
+      "fase": "F5",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Rotina de refeições 2/3.",
+      "captura": {
+        "saveAs": "lunch"
+      },
+      "instrucao": "Mesma estrutura do breakfast. Manter streak curto e mecânico.",
+      "invariantes": [
+        "template question-single",
+        "posição 31 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'lunch'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "dinner",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 32,
+      "id": "dinner",
+      "fase": "F5",
+      "template": "question-single",
+      "papel": "medicao",
+      "descricao": "Rotina de refeições 3/3.",
+      "captura": {
+        "saveAs": "dinner"
+      },
+      "instrucao": "Mesma estrutura. Terceira seguida — a recompensa vem na próxima tela.",
+      "invariantes": [
+        "template question-single",
+        "posição 32 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'dinner'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-jejum",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 33,
+      "id": "i-jejum",
+      "fase": "F5",
+      "template": "interstitial",
+      "papel": "recompensa",
+      "descricao": "Recompensa do bloco de refeições para TODOS (incondicional); a variante personaliza quem pula refeição.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Base incondicional: \"seu plano alimentar se adapta à sua rotina real — sem horrorismo\". Variante jejum (variants por regra): valida o hábito com {{refeicaoPulada}} e explica janelas de alimentação do método.",
+      "invariantes": [
+        "template interstitial",
+        "posição 33 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "diet-type",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-checklist",
+          "D-statCallout"
+        ],
+        "detalhe": "Hoje: 403 chars. Depois: statCallout + checklist de 3 itens. Mesmo padrão dos ecos densos."
+      }
+    },
+    {
+      "ordem": 34,
+      "id": "diet-type",
+      "fase": "F5",
+      "template": "question-single",
+      "papel": "declaracao",
+      "descricao": "Padrão alimentar — personaliza o cardápio mostrado na tela seguinte.",
+      "captura": {
+        "saveAs": "dietType"
+      },
+      "instrucao": "5-7 padrões alimentares do nicho/país (tradicional, low carb, vegetariana...). Alimenta mealsByDiet do i-meal-preview.",
+      "invariantes": [
+        "template question-single",
+        "posição 34 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'dietType'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-meal-preview",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-iconOpcao"
+        ],
+        "detalhe": "Hoje: 527 chars em opções longas. Depois: opção rica — ícone + título curto + descrição de 1 linha. Reduz carga de leitura na pergunta mais densa do F5."
+      }
+    },
+    {
+      "ordem": 35,
+      "id": "i-meal-preview",
+      "fase": "F5",
+      "template": "interstitial",
+      "papel": "tangibilizacao",
+      "descricao": "★ Mostra o produto concreto pela 1ª vez: refeições da dieta DELA — valor tangível antes da venda.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "3-4 refeições com nome, kcal e tempo de preparo plausíveis para o dietType. Layout de cards com imagens do nicho. Zero venda — só valor percebido.",
+      "invariantes": [
+        "template interstitial",
+        "posição 35 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "bad-habits",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-miniCards",
+          "M-stagger",
+          "D-provaResposta"
+        ],
+        "detalhe": "Hoje: 826 chars de prosa sobre refeições. Depois: 4 mini-cards (café/almoço/lanche/jantar) com ícone lucide + título + 1 linha cada, entrando em stagger. Escaneável em 3s em vez de parede de texto."
+      }
+    },
+    {
+      "ordem": 36,
+      "id": "bad-habits",
+      "fase": "F5",
+      "template": "question-multi",
+      "papel": "medicao",
+      "descricao": "Hábitos a evitar — auto-exposição leve pós-recompensa.",
+      "captura": {
+        "saveAs": "badHabits"
+      },
+      "instrucao": "Multi-select de hábitos do nicho (beliscar, refrigerante, pular refeições...) + exclusiva \"nenhum\".",
+      "invariantes": [
+        "template question-multi",
+        "posição 36 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'badHabits'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "cravings",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-selCount"
+        ],
+        "detalhe": "Padrão: ícone por opção + contador \"N selecionadas\"."
+      }
+    },
+    {
+      "ordem": 37,
+      "id": "cravings",
+      "fase": "F5",
+      "template": "question-multi",
+      "papel": "medicao",
+      "descricao": "Compulsões/vontades — último dado de nutrição.",
+      "captura": {
+        "saveAs": "cravings"
+      },
+      "instrucao": "Multi-select de cravings típicos (doces, salgados, fast food...) + exclusiva.",
+      "invariantes": [
+        "template question-multi",
+        "posição 37 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'cravings'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-authority",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-selCount"
+        ],
+        "detalhe": "Padrão: ícone por opção + contador \"N selecionadas\"."
+      }
+    },
+    {
+      "ordem": 38,
+      "id": "i-authority",
+      "fase": "F5",
+      "template": "interstitial",
+      "papel": "autoridade",
+      "descricao": "★ Credibilidade máxima posicionada imediatamente antes de pedir dados sensíveis.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Equipe, certificações, números e prêmios do nicho. Função de posição: blindar o consentimento da tela seguinte. Não mover de lugar.",
+      "invariantes": [
+        "template interstitial",
+        "posição 38 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "height",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-checklist",
+          "M-stagger"
+        ],
+        "detalhe": "Padrão: checklist ou destaque hero (o que couber na copy) + entrada em stagger."
+      }
+    },
+    {
+      "ordem": 39,
+      "id": "height",
+      "fase": "F6",
+      "template": "input-measure",
+      "papel": "consentimento",
+      "descricao": "1º dado sensível — exige consentimento explícito de dados de saúde.",
+      "captura": {
+        "saveAs": "height"
+      },
+      "instrucao": "Input com toggle de unidade + nota de consentimento com cadeado (\"processamos seus dados de saúde para...\"). Alimenta o IMC. Texto legal fixo, não gerado.",
+      "invariantes": [
+        "template input-measure",
+        "posição 39 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'height'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "weight",
+      "natureza": "T",
+      "camadaVisual": "widget de input estrutural (régua/campo) — não é asset; o feedback instantâneo (IMC, faixa) é texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animContador"
+        ],
+        "detalhe": "Padrão: feedback numérico animado (IMC, faixa, data)."
+      }
+    },
+    {
+      "ordem": 40,
+      "id": "weight",
+      "fase": "F6",
+      "template": "input-measure",
+      "papel": "captura",
+      "descricao": "Peso atual — o feedback instantâneo (IMC) transforma fricção em recompensa.",
+      "captura": {
+        "saveAs": "weight"
+      },
+      "instrucao": "Input numérico com feedback visual ao digitar (IMC/faixa). Nota de privacidade reforçada.",
+      "invariantes": [
+        "template input-measure",
+        "posição 40 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'weight'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "goal-weight",
+      "natureza": "T",
+      "camadaVisual": "widget de input estrutural (régua/campo) — não é asset; o feedback instantâneo (IMC, faixa) é texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animContador"
+        ],
+        "detalhe": "Padrão: feedback numérico animado (IMC, faixa, data)."
+      }
+    },
+    {
+      "ordem": 41,
+      "id": "goal-weight",
+      "fase": "F6",
+      "template": "input-measure",
+      "papel": "captura",
+      "descricao": "Meta — feedback instantâneo (% da meta, kg a perder) mantém o momentum.",
+      "captura": {
+        "saveAs": "goalWeight"
+      },
+      "instrucao": "Input com feedback motivacional (\"faltam X kg — totalmente alcançável\") + nota de meta saudável/realista.",
+      "invariantes": [
+        "template input-measure",
+        "posição 41 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'goalWeight'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "age-input",
+      "natureza": "T",
+      "camadaVisual": "widget de input estrutural (régua/campo) — não é asset; o feedback instantâneo (IMC, faixa) é texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animContador"
+        ],
+        "detalhe": "Padrão: feedback numérico animado (IMC, faixa, data)."
+      }
+    },
+    {
+      "ordem": 42,
+      "id": "age-input",
+      "fase": "F6",
+      "template": "input-measure",
+      "papel": "captura",
+      "descricao": "Idade exata — refina a faixa da tela 01 para os cálculos.",
+      "captura": {
+        "saveAs": "ageYears"
+      },
+      "instrucao": "Input simples de número. Ecoa a faixa se possível.",
+      "invariantes": [
+        "template input-measure",
+        "posição 42 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'ageYears'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "loading-analysis",
+      "natureza": "T",
+      "camadaVisual": "widget de input estrutural (régua/campo) — não é asset; o feedback instantâneo (IMC, faixa) é texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animContador"
+        ],
+        "detalhe": "Feedback numérico animado."
+      }
+    },
+    {
+      "ordem": 43,
+      "id": "loading-analysis",
+      "fase": "F6",
+      "template": "loading",
+      "papel": "recompensa",
+      "descricao": "Teatraliza o processamento — sensação de \"estão construindo algo pra mim\".",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "3-4 barras de progresso com verbetes de análise do nicho (\"analisando seu perfil corporal...\", \"calculando seu ritmo...\"). 3-5s total.",
+      "invariantes": [
+        "template loading",
+        "posição 43 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "wellness-profile",
+      "natureza": "T",
+      "camadaVisual": "animação de progresso estrutural (círculo SVG) — o conteúdo persuasivo são os depoimentos, texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-steps",
+          "M-animContador"
+        ],
+        "detalhe": "Steps com check + % animado (mesmo padrão do loading-plan)."
+      }
+    },
+    {
+      "ordem": 44,
+      "id": "wellness-profile",
+      "fase": "F6",
+      "template": "result",
+      "papel": "recompensa",
+      "descricao": "★ O perfil dela montado (IMC + diagnóstico + estilo + foco) — a prova máxima de personalização.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Cards: IMC com escala e faixa + card do diagnóstico (cardLabel/cardValue) + nível + estilo de vida + flexibilidade + foco. TODOS os valores via tokens/calc — nada fixo. Consolida N3.",
+      "invariantes": [
+        "template result",
+        "posição 44 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "weight-triggers",
+      "natureza": "H",
+      "camadaVisual": "data-viz estrutural: gráfico de projeção peso→meta, cards de diagnóstico com ícones lucide, barras — sem asset externo, mas a persuasão é visual",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animPreench",
+          "M-stagger"
+        ],
+        "detalhe": "Barras/cards do perfil preenchem e entram em sequência — prova de personalização animada."
+      }
+    },
+    {
+      "ordem": 45,
+      "id": "weight-triggers",
+      "fase": "F7",
+      "template": "question-multi",
+      "papel": "declaracao",
+      "descricao": "Gatilhos de vida — abre o bloco emocional e detecta personas-chave.",
+      "captura": {
+        "saveAs": "weightTriggers"
+      },
+      "instrucao": "Multi-select de gatilhos (filhos, trabalho, relacionamento, idade, saúde...) + exclusiva. Alimenta personas mamãe/transição — as chaves precisam bater com os detect das personas.",
+      "invariantes": [
+        "template question-multi",
+        "posição 45 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'weightTriggers'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-mamae",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-selCount"
+        ],
+        "detalhe": "Ícone por gatilho emocional + contador."
+      }
+    },
+    {
+      "ordem": 46,
+      "id": "i-mamae",
+      "fase": "F7",
+      "template": "interstitial",
+      "papel": "blindagem",
+      "descricao": "◆ Fala com a mamãe: transforma culpa em permissão.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Guard: persona mamae. Valida a rotina de mãe, sessões curtas, \"cuidar de você é cuidar deles\". Tom de alívio.",
+      "invariantes": [
+        "template interstitial",
+        "posição 46 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)",
+        "guard condicional (estrutura fixa; a regra pode mudar de conteúdo, não de existência)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": true,
+      "guardSeed": {
+        "any": [
+          {
+            "key": "weightTriggers",
+            "op": "includes",
+            "value": "gravidez"
+          },
+          {
+            "key": "mainReason",
+            "op": "eq",
+            "value": "pos-parto"
+          }
+        ]
+      },
+      "nextSeed": "q-liberacao",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-destaqueHero",
+          "D-provaResposta"
+        ],
+        "detalhe": "Fala da persona em hero; já é audience-targeted — vira espelho visual."
+      }
+    },
+    {
+      "ordem": 47,
+      "id": "q-liberacao",
+      "fase": "F7",
+      "template": "question-single",
+      "papel": "captura",
+      "descricao": "◆ Segurança pós-parto — cuidado que vira confiança.",
+      "captura": {
+        "saveAs": "liberacaoMedica"
+      },
+      "instrucao": "Guard: persona mamae. Pergunta binária sobre liberação médica, tom de cuidado. Alimenta FAQ pós-parto condicional.",
+      "invariantes": [
+        "template question-single",
+        "posição 47 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'liberacaoMedica'",
+        "guard condicional (estrutura fixa; a regra pode mudar de conteúdo, não de existência)"
+      ],
+      "contaNoProgresso": true,
+      "condicional": true,
+      "guardSeed": {
+        "any": [
+          {
+            "key": "weightTriggers",
+            "op": "includes",
+            "value": "gravidez"
+          },
+          {
+            "key": "mainReason",
+            "op": "eq",
+            "value": "pos-parto"
+          }
+        ]
+      },
+      "nextSeed": "i-menopausa",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 48,
+      "id": "i-menopausa",
+      "fase": "F7",
+      "template": "interstitial",
+      "papel": "blindagem",
+      "descricao": "◆ Fala com a menopausa: o corpo mudou, o método entende.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Guard: persona menopausa. Hormônios, metabolismo mais lento, tom maduro e respeitoso.",
+      "invariantes": [
+        "template interstitial",
+        "posição 48 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)",
+        "guard condicional (estrutura fixa; a regra pode mudar de conteúdo, não de existência)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": true,
+      "guardSeed": {
+        "all": [
+          {
+            "not": {
+              "any": [
+                {
+                  "key": "weightTriggers",
+                  "op": "includes",
+                  "value": "gravidez"
+                },
+                {
+                  "key": "mainReason",
+                  "op": "eq",
+                  "value": "pos-parto"
+                }
+              ]
+            }
+          },
+          {
+            "any": [
+              {
+                "key": "weightTriggers",
+                "op": "includes",
+                "value": "menopausa"
+              },
+              {
+                "key": "weightTriggers",
+                "op": "includes",
+                "value": "metabolismo"
+              }
+            ]
+          }
+        ]
+      },
+      "nextSeed": "event",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-destaqueHero",
+          "D-provaResposta"
+        ],
+        "detalhe": "Idem i-mamae para a persona menopausa."
+      }
+    },
+    {
+      "ordem": 49,
+      "id": "event",
+      "fase": "F7",
+      "template": "question-single",
+      "papel": "declaracao",
+      "descricao": "Evento-motivador — ancora a meta no calendário (ou declara ausência).",
+      "captura": {
+        "saveAs": "event"
+      },
+      "instrucao": "7-9 eventos típicos (férias, casamento, festa...) + \"nenhum\". Branching: nenhum pula event-date. Motivador vira @switch no projection.",
+      "invariantes": [
+        "template question-single",
+        "posição 49 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'event'",
+        "branching em next (estrutura fixa)"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": {
+        "default": "event-date",
+        "cases": [
+          {
+            "when": {
+              "key": "event",
+              "op": "eq",
+              "value": "nenhum"
+            },
+            "goto": "i-alinhamento"
+          }
+        ]
+      },
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-iconOpcao"
+        ],
+        "detalhe": "Ícone por ocasião (casamento, férias, praia…)."
+      }
+    },
+    {
+      "ordem": 50,
+      "id": "event-date",
+      "fase": "F7",
+      "template": "input-measure",
+      "papel": "captura",
+      "descricao": "◆ A data do evento — concretiza a urgência honesta.",
+      "captura": {
+        "saveAs": "eventDate"
+      },
+      "instrucao": "Guard: event ≠ nenhum. Input de data, skippable, com privacy note.",
+      "invariantes": [
+        "template input-measure",
+        "posição 50 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'eventDate'",
+        "guard condicional (estrutura fixa; a regra pode mudar de conteúdo, não de existência)"
+      ],
+      "contaNoProgresso": true,
+      "condicional": true,
+      "guardSeed": {
+        "key": "event",
+        "op": "neq",
+        "value": "nenhum"
+      },
+      "nextSeed": "i-alinhamento",
+      "natureza": "T",
+      "camadaVisual": "widget de input estrutural (régua/campo) — não é asset; o feedback instantâneo (IMC, faixa) é texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animContador"
+        ],
+        "detalhe": "Padrão: feedback numérico animado (IMC, faixa, data)."
+      }
+    },
+    {
+      "ordem": 51,
+      "id": "i-alinhamento",
+      "fase": "F7",
+      "template": "interstitial",
+      "papel": "eco",
+      "descricao": "◆ Eco do motivador: o plano respeita o prazo DELA (com ou sem evento).",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Variante para quem tem evento (contagem/âncora) vs quem não tem (ritmo próprio). Curto.",
+      "invariantes": [
+        "template interstitial",
+        "posição 51 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)",
+        "guard condicional (estrutura fixa; a regra pode mudar de conteúdo, não de existência)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": true,
+      "guardSeed": {
+        "key": "$flag:metaAgressiva",
+        "op": "truthy"
+      },
+      "nextSeed": "projection",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-checklist",
+          "D-provaResposta"
+        ],
+        "detalhe": "Alinhamento em checks curtos."
+      }
+    },
+    {
+      "ordem": 52,
+      "id": "projection",
+      "fase": "F7",
+      "template": "result",
+      "papel": "projecao",
+      "descricao": "★ O maior propulsor ao CTA: o desejo vira plano concreto com data (\"60 kg até novembro — a tempo do seu casamento\").",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Gráfico de projeção com ritmo realista do nicho (ex.: 0,5-0,75kg/sem) + subheadline com {{goalWeight}} + {{projectionDate}} + @switch do evento + quote de expert + disclaimer obrigatório de resultados. Não remover o disclaimer (S4 bloqueia).",
+      "invariantes": [
+        "template result",
+        "posição 52 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "main-reason",
+      "natureza": "H",
+      "camadaVisual": "data-viz estrutural: gráfico de projeção peso→meta, cards de diagnóstico com ícones lucide, barras — sem asset externo, mas a persuasão é visual",
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-contador",
+          "D-destaqueHero",
+          "D-confettiWhen",
+          "M-animPreench",
+          "M-animContador",
+          "M-stagger"
+        ],
+        "detalhe": "Hoje: 1090 chars de prosa + gráfico estático. Depois: contador animado peso→meta (60 kg subindo do valor atual), data em tipografia hero, curva que se desenha na entrada, confete quando goalPct alto, cards em stagger. A projeção deixa de ser lida — é assistida."
+      }
+    },
+    {
+      "ordem": 53,
+      "id": "main-reason",
+      "fase": "F8",
+      "template": "question-single",
+      "papel": "declaracao",
+      "descricao": "A razão emocional profunda — compromisso verbal (Cialdini) que ancora o fechamento.",
+      "captura": {
+        "saveAs": "mainReason"
+      },
+      "instrucao": "5-7 razões emocionais (confiança, saúde, família, espelho...). Alimenta checkout.headlines — a chave precisa bater com o map de headlines.",
+      "invariantes": [
+        "template question-single",
+        "posição 53 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'mainReason'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "confidence",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "DSL",
+        "mecanismos": [
+          "D-iconOpcao"
+        ],
+        "detalhe": "Ícone por razão emocional."
+      }
+    },
+    {
+      "ordem": 54,
+      "id": "confidence",
+      "fase": "F8",
+      "template": "question-single",
+      "papel": "compromisso",
+      "descricao": "Ela declara o quanto acredita — consistência que a próxima tela responde.",
+      "captura": {
+        "saveAs": "confidence"
+      },
+      "instrucao": "3-4 níveis de confiança. Quem duvida recebe a variante cética no i-awards (variantRules).",
+      "invariantes": [
+        "template question-single",
+        "posição 54 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'confidence'"
+      ],
+      "contaNoProgresso": true,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "i-awards",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 55,
+      "id": "i-awards",
+      "fase": "F8",
+      "template": "interstitial",
+      "papel": "autoridade",
+      "descricao": "A dúvida declarada é respondida na hora: provas e prêmios; a variante cobre o pior caso.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Base: prêmios/selas/números de autoridade do nicho. Variante cetica: \"É normal duvidar\" + risco-zero/garantia. Modelo de variante por objeção.",
+      "invariantes": [
+        "template interstitial",
+        "posição 55 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "loading-plan",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-statCallout",
+          "M-stagger"
+        ],
+        "detalhe": "Hoje: 427 chars de autoridade em prosa. Depois: 3 statCallouts grandes (usuárias, anos, nota) em stagger — autoridade se prova com número, não com adjetivo."
+      }
+    },
+    {
+      "ordem": 56,
+      "id": "loading-plan",
+      "fase": "F8",
+      "template": "loading",
+      "papel": "recompensa",
+      "descricao": "Teatraliza a montagem do plano + prova social passiva (depoimentos girando).",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Círculo 0-100% + 3-4 depoimentos curtos rotativos do nicho. 4-6s. A última tela leve antes do pedido de email.",
+      "invariantes": [
+        "template loading",
+        "posição 56 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "social-proof-2",
+      "natureza": "T",
+      "camadaVisual": "animação de progresso estrutural (círculo SVG) — o conteúdo persuasivo são os depoimentos, texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-steps",
+          "M-animContador",
+          "M-confetti"
+        ],
+        "detalhe": "Hoje: círculo + depoimentos. Depois: steps com check progressivo (\"Analisando respostas ✓ → Montando sequências ✓ → Calculando projeção…\") sincronizados ao % animado, confete no 100%. Textos dos steps vêm do DSL (gerador)."
+      }
+    },
+    {
+      "ordem": 57,
+      "id": "social-proof-2",
+      "fase": "F8",
+      "template": "interstitial",
+      "papel": "prova-social",
+      "descricao": "Redundância intencional: blinda o pedido de email que vem a seguir.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Número grande de usuárias + mini-depoimentos com foto. Ecoa a tela 02 com peça diferente de prova. Não cortar — é blindagem de posição.",
+      "invariantes": [
+        "template interstitial",
+        "posição 57 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "email",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-checklist",
+          "M-stagger"
+        ],
+        "detalhe": "Padrão: checklist ou destaque hero (o que couber na copy) + entrada em stagger."
+      }
+    },
+    {
+      "ordem": 58,
+      "id": "email",
+      "fase": "F9",
+      "template": "input-measure",
+      "papel": "captura",
+      "descricao": "★ O pedido de email ANTES de ver o plano — a maior fricção do funil, blindada por tudo que veio antes.",
+      "captura": {
+        "saveAs": "email"
+      },
+      "instrucao": "Headline com {{goalLabel}} + o que o email entrega (o plano em PDF/novidades) + privacy note com cadeado. Nunca esconder que é captura. Não inverter a ordem sem teste A/B medido.",
+      "invariantes": [
+        "template input-measure",
+        "posição 58 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'email'"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "name",
+      "natureza": "T",
+      "camadaVisual": "widget de input estrutural (régua/campo) — não é asset; o feedback instantâneo (IMC, faixa) é texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-destaqueHero",
+          "M-pulse"
+        ],
+        "detalhe": "\"Seu plano está pronto\" em hero + pulso no CTA quando o email valida."
+      }
+    },
+    {
+      "ordem": 59,
+      "id": "name",
+      "fase": "F9",
+      "template": "input-measure",
+      "papel": "captura",
+      "descricao": "Nome — barato depois do email; habilita o {{firstName}} no momento de maior recompensa.",
+      "captura": {
+        "saveAs": "name"
+      },
+      "instrucao": "Input simples, placeholder comum do país. Sem subheadline.",
+      "invariantes": [
+        "template input-measure",
+        "posição 59 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'name'"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "plan-ready",
+      "natureza": "T",
+      "camadaVisual": "widget de input estrutural (régua/campo) — não é asset; o feedback instantâneo (IMC, faixa) é texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animContador"
+        ],
+        "detalhe": "Padrão: feedback numérico animado (IMC, faixa, data)."
+      }
+    },
+    {
+      "ordem": 60,
+      "id": "plan-ready",
+      "fase": "F9",
+      "template": "result",
+      "papel": "recompensa",
+      "descricao": "★ O plano \"pronto\" com o nome dela em destaque — recompensa máxima pelo investimento.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Headline \"{{firstName}}, o seu {{planLabel}} para {{goalLabel}} está pronto!\" + badges: 1 audience por persona/flag + diagnóstico ({{diagnosisCardLabel}}) + respostas ({{secundarios}}) + meta com data. Gráfico de semanas + disclaimer.",
+      "invariantes": [
+        "template result",
+        "posição 60 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "country",
+      "natureza": "H",
+      "camadaVisual": "data-viz estrutural: gráfico de projeção peso→meta, cards de diagnóstico com ícones lucide, barras — sem asset externo, mas a persuasão é visual",
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "M-animPreench",
+          "D-confettiWhen",
+          "M-stagger"
+        ],
+        "detalhe": "Barras preenchem, badges em stagger, confete na entrada — é o pico de recompensa."
+      }
+    },
+    {
+      "ordem": 61,
+      "id": "country",
+      "fase": "F9",
+      "template": "question-single",
+      "papel": "captura",
+      "descricao": "País — geo para moeda/legal; custo mínimo na reta final.",
+      "captura": {
+        "saveAs": "country"
+      },
+      "instrucao": "4-8 países-alvo + \"outro\". Auto-advance.",
+      "invariantes": [
+        "template question-single",
+        "posição 61 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "saveAs 'country'"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": "scratch",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "AMBOS",
+        "mecanismos": [
+          "D-iconOpcao",
+          "M-haptics"
+        ],
+        "detalhe": "Padrão: ícone por opção quando o conceito é visual + vibração ao selecionar."
+      }
+    },
+    {
+      "ordem": 62,
+      "id": "scratch",
+      "fase": "F9",
+      "template": "scratch",
+      "papel": "recompensa",
+      "descricao": "★ A raspadinha revela o cupom — dopamina final + countdown que empurra ao checkout.",
+      "captura": {
+        "saveAs": null
+      },
+      "instrucao": "Prêmio = o cupom de meta.coupon. Celebração curta + redirecionamento automático em 3-5s. Haptics no mobile quando possível.",
+      "invariantes": [
+        "template scratch",
+        "posição 62 na jornada",
+        "tipo de interação (auto-advance/CTA) conforme o seed",
+        "sem saveAs (não captura dado)"
+      ],
+      "contaNoProgresso": false,
+      "condicional": false,
+      "guardSeed": null,
+      "nextSeed": null,
+      "natureza": "H",
+      "camadaVisual": "interação de raspadinha em canvas — estrutural; cupom/valor são texto gerado",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-confetti"
+        ],
+        "detalhe": "Confete sincronizado ao reveal do cupom."
+      }
+    }
+  ],
+  "checkout": [
+    {
+      "id": "header-urgencia",
+      "papel": "compromisso",
+      "descricao": "CTA sempre visível + countdown persistido — urgência honesta constante.",
+      "instrucao": "Marca (brandLine) + countdown (countdownMin, persistido por slug) + CTA fixo. Não inventar escassez falsa.",
+      "natureza": "T",
+      "camadaVisual": "countdown estrutural persistido — todo o resto é copy",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-pulse"
+        ],
+        "detalhe": "Pulso no countdown no último minuto."
+      }
+    },
+    {
+      "id": "hero-resultado",
+      "papel": "eco",
+      "descricao": "Headline pela razão emocional declarada + silhuetas agora/objetivo + barras de transformação.",
+      "instrucao": "headlines por mainReason (map) + default obrigatório. Barras com from por tokens ({{pilatesLevel}}) + painBar condicional por flag de dor.",
+      "natureza": "H",
+      "camadaVisual": "silhuetas antes/depois em SVG (asset acoplado ao nicho) + barras de transformação data-viz com tokens",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animPreench",
+          "M-animContador"
+        ],
+        "detalhe": "Barras de transformação preenchem + kg em contador animado na entrada."
+      }
+    },
+    {
+      "id": "planos-1",
+      "papel": "captura",
+      "descricao": "A oferta: 3 planos com pré-seleção pela persona.",
+      "instrucao": "3 planos (preço/dia + âncora riscada + ciclo). planRules do icp escolhem o recomendado; fallback = popular. Texto legal de renovação é FIXO, não gerado.",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-pulse"
+        ],
+        "detalhe": "Pulso no badge do plano recomendado; preço/dia em tipografia de destaque."
+      }
+    },
+    {
+      "id": "garantia",
+      "papel": "blindagem",
+      "descricao": "Risco-zero; antecipada para perfis céticos.",
+      "instrucao": "guaranteeDays + guaranteeEarlyWhen (regra por persona cética). Condições na política de reembolso (fixa).",
+      "natureza": "T",
+      "camadaVisual": "ícone lucide estrutural (shield)",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-pulse"
+        ],
+        "detalhe": "Pulso sutil no shield na entrada da seção."
+      }
+    },
+    {
+      "id": "incluidos",
+      "papel": "tangibilizacao",
+      "descricao": "O que o plano contém, com descrição adaptada ao perfil.",
+      "instrucao": "6 itens com ícone-chave, título, desc + descWhen (variações por regra) + boostWhen (reordena para o topo).",
+      "natureza": "T",
+      "camadaVisual": "ícone por CHAVE de conjunto fechado (lucide: home, salad, timer...) — o gerador escolhe a chave, não cria imagem",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-stagger"
+        ],
+        "detalhe": "6 cards com ícone entram em stagger."
+      }
+    },
+    {
+      "id": "avaliacoes",
+      "papel": "prova-social",
+      "descricao": "Rating agregado (nota + volume).",
+      "instrucao": "rating.line1/line2/score plausíveis do nicho.",
+      "natureza": "T",
+      "camadaVisual": "estrelas estruturais",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-animContador"
+        ],
+        "detalhe": "Nota sobe animada; estrelas preenchem em sequência."
+      }
+    },
+    {
+      "id": "historias",
+      "papel": "prova-social",
+      "descricao": "Resultados de usuárias — a persona dela aparece primeiro.",
+      "instrucao": "3 histórias (1 por persona prioritária) com kg/resultado, texto e nome. Tag persona em cada; disclaimer de compensação fixo.",
+      "natureza": "T",
+      "camadaVisual": "SEM foto de usuária — decisão deliberada; nome+resultado+texto bastam",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-stagger"
+        ],
+        "detalhe": "Cards em stagger com aspas tipográficas grandes."
+      }
+    },
+    {
+      "id": "faq",
+      "papel": "blindagem",
+      "descricao": "Objeções finais, filtradas pelo perfil.",
+      "instrucao": "4-6 FAQs; when (só aparece se a regra bater, ex.: dor) + openWhen (abre por padrão). FAQ de dor usa {{dorAlvo}}.",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-stagger"
+        ],
+        "detalhe": "Acordeão com abertura animada suave."
+      }
+    },
+    {
+      "id": "midia",
+      "papel": "autoridade",
+      "descricao": "Logos de mídia — \"como exibido em\".",
+      "instrucao": "4-6 veículos plausíveis do nicho/país.",
+      "natureza": "T",
+      "camadaVisual": "logos renderizados como NOMES em texto serifado/itálico — sem arquivos de logo, decisão deliberada",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-stagger"
+        ],
+        "detalhe": "Nomes dos veículos em fade sequencial."
+      }
+    },
+    {
+      "id": "reviews",
+      "papel": "prova-social",
+      "descricao": "Reviews plataforma + linha de confiança.",
+      "instrucao": "trustLine + 3 reviews curtos com nome. Tom de review real (imperfeito, específico).",
+      "natureza": "T",
+      "camadaVisual": "estrelas estruturais",
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-stagger"
+        ],
+        "detalhe": "Cards em stagger; estrelas preenchem."
+      }
+    },
+    {
+      "id": "planos-2",
+      "papel": "captura",
+      "descricao": "Segunda chance da oferta com headline própria.",
+      "instrucao": "plansHeadline2 reforçando desconto/prazo. Mesmos planos do bloco 1.",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "MOTOR",
+        "mecanismos": [
+          "M-pulse"
+        ],
+        "detalhe": "Mesmo padrão do planos-1."
+      }
+    },
+    {
+      "id": "footer",
+      "papel": "consentimento",
+      "descricao": "Legal + disclaimer de saúde com a meta dela.",
+      "instrucao": "legal (company/cnpj/city) + disclaimer FIXO (\"não substitui orientação médica\") + meta com {{goalWeight}} e data. Textos legais nunca gerados.",
+      "natureza": "T",
+      "camadaVisual": null,
+      "upgradeVisual": {
+        "etiqueta": "NENHUM",
+        "mecanismos": [],
+        "detalhe": "Legal fixo — nenhum upgrade (consentimento não se anima)."
+      }
+    }
+  ],
+  "naturezaConteudo": {
+    "definicoes": {
+      "T": "100% textual — o gerador (LLM) produz todo o conteúdo; o template renderiza apenas copy. Widgets/animações são estruturais e não contam como asset.",
+      "H": "híbrido — copy gerada + camada visual estrutural que carrega parte da persuasão (data-viz, ilustração, interação). O LLM escreve; a camada visual já existe no template.",
+      "V": "100% visual — depende de asset gráfico externo (foto, ilustração, logo-imagem). NENHUM slot do template é V: decisão deliberada para o funil rodar sem banco de imagens."
+    },
+    "resumo": {
+      "slotsT": 57,
+      "slotsH": 5,
+      "slotsV": 0,
+      "checkoutT": 11,
+      "checkoutH": 1
+    },
+    "unicoAssetPorNicho": "silhuetas SVG (select-cards do slot 1 + hero-resultado do checkout). Nicho novo = redesenhar esses vetores; todo o resto é copy ou data-viz estrutural."
+  },
+  "vocabularioVisual": {
+    "D-iconOpcao": "DSL — ícone 3D thiings.co por opção (slug de conjunto fechado de 100 ícones em public/icons/thiings/; IMPLEMENTADO: Option.icon → OptionCard)",
+    "D-statCallout": "DSL — {valor, rotulo, when?}: número grande destacado extraído da copy",
+    "D-checklist": "DSL — corpo como lista de checks em vez de prosa corrida",
+    "D-miniCards": "DSL — [{icon, titulo, texto}]: quebra prosa densa em 3-4 mini-cards",
+    "D-contador": "DSL — {valor, sufixo, rotulo}: número que o motor anima",
+    "D-destaqueHero": "DSL — frase/número-chave promovido a tipografia hero",
+    "D-confettiWhen": "DSL — regra que dispara celebração (confete CSS) no slot",
+    "M-streak": "MOTOR — chip \"pergunta X de Y\" + dots de sequência nas perguntas",
+    "M-animPreench": "MOTOR — barras/gráficos/curvas que se preenchem até o valor real",
+    "M-animContador": "MOTOR — números sobem animados até o valor (IMC, kg, %, nota)",
+    "M-stagger": "MOTOR — filhos entram em sequência (40-80ms) guiando a varredura do olho",
+    "M-confetti": "MOTOR — explosão de confete CSS em picos (100% loading, cupom, plano)",
+    "M-haptics": "MOTOR — vibração sutil ao selecionar opção (mobile)",
+    "M-selCount": "MOTOR — contador \"N selecionadas\" nas multi-seleção",
+    "M-pulse": "MOTOR — pulso sutil em elemento-chave (CTA pronto, badge, countdown final)",
+    "M-popSelecao": "MOTOR — feedback de escala/cor ao selecionar card",
+    "M-steps": "MOTOR — etapas do loading com check progressivo sincronizado ao %",
+    "D-provaResposta": "DSL — proof: {saveAs, byAnswer: {valor→{stat, text}}, fallback}: stat callout nos ecos que valida a resposta da etapa anterior (IMPLEMENTADO: 9 ecos — i-welcome, i-goal, i-diagnosis, i-foco, i-energy, i-meal-preview, i-mamae, i-menopausa, i-alinhamento; multi-select usa answers[0]; stats 55-85% redondos, sem claim médico — regra S4 nº8; copy-qa valida cobertura e formato)",
+    "D-medidorPlano": "Anel de % do plano montado em todos os ecos (payload.meter: pct 1-99 crescente, block 1-5, blockName, milestone opcional). Marcos de bloco (15/35/55/75/95) ganham selo dourado + partículas. Nunca 100% no quiz — o 100% é o plan-ready."
+  },
+  "sistemaIcones": {
+    "lucide": "chrome de UI (checks, setas, seções do checkout) — vetor, conjunto fechado",
+    "thiings": "ícones 3D em dois papéis: (1) opções de resposta (44px, Option.icon) e (2) herói dos ecos (88px com halo creme, payload.heroIcon — EchoHero) — slugs curados em public/icons/thiings/, 128px PNG, atribuição no footer do checkout",
+    "regraCamadaVisualEco": "todo interstitial tem exatamente UMA camada visual: heroIcon (motivation/diagnosis/social) OU grid de conteúdo (meals/authority/awards/logos) — nunca os dois, nunca nenhum",
+    "hierarquiaTipografica": "escala canônica única em src/quiz/components/typography.ts (H1 27→32 semibold, SUB 15px, KICKER, NOTE, FOOTNOTE, SECTION_H2, SHELL 560px, CONTENT mt-8) — obrigatória em todos os templates, quiz e checkout; line-art removido, linguagem visual = thiings 3D + silhuetas funcionais",
+    "replicacao": "nicho novo = re-curar os slugs dos dois mapas (tela→opção→slug e eco→heroIcon) e baixar do catálogo thiings.co; mecanismo do template não muda",
+    "medidorPlano": "PlanMeter.tsx: anel SVG 64px (terracota; dourado no marco) + count-up rAF + mini-segmentos de bloco; elemento de dados (como proof), não conta como camada visual do eco."
+  }
+}

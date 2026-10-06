@@ -1,0 +1,3543 @@
+{
+  "meta": {
+    "slug": "pilates",
+    "product": "Plano de Pilates",
+    "brand": "Viva Pilates",
+    "locale": "pt-BR",
+    "coupon": "pilates_jul26",
+    "planLabel": "Plano de Pilates de 4 semanas",
+    "palette": {
+      "accent": "#7D8F74",
+      "cta": "#292524",
+      "bg": "#FAF7F2"
+    }
+  },
+  "icp": {
+    "personas": [
+      {
+        "id": "mamae",
+        "name": "A Mamãe em Reconstrução",
+        "detect": {
+          "any": [
+            {
+              "key": "weightTriggers",
+              "op": "includes",
+              "value": "gravidez"
+            },
+            {
+              "key": "mainReason",
+              "op": "eq",
+              "value": "pos-parto"
+            }
+          ]
+        }
+      },
+      {
+        "id": "madura",
+        "name": "A Madura 55+",
+        "detect": {
+          "key": "ageBucket",
+          "op": "eq",
+          "value": "55+"
+        }
+      },
+      {
+        "id": "transicao",
+        "name": "A Mulher em Transição Hormonal",
+        "detect": {
+          "key": "$flag:transicaoRaw",
+          "op": "truthy"
+        },
+        "suppressIf": [
+          "madura"
+        ]
+      },
+      {
+        "id": "iniciante",
+        "name": "A Iniciante Intimidada",
+        "detect": {
+          "all": [
+            {
+              "key": "ageBucket",
+              "op": "eq",
+              "value": "25-34"
+            },
+            {
+              "key": "experience",
+              "op": "eq",
+              "value": "nao"
+            }
+          ]
+        },
+        "suppressIf": [
+          "mamae"
+        ]
+      },
+      {
+        "id": "executiva",
+        "name": "A Executiva Sem Tempo",
+        "detect": {
+          "all": [
+            {
+              "key": "typicalDay",
+              "op": "eq",
+              "value": "sentada"
+            },
+            {
+              "any": [
+                {
+                  "all": [
+                    {
+                      "key": "painPoints",
+                      "op": "not-empty"
+                    },
+                    {
+                      "key": "painPoints",
+                      "op": "excludes",
+                      "value": "nenhuma"
+                    }
+                  ]
+                },
+                {
+                  "key": "stress",
+                  "op": "eq",
+                  "value": "muito-alto"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "id": "cetica",
+        "name": "A Cética",
+        "layer": true,
+        "detect": {
+          "any": [
+            {
+              "key": "confidence",
+              "op": "eq",
+              "value": "insegura"
+            },
+            {
+              "all": [
+                {
+                  "key": "bestShape",
+                  "op": "eq",
+                  "value": "nunca"
+                },
+                {
+                  "key": "frequency",
+                  "op": "eq",
+                  "value": "nunca"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "flags": {
+      "jejum": {
+        "any": [
+          {
+            "key": "breakfast",
+            "op": "eq",
+            "value": "pula"
+          },
+          {
+            "key": "lunch",
+            "op": "eq",
+            "value": "pula"
+          },
+          {
+            "key": "dinner",
+            "op": "eq",
+            "value": "pula"
+          }
+        ]
+      },
+      "metaAgressiva": {
+        "any": [
+          {
+            "key": "$calc:goalPct",
+            "op": "gt",
+            "value": 15
+          },
+          {
+            "all": [
+              {
+                "key": "eventDate",
+                "op": "not-empty"
+              },
+              {
+                "key": "$calc:goalPct",
+                "op": "gt",
+                "value": 8
+              }
+            ]
+          }
+        ]
+      },
+      "baixaConfianca": {
+        "key": "confidence",
+        "op": "eq",
+        "value": "insegura"
+      },
+      "inicianteTotal": {
+        "all": [
+          {
+            "key": "experience",
+            "op": "eq",
+            "value": "nao"
+          },
+          {
+            "key": "frequency",
+            "op": "eq",
+            "value": "nunca"
+          }
+        ]
+      },
+      "dorCronica": {
+        "all": [
+          {
+            "key": "painPoints",
+            "op": "not-empty"
+          },
+          {
+            "key": "painPoints",
+            "op": "excludes",
+            "value": "nenhuma"
+          }
+        ]
+      },
+      "transicaoRaw": {
+        "any": [
+          {
+            "key": "weightTriggers",
+            "op": "includes",
+            "value": "menopausa"
+          },
+          {
+            "key": "weightTriggers",
+            "op": "includes",
+            "value": "metabolismo"
+          },
+          {
+            "all": [
+              {
+                "key": "ageBucket",
+                "op": "in",
+                "value": [
+                  "45-54",
+                  "55+"
+                ]
+              },
+              {
+                "key": "weightPattern",
+                "op": "eq",
+                "value": "dificil"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "variantRules": [
+      {
+        "key": "dor",
+        "when": {
+          "key": "$flag:dorCronica",
+          "op": "truthy"
+        }
+      },
+      {
+        "key": "jejum",
+        "when": {
+          "key": "$flag:jejum",
+          "op": "truthy"
+        }
+      },
+      {
+        "key": "iniciante-total",
+        "when": {
+          "key": "$flag:inicianteTotal",
+          "op": "truthy"
+        }
+      },
+      {
+        "key": "55plus",
+        "when": {
+          "key": "$persona:madura",
+          "op": "truthy"
+        }
+      },
+      {
+        "key": "transicao",
+        "when": {
+          "key": "$flag:transicaoRaw",
+          "op": "truthy"
+        }
+      },
+      {
+        "key": "mamae",
+        "when": {
+          "key": "$persona:mamae",
+          "op": "truthy"
+        }
+      },
+      {
+        "key": "cetica",
+        "when": {
+          "key": "$persona:cetica",
+          "op": "truthy"
+        }
+      },
+      {
+        "keyPrefix": "diet-",
+        "source": "dietType",
+        "exclude": [
+          "tradicional"
+        ]
+      }
+    ],
+    "planRules": [
+      {
+        "plan": "12w",
+        "when": {
+          "any": [
+            {
+              "key": "$persona:transicao",
+              "op": "truthy"
+            },
+            {
+              "key": "$flag:metaAgressiva",
+              "op": "truthy"
+            }
+          ]
+        }
+      },
+      {
+        "plan": "1w",
+        "when": {
+          "all": [
+            {
+              "key": "$persona:iniciante",
+              "op": "truthy"
+            },
+            {
+              "key": "$flag:inicianteTotal",
+              "op": "truthy"
+            }
+          ]
+        }
+      }
+    ],
+    "defaultPlan": "4w",
+    "diagnoses": [
+      {
+        "id": "D1",
+        "title": "Postura Sobrecarregada",
+        "when": {
+          "key": "goal",
+          "op": "eq",
+          "value": "postura"
+        },
+        "cardLabel": "Perfil de postura",
+        "cardValue": "Sobrecarregada",
+        "copy": "Ombros curvados e tensão cervical indicam desequilíbrio da cadeia posterior. Os nossos **treinos guiados por vídeo de mobilidade e fortalecimento postural** vão realinhar seu corpo de forma progressiva."
+      },
+      {
+        "id": "D1b",
+        "title": "Core em Recuperação Pós-Parto",
+        "when": {
+          "key": "weightTriggers",
+          "op": "includes",
+          "value": "gravidez"
+        },
+        "cardLabel": "Perfil de core",
+        "cardValue": "Em recuperação",
+        "copy": "Após a gravidez, os músculos profundos do abdômen e o assoalho pélvico precisam ser **reconstruídos com cuidado e na ordem certa**. O Pilates é o método mais recomendado para essa fase — seguro, progressivo e sem impacto."
+      },
+      {
+        "id": "D2b",
+        "title": "Metabolismo Hormonal",
+        "when": {
+          "key": "$flag:transicaoRaw",
+          "op": "truthy"
+        },
+        "cardLabel": "Metabolismo",
+        "cardValue": "Hormonal — mais lento",
+        "copy": "Com a menopausa, o corpo redistribui gordura para a barriga e perde músculo mais rápido — por isso o que funcionava antes parou de funcionar. O Pilates combate **exatamente esses dois efeitos**, com baixo impacto."
+      },
+      {
+        "id": "D2",
+        "title": "Metabolismo de Baixa Queima",
+        "when": {
+          "all": [
+            {
+              "key": "goal",
+              "op": "eq",
+              "value": "perder-peso"
+            },
+            {
+              "key": "weightPattern",
+              "op": "eq",
+              "value": "dificil"
+            }
+          ]
+        },
+        "cardLabel": "Metabolismo",
+        "cardValue": "Lento",
+        "copy": "Seu corpo tende a preservar energia — o segredo é queimar com **baixo impacto e constância**. As séries dinâmicas de Pilates elevam o gasto calórico sem sobrecarregar as articulações."
+      },
+      {
+        "id": "D3",
+        "title": "Core Adormecido",
+        "when": {
+          "all": [
+            {
+              "key": "plank",
+              "op": "in",
+              "value": [
+                "nao",
+                "menos-30"
+              ]
+            },
+            {
+              "key": "bodyType",
+              "op": "in",
+              "value": [
+                "media",
+                "grande",
+                "acima"
+              ]
+            }
+          ]
+        },
+        "cardLabel": "Perfil de core",
+        "cardValue": "Adormecido",
+        "copy": "Quando os músculos profundos do abdômen não são ativados, a barriga projeta-se para fora e a postura sofre — mesmo em pessoas magras. Os nossos **treinos guiados por vídeo com foco em ativação do core** vão reverter isso de forma progressiva."
+      },
+      {
+        "id": "D4",
+        "title": "Encurtamento Muscular",
+        "when": {
+          "key": "toeTouch",
+          "op": "in",
+          "value": [
+            "nem-perto",
+            "quase"
+          ]
+        },
+        "cardLabel": "Flexibilidade",
+        "cardValue": "Baixa",
+        "copy": "Cadeias musculares encurtadas limitam o movimento e pioram a postura. Os **alongamentos dinâmicos diários de 10 minutos** do seu plano vão devolver amplitude e leveza ao seu corpo."
+      },
+      {
+        "id": "D5",
+        "title": "Quadril Preso",
+        "when": {
+          "all": [
+            {
+              "key": "typicalDay",
+              "op": "eq",
+              "value": "sentada"
+            },
+            {
+              "key": "painPoints",
+              "op": "includes",
+              "value": "lombar"
+            }
+          ]
+        },
+        "cardLabel": "Mobilidade de quadril",
+        "cardValue": "Restrita",
+        "copy": "Horas sentada encurtam os flexores do quadril e sobrecarregam a lombar. As **sequências de liberação de quadril e glúteo médio** vão destravar seu movimento e aliviar a dor."
+      },
+      {
+        "id": "D0",
+        "title": "Perfil Equilibrado",
+        "cardLabel": "Perfil geral",
+        "cardValue": "Equilibrado",
+        "copy": "Você tem uma base sólida — o seu plano vai **acelerar o que já funciona** e levar seus resultados para o próximo nível."
+      }
+    ],
+    "tokens": {
+      "foco": {
+        "source": "focusZones",
+        "join": true,
+        "default": "corpo todo",
+        "map": {
+          "barriga": "barriga",
+          "cintura": "cintura",
+          "gluteos": "glúteos",
+          "pernas": "pernas",
+          "bracos": "braços",
+          "postura": "postura"
+        }
+      },
+      "secundarios": {
+        "source": "secondaryGoals",
+        "exclude": [
+          "nenhum"
+        ],
+        "join": true,
+        "map": {
+          "dores": "reduzir dores nas costas",
+          "flexibilidade": "aumentar flexibilidade",
+          "core": "fortalecer o abdômen",
+          "estresse": "reduzir o estresse",
+          "sono": "dormir melhor"
+        }
+      },
+      "dorAlvo": {
+        "source": "painPoints",
+        "first": true,
+        "exclude": [
+          "nenhuma"
+        ],
+        "map": {
+          "lombar": "lombar",
+          "pescoco": "pescoço e ombros",
+          "joelhos": "joelhos",
+          "quadril": "quadril"
+        }
+      },
+      "dorAlvoFrase": {
+        "source": "painPoints",
+        "priority": [
+          "lombar",
+          "pescoco",
+          "joelhos",
+          "quadril"
+        ],
+        "default": "protegem suas articulações",
+        "map": {
+          "lombar": "protegem sua lombar",
+          "pescoco": "aliviam a tensão do pescoço e ombros",
+          "joelhos": "respeitam seus joelhos",
+          "quadril": "liberam seu quadril"
+        }
+      },
+      "dorAdaptacao": {
+        "source": "painPoints",
+        "first": true,
+        "exclude": [
+          "nenhuma"
+        ],
+        "default": "Todas as aulas trazem **variações sem carga na lombar** — você fortalece o core sem forçar a região.",
+        "map": {
+          "lombar": "Todas as aulas trazem **variações sem carga na lombar** — você fortalece o core sem forçar a região.",
+          "pescoco": "Você verá **variações sem tensão no pescoço** em todos os exercícios — o foco é soltar, não travar.",
+          "joelhos": "As sequências evitam impacto e flexão profunda — você fortalece **sem dobrar demais os joelhos**.",
+          "quadril": "As aulas incluem **liberação progressiva do quadril** antes de qualquer fortalecimento."
+        }
+      },
+      "refeicaoPulada": {
+        "firstMatch": [
+          {
+            "key": "breakfast",
+            "eq": "pula",
+            "token": "café da manhã"
+          },
+          {
+            "key": "lunch",
+            "eq": "pula",
+            "token": "almoço"
+          }
+        ],
+        "default": "jantar"
+      }
+    }
+  },
+  "screens": [
+    {
+      "id": "age",
+      "template": "select-cards",
+      "section": "none",
+      "countsForProgress": true,
+      "saveAs": "ageBucket",
+      "next": "social-proof",
+      "payload": {
+        "headline": "Pilates em casa, adaptado à sua faixa etária",
+        "subheadline": "ESCOLHA A SUA IDADE",
+        "options": [
+          {
+            "value": "25-34",
+            "label": "Idade: 25–34"
+          },
+          {
+            "value": "35-44",
+            "label": "Idade: 35–44"
+          },
+          {
+            "value": "45-54",
+            "label": "Idade: 45–54"
+          },
+          {
+            "value": "55+",
+            "label": "Idade: 55+"
+          }
+        ],
+        "footer": "Ao escolher sua idade e continuar, você concorda com nossos Termos de Serviço | Política de Privacidade — Leia antes de continuar",
+        "help": true
+      }
+    },
+    {
+      "id": "social-proof",
+      "template": "interstitial",
+      "section": "none",
+      "countsForProgress": false,
+      "next": "experience",
+      "payload": {
+        "variant": "social",
+        "headline": "Mais de 98.000 mulheres na {{ageLabel}} já experimentaram nosso Plano de Pilates",
+        "logos": [
+          "Women's Health",
+          "Vogue Fitness",
+          "Marie Claire"
+        ],
+        "cta": "CONTINUAR",
+        "heroIcon": "friends",
+        "meter": {
+          "pct": 4,
+          "block": 1,
+          "blockName": "Começo"
+        }
+      }
+    },
+    {
+      "id": "experience",
+      "template": "question-single",
+      "section": "meu-perfil",
+      "countsForProgress": true,
+      "saveAs": "experience",
+      "next": "i-welcome",
+      "payload": {
+        "headline": "Você já praticou Pilates antes?",
+        "options": [
+          {
+            "value": "sim",
+            "label": "Sim",
+            "icon": "thumbs-up"
+          },
+          {
+            "value": "nao",
+            "label": "Não",
+            "icon": "thumbs-down"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-welcome",
+      "template": "interstitial",
+      "section": "meu-perfil",
+      "countsForProgress": false,
+      "next": "goal",
+      "payload": {
+        "variant": "motivation",
+        "headline": "Começar era a parte difícil — **e você já fez.**",
+        "body": "Nosso programa de Pilates é suave, de baixo impacto e eficaz para todos os níveis de condicionamento físico. Vamos ajudar você a **tonificar o corpo e corrigir a postura sem nenhum equipamento** em casa!",
+        "cta": "CONTINUAR",
+        "heroIcon": "yoga",
+        "proof": {
+          "saveAs": "experience",
+          "byAnswer": {
+            "sim": {
+              "stat": "62%",
+              "text": "das usuárias Viva Pilates já conheciam o método — e escolheram o plano para treinar em casa, no próprio ritmo."
+            },
+            "nao": {
+              "stat": "78%",
+              "text": "das usuárias nunca tinham praticado Pilates antes de começar. Você começa do zero em ótima companhia."
+            }
+          },
+          "fallback": {
+            "stat": "74%",
+            "text": "das usuárias escolheram o Pilates exatamente por ser suave, de baixo impacto e possível em casa."
+          }
+        },
+        "meter": {
+          "pct": 8,
+          "block": 1,
+          "blockName": "Começo"
+        }
+      }
+    },
+    {
+      "id": "goal",
+      "template": "question-single",
+      "section": "meu-perfil",
+      "countsForProgress": true,
+      "saveAs": "goal",
+      "next": "i-goal",
+      "payload": {
+        "headline": "Qual é o seu principal objetivo?",
+        "options": [
+          {
+            "value": "perder-peso",
+            "label": "Perder peso",
+            "icon": "weight-scale"
+          },
+          {
+            "value": "tonificar",
+            "label": "Tonificar e definir",
+            "icon": "dumbbell"
+          },
+          {
+            "value": "postura",
+            "label": "Corrigir a postura e aliviar dores",
+            "icon": "posture-corrector"
+          },
+          {
+            "value": "manter",
+            "label": "Manter o peso e ficar em forma",
+            "icon": "heart"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-goal",
+      "template": "interstitial",
+      "section": "meu-perfil",
+      "countsForProgress": false,
+      "next": "secondary-goals",
+      "payload": {
+        "variant": "motivation",
+        "headline": {
+          "@switch": {
+            "key": "goal",
+            "cases": {
+              "perder-peso": "Nós sabemos como fazer isso acontecer!",
+              "tonificar": "Perfeito!",
+              "postura": "Você está no lugar certo!",
+              "manter": "Ótima escolha!"
+            },
+            "default": "Nós sabemos como fazer isso acontecer!"
+          }
+        },
+        "body": {
+          "@switch": {
+            "key": "goal",
+            "cases": {
+              "perder-peso": "Vamos criar um plano adaptado às suas medidas corporais e ao seu objetivo. Assim, você pode **emagrecer no seu ritmo** e com prazer!",
+              "tonificar": "Sequências de Pilates criam **músculos longos e definidos** — o famoso \"corpo de bailarina\" — usando só o peso do seu corpo.",
+              "postura": "O Pilates é o método mais estudado para **realinhar a postura e aliviar dores** — sem impacto, sem equipamento.",
+              "manter": "Consistência é o segredo. Vamos montar uma rotina que **mantém você em forma e com energia** todos os dias."
+            },
+            "default": ""
+          }
+        },
+        "cta": "VER COMO VOU CHEGAR LÁ",
+        "heroIcon": "sparkle",
+        "proof": {
+          "saveAs": "goal",
+          "byAnswer": {
+            "perder-peso": {
+              "stat": "68%",
+              "text": "das mulheres na casa dos 40 e 50 anos têm o mesmo objetivo principal que você — é a meta nº1 da comunidade."
+            },
+            "tonificar": {
+              "stat": "74%",
+              "text": "das usuárias que queriam tonificar notaram o corpo mais firme já nas primeiras 4 semanas."
+            },
+            "postura": {
+              "stat": "79%",
+              "text": "das usuárias que focaram em postura sentiram menos tensão nas costas no primeiro mês."
+            },
+            "manter": {
+              "stat": "66%",
+              "text": "das usuárias que queriam manter o peso sustentaram a forma com sessões curtas em casa."
+            }
+          },
+          "fallback": {
+            "stat": "71%",
+            "text": "das usuárias atingiram o objetivo principal seguindo o plano 15 minutos por dia."
+          }
+        },
+        "meter": {
+          "pct": 15,
+          "block": 1,
+          "blockName": "Começo",
+          "milestone": "Bloco Começo completo"
+        }
+      }
+    },
+    {
+      "id": "secondary-goals",
+      "template": "question-multi",
+      "section": "meu-perfil",
+      "countsForProgress": true,
+      "saveAs": "secondaryGoals",
+      "next": "body-type",
+      "payload": {
+        "headline": "O que mais você espera alcançar com este plano?",
+        "subheadline": "Escolha todas que se aplicam",
+        "options": [
+          {
+            "value": "dores",
+            "label": "Reduzir dores nas costas",
+            "icon": "spine-alignment-roller"
+          },
+          {
+            "value": "flexibilidade",
+            "label": "Aumentar flexibilidade",
+            "icon": "yoga"
+          },
+          {
+            "value": "core",
+            "label": "Fortalecer o abdômen (core)",
+            "icon": "kettlebell"
+          },
+          {
+            "value": "estresse",
+            "label": "Reduzir o estresse e a ansiedade",
+            "icon": "meditation"
+          },
+          {
+            "value": "sono",
+            "label": "Dormir melhor",
+            "icon": "bed"
+          },
+          {
+            "value": "nenhum",
+            "label": "Nenhum dos itens acima",
+            "exclusive": true,
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "body-type",
+      "template": "question-single",
+      "section": "meu-perfil",
+      "countsForProgress": true,
+      "saveAs": "bodyType",
+      "next": "dream-body",
+      "payload": {
+        "layout": "silhouette",
+        "headline": "Como você descreveria o seu físico atual?",
+        "options": [
+          {
+            "value": "magra",
+            "label": "Magra"
+          },
+          {
+            "value": "media",
+            "label": "Média"
+          },
+          {
+            "value": "grande",
+            "label": "Tamanho grande"
+          },
+          {
+            "value": "acima",
+            "label": "Significativamente acima do peso"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dream-body",
+      "template": "question-single",
+      "section": "meu-perfil",
+      "countsForProgress": true,
+      "saveAs": "dreamBody",
+      "next": "best-shape",
+      "payload": {
+        "layout": "silhouette",
+        "headline": "Qual é o seu corpo dos sonhos?",
+        "subheadline": "Visualize sua meta para se manter motivada e responsável",
+        "options": [
+          {
+            "value": "esguia",
+            "label": "Esguia e alongada"
+          },
+          {
+            "value": "tonificada",
+            "label": "Tonificada"
+          },
+          {
+            "value": "curvas",
+            "label": "Com curvas"
+          },
+          {
+            "value": "media",
+            "label": "Média"
+          }
+        ]
+      }
+    },
+    {
+      "id": "best-shape",
+      "template": "question-single",
+      "section": "meu-perfil",
+      "countsForProgress": true,
+      "saveAs": "bestShape",
+      "next": "weight-pattern",
+      "payload": {
+        "headline": "Há quanto tempo você esteve no melhor físico da sua vida?",
+        "options": [
+          {
+            "value": "menos-1",
+            "label": "Há menos de um ano",
+            "icon": "calendar-plus"
+          },
+          {
+            "value": "1-2",
+            "label": "1 a 2 anos atrás",
+            "icon": "calendar"
+          },
+          {
+            "value": "mais-3",
+            "label": "Há mais de 3 anos",
+            "icon": "wall-calendar"
+          },
+          {
+            "value": "nunca",
+            "label": "Nunca",
+            "icon": "hourglass"
+          }
+        ]
+      }
+    },
+    {
+      "id": "weight-pattern",
+      "template": "question-single",
+      "section": "meu-perfil",
+      "countsForProgress": true,
+      "saveAs": "weightPattern",
+      "next": "i-diagnosis",
+      "payload": {
+        "headline": "Como o seu peso muda tipicamente?",
+        "options": [
+          {
+            "value": "dificil",
+            "label": "Peso difícil de perder",
+            "icon": "weight-scale"
+          },
+          {
+            "value": "facil",
+            "label": "O peso muda facilmente",
+            "icon": "balance-scale"
+          },
+          {
+            "value": "ganhar",
+            "label": "Dificuldade em ganhar peso",
+            "icon": "feather"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-diagnosis",
+      "template": "interstitial",
+      "section": "meu-perfil",
+      "countsForProgress": false,
+      "next": "flexibility",
+      "payload": {
+        "variant": "diagnosis",
+        "headline": "Parece que você tem o perfil de {{diagnosisTitle}}.",
+        "body": "{{diagnosisCopy}}",
+        "cta": "VER MEU DIAGNÓSTICO",
+        "heroIcon": "thinking",
+        "proof": {
+          "saveAs": "weightPattern",
+          "byAnswer": {
+            "dificil": {
+              "stat": "73%",
+              "text": "das usuárias também achavam difícil emagrecer — o plano foi desenhado exatamente para esse padrão."
+            },
+            "facil": {
+              "stat": "64%",
+              "text": "das usuárias com o seu padrão mantêm o resultado quando o plano respeita o ritmo do corpo."
+            },
+            "ganhar": {
+              "stat": "69%",
+              "text": "das usuárias que ganhavam peso com facilidade inverteram o ponteiro da balança com sequências diárias."
+            }
+          },
+          "fallback": {
+            "stat": "70%",
+            "text": "das usuárias reconheceram o próprio padrão de peso neste diagnóstico."
+          }
+        },
+        "meter": {
+          "pct": 22,
+          "block": 2,
+          "blockName": "Seu corpo"
+        }
+      }
+    },
+    {
+      "id": "flexibility",
+      "template": "question-single",
+      "section": "atividade",
+      "countsForProgress": true,
+      "saveAs": "flexibility",
+      "next": "frequency",
+      "payload": {
+        "headline": "Você se considera flexível?",
+        "options": [
+          {
+            "value": "bastante",
+            "label": "Bastante flexível",
+            "icon": "yoga"
+          },
+          {
+            "value": "comecando",
+            "label": "Estou começando",
+            "icon": "stretching-bands"
+          },
+          {
+            "value": "nao-muito",
+            "label": "Não muito",
+            "icon": "tin-robot"
+          },
+          {
+            "value": "nao-sei",
+            "label": "Não tenho certeza",
+            "icon": "thinking"
+          }
+        ]
+      }
+    },
+    {
+      "id": "frequency",
+      "template": "question-single",
+      "section": "atividade",
+      "countsForProgress": true,
+      "saveAs": "frequency",
+      "next": "focus-zones",
+      "payload": {
+        "headline": "Quantas vezes por semana você se exercita?",
+        "options": [
+          {
+            "value": "diaria",
+            "label": "Quase todos os dias",
+            "icon": "calendar-plus"
+          },
+          {
+            "value": "semana",
+            "label": "Várias vezes por semana",
+            "icon": "calendar"
+          },
+          {
+            "value": "mes",
+            "label": "Várias vezes por mês",
+            "icon": "wall-calendar"
+          },
+          {
+            "value": "nunca",
+            "label": "Nunca",
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "focus-zones",
+      "template": "question-multi",
+      "section": "atividade",
+      "countsForProgress": true,
+      "saveAs": "focusZones",
+      "next": "i-foco",
+      "payload": {
+        "headline": "Quais regiões você quer transformar?",
+        "subheadline": "Escolha todas que se aplicam",
+        "options": [
+          {
+            "value": "barriga",
+            "label": "Barriga",
+            "icon": "high-waisted-jeans"
+          },
+          {
+            "value": "cintura",
+            "label": "Cintura",
+            "icon": "measuring-tape"
+          },
+          {
+            "value": "gluteos",
+            "label": "Glúteos",
+            "icon": "peach"
+          },
+          {
+            "value": "pernas",
+            "label": "Pernas",
+            "icon": "leg-press"
+          },
+          {
+            "value": "bracos",
+            "label": "Braços",
+            "icon": "biceps-curl-machine"
+          },
+          {
+            "value": "postura",
+            "label": "Postura (costas)",
+            "icon": "spine-alignment-roller"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-foco",
+      "template": "interstitial",
+      "section": "atividade",
+      "countsForProgress": false,
+      "next": "plank",
+      "payload": {
+        "variant": "motivation",
+        "headline": "Na mira: {{foco}}.",
+        "body": "Essas são regiões que respondem rápido ao Pilates. Agora vamos medir o seu ponto de partida — **para você acompanhar o progresso semana a semana**.",
+        "cta": "CONTINUAR",
+        "heroIcon": "flexibility",
+        "proof": {
+          "saveAs": "focusZones",
+          "byAnswer": {
+            "barriga": {
+              "stat": "81%",
+              "text": "das usuárias marcam a barriga como zona prioritária — é a nº1 da comunidade Viva Pilates."
+            },
+            "cintura": {
+              "stat": "72%",
+              "text": "das usuárias que focaram a cintura viram as medidas diminuírem nas primeiras semanas."
+            },
+            "gluteos": {
+              "stat": "67%",
+              "text": "das usuárias que priorizaram os glúteos sentiram mais firmeza com sequências de baixo impacto."
+            },
+            "pernas": {
+              "stat": "70%",
+              "text": "das usuárias que focaram as pernas notaram definição visível no primeiro mês."
+            },
+            "bracos": {
+              "stat": "63%",
+              "text": "das usuárias que escolheram os braços ganharam firmeza usando só o peso do próprio corpo."
+            },
+            "postura": {
+              "stat": "77%",
+              "text": "das usuárias que priorizaram a postura sentiram o corpo mais alongado e leve."
+            }
+          },
+          "fallback": {
+            "stat": "74%",
+            "text": "das usuárias viram resultado mais rápido nas zonas que escolheram priorizar."
+          }
+        },
+        "meter": {
+          "pct": 28,
+          "block": 2,
+          "blockName": "Seu corpo"
+        }
+      }
+    },
+    {
+      "id": "plank",
+      "template": "question-single",
+      "section": "atividade",
+      "countsForProgress": true,
+      "saveAs": "plank",
+      "next": "toe-touch",
+      "payload": {
+        "headline": "Por quanto tempo você consegue segurar uma prancha?",
+        "options": [
+          {
+            "value": "nao",
+            "label": "Não consigo",
+            "icon": "empty-battery"
+          },
+          {
+            "value": "menos-30",
+            "label": "Menos de 30 segundos",
+            "icon": "stopwatch"
+          },
+          {
+            "value": "30-60",
+            "label": "30–60 segundos",
+            "icon": "timer"
+          },
+          {
+            "value": "mais-60",
+            "label": "Mais de 1 minuto",
+            "icon": "trophy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "toe-touch",
+      "template": "question-single",
+      "section": "atividade",
+      "countsForProgress": true,
+      "saveAs": "toeTouch",
+      "next": "balance",
+      "payload": {
+        "headline": "Sentada com as pernas esticadas, você consegue tocar os pés?",
+        "options": [
+          {
+            "value": "nem-perto",
+            "label": "Nem perto",
+            "icon": "rain"
+          },
+          {
+            "value": "quase",
+            "label": "Quase lá",
+            "icon": "stretching-bands"
+          },
+          {
+            "value": "esforco",
+            "label": "Toco com esforço",
+            "icon": "yoga"
+          },
+          {
+            "value": "facilmente",
+            "label": "Toco facilmente",
+            "icon": "flexibility"
+          }
+        ]
+      }
+    },
+    {
+      "id": "balance",
+      "template": "question-single",
+      "section": "atividade",
+      "countsForProgress": true,
+      "saveAs": "balance",
+      "next": "pain-points",
+      "payload": {
+        "headline": "Você consegue ficar em uma perna só por 30 segundos sem apoio?",
+        "options": [
+          {
+            "value": "nao",
+            "label": "Não",
+            "icon": "balance-scale"
+          },
+          {
+            "value": "dificuldade",
+            "label": "Com dificuldade",
+            "icon": "balance-pad"
+          },
+          {
+            "value": "uma",
+            "label": "Sim, em uma perna",
+            "icon": "flamingo"
+          },
+          {
+            "value": "duas",
+            "label": "Sim, nas duas pernas",
+            "icon": "trophy"
+          }
+        ],
+        "variants": {
+          "55plus": {
+            "headline": "Você sente firmeza ao descer escadas sem corrimão?",
+            "options": [
+              {
+                "value": "nao",
+                "label": "Não sinto firmeza"
+              },
+              {
+                "value": "dificuldade",
+                "label": "Só com apoio"
+              },
+              {
+                "value": "uma",
+                "label": "Sinto firmeza na maioria das vezes"
+              },
+              {
+                "value": "duas",
+                "label": "Sinto total firmeza"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "pain-points",
+      "template": "question-multi",
+      "section": "atividade",
+      "countsForProgress": true,
+      "saveAs": "painPoints",
+      "next": "i-activity",
+      "payload": {
+        "headline": "Você sente desconforto em alguma dessas regiões?",
+        "subheadline": "Escolha todas que se aplicam",
+        "footnote": "Este plano não substitui orientação médica ou fisioterapêutica.",
+        "options": [
+          {
+            "value": "lombar",
+            "label": "Lombar",
+            "icon": "spine-alignment-roller"
+          },
+          {
+            "value": "pescoco",
+            "label": "Pescoço e ombros",
+            "icon": "neck-pillow"
+          },
+          {
+            "value": "joelhos",
+            "label": "Joelhos",
+            "icon": "knee-joint-bone"
+          },
+          {
+            "value": "quadril",
+            "label": "Quadril",
+            "icon": "pelvis"
+          },
+          {
+            "value": "nenhuma",
+            "label": "Nenhuma",
+            "exclusive": true,
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-activity",
+      "template": "interstitial",
+      "section": "atividade",
+      "countsForProgress": false,
+      "next": "i-adaptacao",
+      "payload": {
+        "variant": "motivation",
+        "headline": "Seu mapa de treino está **traçado**.",
+        "body": "Vamos montar sequências para **{{foco}}** que fortalecem o core, **{{dorAlvoFrase}}** e melhoram o condicionamento de forma suave. Uma rotina simples e regular de Pilates significa um corpo mais forte, alongado e sem dores!",
+        "cta": "CONTINUAR",
+        "heroIcon": "walk",
+        "meter": {
+          "pct": 35,
+          "block": 2,
+          "blockName": "Seu corpo",
+          "milestone": "Bloco Seu corpo completo"
+        }
+      }
+    },
+    {
+      "id": "i-adaptacao",
+      "template": "interstitial",
+      "section": "atividade",
+      "countsForProgress": false,
+      "next": "work-routine",
+      "guard": {
+        "all": [
+          {
+            "key": "painPoints",
+            "op": "not-empty"
+          },
+          {
+            "key": "painPoints",
+            "op": "excludes",
+            "value": "nenhuma"
+          }
+        ]
+      },
+      "payload": {
+        "variant": "motivation",
+        "headline": "Seu plano será adaptado para a sua região sensível.",
+        "body": "{{dorAdaptacao}} Conforme seu corpo responde, o plano evolui junto com você.",
+        "cta": "CONTINUAR",
+        "heroIcon": "balance-pad",
+        "meter": {
+          "pct": 38,
+          "block": 3,
+          "blockName": "Sua rotina"
+        }
+      }
+    },
+    {
+      "id": "work-routine",
+      "template": "question-single",
+      "section": "estilo-de-vida",
+      "countsForProgress": true,
+      "saveAs": "workRoutine",
+      "next": "typical-day",
+      "payload": {
+        "headline": "Como é a sua rotina de trabalho?",
+        "options": [
+          {
+            "value": "9-18",
+            "label": "Das 9h às 18h",
+            "icon": "briefcase"
+          },
+          {
+            "value": "flexivel",
+            "label": "Horários flexíveis",
+            "icon": "laptop"
+          },
+          {
+            "value": "noturno",
+            "label": "Turnos noturnos",
+            "icon": "moon"
+          },
+          {
+            "value": "nao-trabalho",
+            "label": "Não estou trabalhando no momento",
+            "icon": "sofa"
+          }
+        ]
+      }
+    },
+    {
+      "id": "typical-day",
+      "template": "question-single",
+      "section": "estilo-de-vida",
+      "countsForProgress": true,
+      "saveAs": "typicalDay",
+      "next": "energy",
+      "payload": {
+        "headline": "Como você descreveria o seu dia típico?",
+        "options": [
+          {
+            "value": "sentada",
+            "label": "Passo a maior parte do dia sentada",
+            "icon": "chair"
+          },
+          {
+            "value": "pausas",
+            "label": "Faço pausas ativas",
+            "icon": "walk"
+          },
+          {
+            "value": "de-pe",
+            "label": "Fico de pé o dia todo",
+            "icon": "work-boots"
+          }
+        ]
+      }
+    },
+    {
+      "id": "energy",
+      "template": "question-single",
+      "section": "estilo-de-vida",
+      "countsForProgress": true,
+      "saveAs": "energy",
+      "next": "i-energy",
+      "payload": {
+        "headline": "Como são os seus níveis de energia durante o dia?",
+        "options": [
+          {
+            "value": "baixos",
+            "label": "Baixos, sinto-me cansada o dia todo",
+            "icon": "empty-battery"
+          },
+          {
+            "value": "almoco",
+            "label": "Queda após o almoço",
+            "icon": "battery"
+          },
+          {
+            "value": "arrasto",
+            "label": "Vou me arrastando entre refeições",
+            "icon": "sloth"
+          },
+          {
+            "value": "estaveis",
+            "label": "Elevados e estáveis",
+            "icon": "lightning"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-energy",
+      "template": "interstitial",
+      "section": "estilo-de-vida",
+      "countsForProgress": false,
+      "next": "water",
+      "payload": {
+        "variant": "motivation",
+        "headline": {
+          "@switch": {
+            "key": "energy",
+            "cases": {
+              "baixos": "Seu corpo está pedindo movimento inteligente.",
+              "almoco": "Acabe de vez com a queda de energia pós-almoço.",
+              "arrasto": "Energia estável começa com músculos ativados.",
+              "estaveis": "Ótimo — vamos manter essa energia lá em cima."
+            },
+            "default": "Entendido!"
+          }
+        },
+        "body": {
+          "@switch": {
+            "key": "energy",
+            "cases": {
+              "baixos": "Sessões curtas de Pilates **elevam a energia sem esgotar** — diferente de treinos intensos que deixam você ainda mais cansada.",
+              "almoco": "Os exercícios de respiração e alongamento do Pilates ativam a circulação e a oxigenação — você terá **mais energia e disposição** para o resto do dia.",
+              "arrasto": "Sequências de ativação do core melhoram a circulação e estabilizam a glicemia — **menos altos e baixos** ao longo do dia.",
+              "estaveis": "Com uma rotina regular de Pilates, você **sustenta a disposição** e ainda melhora sono, postura e foco."
+            },
+            "default": ""
+          }
+        },
+        "cta": "CONTINUAR",
+        "heroIcon": "lightning",
+        "proof": {
+          "saveAs": "energy",
+          "byAnswer": {
+            "baixos": {
+              "stat": "76%",
+              "text": "das usuárias começaram com a energia baixa — e relataram mais disposição já na segunda semana."
+            },
+            "almoco": {
+              "stat": "71%",
+              "text": "das usuárias sentiam a energia despencar depois do almoço — o plano ataca exatamente esse horário."
+            },
+            "arrasto": {
+              "stat": "74%",
+              "text": "das usuárias se arrastavam ao longo do dia antes de começar sessões curtas de Pilates."
+            },
+            "estaveis": {
+              "stat": "65%",
+              "text": "das usuárias com energia estável usam o plano para manter o ritmo e evoluir o condicionamento."
+            }
+          },
+          "fallback": {
+            "stat": "72%",
+            "text": "das usuárias sentiram a disposição melhorar nas duas primeiras semanas."
+          }
+        },
+        "meter": {
+          "pct": 46,
+          "block": 3,
+          "blockName": "Sua rotina"
+        }
+      }
+    },
+    {
+      "id": "water",
+      "template": "question-single",
+      "section": "estilo-de-vida",
+      "countsForProgress": true,
+      "saveAs": "water",
+      "next": "sleep",
+      "payload": {
+        "headline": "Quanta água você bebe por dia?",
+        "note": "1 copo médio de água equivale a 250 ml",
+        "options": [
+          {
+            "value": "cafe",
+            "label": "Apenas tomo café ou chá",
+            "icon": "coffee-cup"
+          },
+          {
+            "value": "2-copos",
+            "label": "Cerca de 2 copos",
+            "icon": "water-glass"
+          },
+          {
+            "value": "2-6",
+            "label": "2 a 6 copos",
+            "icon": "water-bottle"
+          },
+          {
+            "value": "6+",
+            "label": "Mais de 6 copos",
+            "icon": "glass-water-jug"
+          }
+        ],
+        "subheadline": "Para calibrar seus lembretes de hidratação no plano diário."
+      }
+    },
+    {
+      "id": "sleep",
+      "template": "question-single",
+      "section": "estilo-de-vida",
+      "countsForProgress": true,
+      "saveAs": "sleep",
+      "next": "stress",
+      "payload": {
+        "headline": "Quantas horas você dorme por noite?",
+        "options": [
+          {
+            "value": "menos-5",
+            "label": "Menos de 5 horas",
+            "icon": "owl"
+          },
+          {
+            "value": "5-6",
+            "label": "5–6 horas",
+            "icon": "bed"
+          },
+          {
+            "value": "7-8",
+            "label": "7–8 horas",
+            "icon": "sleep-1"
+          },
+          {
+            "value": "8+",
+            "label": "Mais de 8 horas",
+            "icon": "alarm-clock"
+          }
+        ],
+        "subheadline": "Sono regula fome e recuperação — **seu plano considera isso.**"
+      }
+    },
+    {
+      "id": "stress",
+      "template": "question-single",
+      "section": "estilo-de-vida",
+      "countsForProgress": true,
+      "saveAs": "stress",
+      "next": "breakfast",
+      "payload": {
+        "headline": "Como você avalia seu nível de estresse no dia a dia?",
+        "options": [
+          {
+            "value": "muito-alto",
+            "label": "Muito alto",
+            "icon": "headache"
+          },
+          {
+            "value": "moderado",
+            "label": "Moderado",
+            "icon": "thundercloud"
+          },
+          {
+            "value": "baixo",
+            "label": "Baixo",
+            "icon": "cloud"
+          },
+          {
+            "value": "controlado",
+            "label": "Bem controlado",
+            "icon": "meditation"
+          }
+        ],
+        "subheadline": "Para dosar as sessões de respiração e relaxamento do plano."
+      }
+    },
+    {
+      "id": "breakfast",
+      "template": "question-single",
+      "section": "nutricao",
+      "countsForProgress": true,
+      "saveAs": "breakfast",
+      "next": "lunch",
+      "payload": {
+        "headline": "Quando você normalmente toma café da manhã?",
+        "options": [
+          {
+            "value": "6-8",
+            "label": "Entre 6h e 8h",
+            "icon": "egg-1"
+          },
+          {
+            "value": "8-10",
+            "label": "Entre 8h e 10h",
+            "icon": "croissant"
+          },
+          {
+            "value": "10-12",
+            "label": "Entre 10h e meio-dia",
+            "icon": "pancake"
+          },
+          {
+            "value": "pula",
+            "label": "Costumo pular o café da manhã",
+            "icon": "blocked"
+          }
+        ],
+        "subheadline": "Seu plano alimentar respeita os seus horários reais."
+      }
+    },
+    {
+      "id": "lunch",
+      "template": "question-single",
+      "section": "nutricao",
+      "countsForProgress": true,
+      "saveAs": "lunch",
+      "next": "dinner",
+      "payload": {
+        "headline": "E o almoço?",
+        "options": [
+          {
+            "value": "10-12",
+            "label": "Entre 10h e meio-dia",
+            "icon": "salad"
+          },
+          {
+            "value": "12-14",
+            "label": "Entre meio-dia e 14h",
+            "icon": "lunch-box"
+          },
+          {
+            "value": "14-16",
+            "label": "Entre 14h e 16h",
+            "icon": "sandwich"
+          },
+          {
+            "value": "pula",
+            "label": "Costumo pular o almoço",
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dinner",
+      "template": "question-single",
+      "section": "nutricao",
+      "countsForProgress": true,
+      "saveAs": "dinner",
+      "next": "i-jejum",
+      "payload": {
+        "headline": "A que horas você normalmente janta?",
+        "options": [
+          {
+            "value": "16-18",
+            "label": "Entre 16h e 18h",
+            "icon": "soup"
+          },
+          {
+            "value": "18-20",
+            "label": "Entre 18h e 20h",
+            "icon": "pasta"
+          },
+          {
+            "value": "20-22",
+            "label": "Entre 20h e 22h",
+            "icon": "moon"
+          },
+          {
+            "value": "pula",
+            "label": "Costumo pular o jantar",
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-jejum",
+      "template": "interstitial",
+      "section": "nutricao",
+      "countsForProgress": false,
+      "next": "diet-type",
+      "payload": {
+        "variant": "motivation",
+        "headline": "Seu plano alimentar se adapta à sua rotina real.",
+        "body": "Refeições práticas, nos horários que funcionam para você — **sem regras rígidas** e com receitas rápidas de preparar.",
+        "variants": {
+          "jejum": {
+            "headline": "Notamos que você costuma pular o {{refeicaoPulada}}.",
+            "body": "Seu plano alimentar se adapta à sua rotina real — **sem horários rígidos** e, se fizer sentido para você, com uma estrutura de jejum intermitente saudável e orientada."
+          }
+        },
+        "cta": "CONTINUAR",
+        "heroIcon": "hourglass",
+        "meter": {
+          "pct": 55,
+          "block": 3,
+          "blockName": "Sua rotina",
+          "milestone": "Bloco Sua rotina completo"
+        }
+      }
+    },
+    {
+      "id": "diet-type",
+      "template": "question-single",
+      "section": "nutricao",
+      "countsForProgress": true,
+      "saveAs": "dietType",
+      "next": "i-meal-preview",
+      "payload": {
+        "layout": "grouped",
+        "headline": "Que tipo de alimentação você prefere?",
+        "groups": [
+          {
+            "title": "Com carne",
+            "options": [
+              {
+                "value": "tradicional",
+                "label": "Tradicional",
+                "hint": "Gosto de tudo",
+                "icon": "meat"
+              },
+              {
+                "value": "keto",
+                "label": "Keto",
+                "hint": "Baixo carboidrato, alta gordura",
+                "icon": "avocado"
+              },
+              {
+                "value": "low-carb",
+                "label": "Low carb",
+                "hint": "Menos carboidrato no dia a dia",
+                "icon": "salad"
+              }
+            ]
+          },
+          {
+            "title": "Sem carne",
+            "options": [
+              {
+                "value": "vegetariana",
+                "label": "Vegetariana",
+                "hint": "Sem carne, com ovos e laticínios",
+                "icon": "broccoli-1"
+              },
+              {
+                "value": "vegana",
+                "label": "Vegana",
+                "hint": "Sem nenhum produto animal",
+                "icon": "leaf"
+              },
+              {
+                "value": "keto-vegana",
+                "label": "Keto vegana",
+                "hint": "Baixo carboidrato vegetal",
+                "icon": "coconut"
+              }
+            ]
+          },
+          {
+            "title": "Com peixe",
+            "options": [
+              {
+                "value": "mediterranea",
+                "label": "Mediterrânea",
+                "hint": "Peixes, azeite e vegetais",
+                "icon": "olive-oil"
+              },
+              {
+                "value": "pescatariana",
+                "label": "Pescatariana",
+                "hint": "Sem carne, com peixe",
+                "icon": "salmon"
+              }
+            ]
+          },
+          {
+            "title": "Sem alérgenos",
+            "options": [
+              {
+                "value": "sem-lactose",
+                "label": "Sem lactose",
+                "hint": "Zero leite e derivados",
+                "icon": "milk-jug"
+              },
+              {
+                "value": "sem-gluten",
+                "label": "Sem glúten",
+                "hint": "Zero trigo, cevada e centeio",
+                "icon": "wheat"
+              }
+            ]
+          }
+        ],
+        "body": "Para você receber receitas no seu estilo — **sem alimentos que não come.**"
+      }
+    },
+    {
+      "id": "i-meal-preview",
+      "template": "interstitial",
+      "section": "nutricao",
+      "countsForProgress": false,
+      "next": "bad-habits",
+      "payload": {
+        "variant": "meals",
+        "headline": {
+          "@switch": {
+            "key": "goal",
+            "cases": {
+              "perder-peso": "Emagreça com um plano alimentar adaptado.",
+              "tonificar": "Refeições que constroem músculo e firmeza.",
+              "postura": "Alimentação que ajuda a reduzir inflamação e dores.",
+              "manter": "Um plano alimentar para manter o ritmo — **sem neura**."
+            },
+            "default": "Emagreça com um plano alimentar adaptado."
+          }
+        },
+        "body": "A nutrição é fundamental para **um resultado visível**. Receba receitas rápidas e saborosas e melhore seus hábitos para atingir sua meta mais rápido.",
+        "meals": [
+          {
+            "name": "Café da manhã",
+            "kcal": 420,
+            "min": 10
+          },
+          {
+            "name": "Almoço",
+            "kcal": 510,
+            "min": 20
+          },
+          {
+            "name": "Jantar",
+            "kcal": 435,
+            "min": 25
+          }
+        ],
+        "mealsByDiet": {
+          "keto": {
+            "label": "Keto",
+            "meals": [
+              {
+                "name": "Ovos com abacate",
+                "kcal": 380,
+                "min": 10
+              },
+              {
+                "name": "Frango grelhado c/ legumes",
+                "kcal": 480,
+                "min": 20
+              },
+              {
+                "name": "Salmão com brócolis",
+                "kcal": 450,
+                "min": 25
+              }
+            ]
+          },
+          "low-carb": {
+            "label": "Low carb",
+            "meals": [
+              {
+                "name": "Omelete de queijo",
+                "kcal": 350,
+                "min": 8
+              },
+              {
+                "name": "Carne c/ salada completa",
+                "kcal": 470,
+                "min": 20
+              },
+              {
+                "name": "Peixe c/ abobrinha",
+                "kcal": 420,
+                "min": 22
+              }
+            ]
+          },
+          "vegetariana": {
+            "label": "Vegetariana",
+            "meals": [
+              {
+                "name": "Iogurte c/ granola",
+                "kcal": 360,
+                "min": 5
+              },
+              {
+                "name": "Lasanha de berinjela",
+                "kcal": 490,
+                "min": 25
+              },
+              {
+                "name": "Curry de legumes",
+                "kcal": 440,
+                "min": 20
+              }
+            ]
+          },
+          "vegana": {
+            "label": "Vegana",
+            "meals": [
+              {
+                "name": "Vitamina de frutas c/ aveia",
+                "kcal": 340,
+                "min": 6
+              },
+              {
+                "name": "Bowl de grão-de-bico",
+                "kcal": 480,
+                "min": 15
+              },
+              {
+                "name": "Tofu c/ legumes",
+                "kcal": 430,
+                "min": 20
+              }
+            ]
+          },
+          "keto-vegana": {
+            "label": "Keto vegana",
+            "meals": [
+              {
+                "name": "Smoothie verde c/ coco",
+                "kcal": 320,
+                "min": 6
+              },
+              {
+                "name": "Salada c/ tofu e abacate",
+                "kcal": 450,
+                "min": 12
+              },
+              {
+                "name": "Cogumelos salteados",
+                "kcal": 380,
+                "min": 18
+              }
+            ]
+          },
+          "mediterranea": {
+            "label": "Mediterrânea",
+            "meals": [
+              {
+                "name": "Iogurte grego c/ mel",
+                "kcal": 330,
+                "min": 5
+              },
+              {
+                "name": "Peixe c/ azeite e legumes",
+                "kcal": 490,
+                "min": 22
+              },
+              {
+                "name": "Salada mediterrânea",
+                "kcal": 420,
+                "min": 15
+              }
+            ]
+          },
+          "pescatariana": {
+            "label": "Pescatariana",
+            "meals": [
+              {
+                "name": "Torrada c/ ovos",
+                "kcal": 350,
+                "min": 8
+              },
+              {
+                "name": "Atum c/ grãos",
+                "kcal": 470,
+                "min": 15
+              },
+              {
+                "name": "Tilápia c/ purê",
+                "kcal": 440,
+                "min": 25
+              }
+            ]
+          },
+          "sem-lactose": {
+            "label": "Sem lactose",
+            "meals": [
+              {
+                "name": "Tapioca c/ ovos",
+                "kcal": 370,
+                "min": 10
+              },
+              {
+                "name": "Frango c/ arroz e legumes",
+                "kcal": 500,
+                "min": 20
+              },
+              {
+                "name": "Carne c/ mandioca",
+                "kcal": 460,
+                "min": 25
+              }
+            ]
+          },
+          "sem-gluten": {
+            "label": "Sem glúten",
+            "meals": [
+              {
+                "name": "Tapioca recheada",
+                "kcal": 360,
+                "min": 10
+              },
+              {
+                "name": "Risoto de frango",
+                "kcal": 490,
+                "min": 25
+              },
+              {
+                "name": "Peixe c/ quinoa",
+                "kcal": 440,
+                "min": 22
+              }
+            ]
+          }
+        },
+        "cta": "CONTINUAR",
+        "proof": {
+          "saveAs": "dietType",
+          "byAnswer": {
+            "tradicional": {
+              "stat": "69%",
+              "text": "das usuárias seguem uma alimentação tradicional — o cardápio respeita o seu jeito de comer."
+            },
+            "keto": {
+              "stat": "58%",
+              "text": "das usuárias na keto mantiveram a energia nos treinos com as refeições do plano."
+            },
+            "low-carb": {
+              "stat": "62%",
+              "text": "das usuárias que reduziram carboidratos potencializaram o resultado com o cardápio adaptado."
+            },
+            "vegetariana": {
+              "stat": "64%",
+              "text": "das usuárias vegetarianas montaram pratos completos com as sugestões do plano."
+            },
+            "vegana": {
+              "stat": "59%",
+              "text": "das usuárias veganas bateram as metas de proteína com o cardápio adaptado."
+            },
+            "keto-vegana": {
+              "stat": "57%",
+              "text": "das usuárias com dieta restrita encontraram variedade no plano de refeições."
+            },
+            "mediterranea": {
+              "stat": "66%",
+              "text": "das usuárias no estilo mediterrâneo relataram mais saciedade ao longo do dia."
+            },
+            "pescatariana": {
+              "stat": "61%",
+              "text": "das usuárias pescatarianas elogiaram a praticidade das receitas do plano."
+            },
+            "sem-lactose": {
+              "stat": "63%",
+              "text": "das usuárias sem lactose encontraram substituições simples no cardápio."
+            },
+            "sem-gluten": {
+              "stat": "60%",
+              "text": "das usuárias sem glúten mantiveram a dieta sem esforço com as refeições sugeridas."
+            }
+          },
+          "fallback": {
+            "stat": "65%",
+            "text": "das usuárias mantiveram a dieta com mais facilidade seguindo o cardápio do plano."
+          }
+        },
+        "meter": {
+          "pct": 63,
+          "block": 4,
+          "blockName": "Alimentação"
+        }
+      }
+    },
+    {
+      "id": "bad-habits",
+      "template": "question-multi",
+      "section": "nutricao",
+      "countsForProgress": true,
+      "saveAs": "badHabits",
+      "next": "cravings",
+      "payload": {
+        "headline": "Você tem algum desses hábitos?",
+        "options": [
+          {
+            "value": "emocional",
+            "label": "Comer por emoção ou tédio",
+            "icon": "ice-cream"
+          },
+          {
+            "value": "demais",
+            "label": "Comer demais",
+            "icon": "pizza"
+          },
+          {
+            "value": "noturno",
+            "label": "Lanches noturnos",
+            "icon": "refrigerator"
+          },
+          {
+            "value": "pular",
+            "label": "Pular refeições com frequência",
+            "icon": "blocked"
+          },
+          {
+            "value": "nenhum",
+            "label": "Nenhum dos itens acima",
+            "exclusive": true,
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cravings",
+      "template": "question-multi",
+      "section": "nutricao",
+      "countsForProgress": true,
+      "saveAs": "cravings",
+      "next": "i-authority",
+      "payload": {
+        "headline": "Quais alimentos você mais sente vontade de comer?",
+        "options": [
+          {
+            "value": "doces",
+            "label": "Doces",
+            "icon": "candy"
+          },
+          {
+            "value": "salgadinhos",
+            "label": "Salgadinhos",
+            "icon": "chips"
+          },
+          {
+            "value": "fast-food",
+            "label": "Fast food",
+            "icon": "hamburger"
+          },
+          {
+            "value": "refrigerante",
+            "label": "Refrigerante",
+            "icon": "soda-can"
+          },
+          {
+            "value": "nenhum",
+            "label": "Nenhum dos itens acima",
+            "exclusive": true,
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-authority",
+      "template": "interstitial",
+      "section": "nutricao",
+      "countsForProgress": false,
+      "next": "height",
+      "payload": {
+        "variant": "authority",
+        "headline": "Especialistas certificadas de alto nível",
+        "experts": [
+          {
+            "name": "Dra. Camila Ferraz",
+            "role": "Instrutora de Pilates Certificada (BASI)"
+          },
+          {
+            "name": "Dra. Renata Souza",
+            "role": "Fisioterapeuta especialista em coluna"
+          },
+          {
+            "name": "Juliana Prates",
+            "role": "Nutricionista"
+          }
+        ],
+        "cta": "CONTINUAR",
+        "meter": {
+          "pct": 75,
+          "block": 4,
+          "blockName": "Alimentação",
+          "milestone": "Bloco Alimentação completo"
+        }
+      }
+    },
+    {
+      "id": "height",
+      "template": "input-measure",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "height",
+      "next": "weight",
+      "payload": {
+        "kind": "height",
+        "headline": "Qual é a sua altura?",
+        "units": [
+          {
+            "id": "cm",
+            "label": "CM"
+          },
+          {
+            "id": "ft",
+            "label": "FT"
+          }
+        ],
+        "range": {
+          "min": 90,
+          "max": 243
+        },
+        "rangeHint": "Por favor, introduza um valor entre 90 e 243 cm",
+        "consent": true,
+        "cta": "PRÓXIMO PASSO"
+      }
+    },
+    {
+      "id": "weight",
+      "template": "input-measure",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "weight",
+      "next": "goal-weight",
+      "payload": {
+        "kind": "weight",
+        "headline": "Qual é o seu peso atual?",
+        "units": [
+          {
+            "id": "kg",
+            "label": "KG"
+          },
+          {
+            "id": "lbs",
+            "label": "LBS"
+          }
+        ],
+        "range": {
+          "min": 25,
+          "max": 300
+        },
+        "rangeHint": "Por favor, introduza um valor entre 25 e 300 kg",
+        "feedback": "bmi",
+        "cta": "PRÓXIMO PASSO"
+      }
+    },
+    {
+      "id": "goal-weight",
+      "template": "input-measure",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "goalWeight",
+      "next": "age-input",
+      "payload": {
+        "kind": "weight",
+        "headline": "Entendido! E qual é o seu peso dos sonhos?",
+        "units": [
+          {
+            "id": "kg",
+            "label": "KG"
+          },
+          {
+            "id": "lbs",
+            "label": "LBS"
+          }
+        ],
+        "range": {
+          "min": 25,
+          "max": 300
+        },
+        "rangeHint": "Por favor, introduza um valor entre 25 e 300 kg",
+        "feedback": "goal",
+        "cta": "PRÓXIMO PASSO"
+      }
+    },
+    {
+      "id": "age-input",
+      "template": "input-measure",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "ageYears",
+      "next": "loading-analysis",
+      "payload": {
+        "kind": "age",
+        "headline": "Qual é a sua idade?",
+        "unitSuffix": "anos",
+        "range": {
+          "min": 16,
+          "max": 100
+        },
+        "rangeHint": "Por favor, introduza um valor entre 16 e 100",
+        "staticFeedback": "Perguntamos a sua idade para personalizar o seu plano. Com a idade, a massa muscular diminui e o core enfraquece — o Pilates é o método mais indicado para reverter isso com segurança.",
+        "cta": "PRÓXIMO PASSO"
+      }
+    },
+    {
+      "id": "loading-analysis",
+      "template": "loading",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "wellness-profile",
+      "payload": {
+        "variant": "bars",
+        "headline": "Analisando suas respostas…",
+        "bars": [
+          "Seu Perfil",
+          "Atividade",
+          "Estilo de Vida e Hábitos",
+          "Nutrição"
+        ],
+        "badge": "App em destaque em 40+ países",
+        "rating": "Excelente"
+      }
+    },
+    {
+      "id": "wellness-profile",
+      "template": "result",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "weight-triggers",
+      "payload": {
+        "variant": "profile",
+        "headline": "Aqui está o seu perfil de bem-estar",
+        "cards": {
+          "lifestyle": "Estilo de vida",
+          "level": "Nível de Pilates",
+          "flexibility": "Flexibilidade",
+          "focus": "Foco especial"
+        },
+        "cta": "CONTINUAR"
+      }
+    },
+    {
+      "id": "weight-triggers",
+      "template": "question-multi",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "weightTriggers",
+      "next": "i-mamae",
+      "payload": {
+        "headline": "Algum desses eventos contribuiu para o ganho de peso nos últimos anos?",
+        "subheadline": "Escolha todas que se aplicam",
+        "options": [
+          {
+            "value": "trabalho",
+            "label": "Pressão no trabalho",
+            "icon": "briefcase"
+          },
+          {
+            "value": "familia",
+            "label": "Correria da vida familiar",
+            "icon": "family"
+          },
+          {
+            "value": "gravidez",
+            "label": "Gravidez e maternidade",
+            "icon": "pregnant-woman"
+          },
+          {
+            "value": "divorcio",
+            "label": "Separação ou divórcio",
+            "icon": "broken-heart"
+          },
+          {
+            "value": "metabolismo",
+            "label": "Metabolismo mais lento com a idade",
+            "icon": "hourglass"
+          },
+          {
+            "value": "financeiro",
+            "label": "Dificuldades financeiras",
+            "icon": "money"
+          },
+          {
+            "value": "menopausa",
+            "label": "Menopausa",
+            "icon": "folding-fan"
+          },
+          {
+            "value": "nenhum",
+            "label": "Nenhum dos itens acima",
+            "exclusive": true,
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-mamae",
+      "template": "interstitial",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "q-liberacao",
+      "guard": {
+        "any": [
+          {
+            "key": "weightTriggers",
+            "op": "includes",
+            "value": "gravidez"
+          },
+          {
+            "key": "mainReason",
+            "op": "eq",
+            "value": "pos-parto"
+          }
+        ]
+      },
+      "payload": {
+        "variant": "motivation",
+        "headline": "Seu corpo passou por uma transformação enorme.",
+        "body": "E ele merece cuidado na mesma medida. O Pilates é o método mais recomendado para o pós-parto: **reconstrói o core profundo e o assoalho pélvico com segurança** — no seu ritmo, respeitando cada fase da sua recuperação.",
+        "cta": "CONTINUAR",
+        "heroIcon": "family",
+        "proof": {
+          "saveAs": "weightTriggers",
+          "byAnswer": {
+            "gravidez": {
+              "stat": "74%",
+              "text": "das mamães que usam o plano voltaram a se sentir donas do próprio corpo com 15 minutos por dia."
+            }
+          },
+          "fallback": {
+            "stat": "73%",
+            "text": "das usuárias no pós-parto recuperaram a forma treinando em casa, no ritmo do bebê."
+          }
+        },
+        "meter": {
+          "pct": 78,
+          "block": 5,
+          "blockName": "Seu plano"
+        }
+      }
+    },
+    {
+      "id": "q-liberacao",
+      "template": "question-single",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "liberacaoMedica",
+      "next": "i-menopausa",
+      "guard": {
+        "any": [
+          {
+            "key": "weightTriggers",
+            "op": "includes",
+            "value": "gravidez"
+          },
+          {
+            "key": "mainReason",
+            "op": "eq",
+            "value": "pos-parto"
+          }
+        ]
+      },
+      "payload": {
+        "headline": "Você já recebeu liberação médica para praticar exercícios?",
+        "subheadline": "Perguntamos para adaptar a intensidade inicial do seu plano",
+        "options": [
+          {
+            "value": "sim",
+            "label": "Sim, já fui liberada",
+            "icon": "checkmark"
+          },
+          {
+            "value": "ainda-nao",
+            "label": "Ainda não",
+            "icon": "hourglass"
+          },
+          {
+            "value": "nao-sei",
+            "label": "Não tenho certeza",
+            "icon": "thinking"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-menopausa",
+      "template": "interstitial",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "event",
+      "guard": {
+        "all": [
+          {
+            "not": {
+              "any": [
+                {
+                  "key": "weightTriggers",
+                  "op": "includes",
+                  "value": "gravidez"
+                },
+                {
+                  "key": "mainReason",
+                  "op": "eq",
+                  "value": "pos-parto"
+                }
+              ]
+            }
+          },
+          {
+            "any": [
+              {
+                "key": "weightTriggers",
+                "op": "includes",
+                "value": "menopausa"
+              },
+              {
+                "key": "weightTriggers",
+                "op": "includes",
+                "value": "metabolismo"
+              }
+            ]
+          }
+        ]
+      },
+      "payload": {
+        "variant": "motivation",
+        "headline": "Seu corpo mudou as regras. O método também precisa mudar.",
+        "body": "Na menopausa, a gordura migra para a barriga e a massa muscular diminui mais rápido. O Pilates combate **exatamente esses dois efeitos** — com baixo impacto, respeitando suas articulações e fortalecendo seus ossos.",
+        "cta": "CONTINUAR",
+        "heroIcon": "folding-fan",
+        "proof": {
+          "saveAs": "weightTriggers",
+          "byAnswer": {
+            "menopausa": {
+              "stat": "77%",
+              "text": "das usuárias na menopausa relataram mais energia e menos inchaço com sequências de baixo impacto."
+            },
+            "metabolismo": {
+              "stat": "71%",
+              "text": "das usuárias que culpavam o metabolismo viram o corpo responder quando o método mudou."
+            }
+          },
+          "fallback": {
+            "stat": "75%",
+            "text": "das usuárias 45+ atravessaram essa fase treinando em casa, com segurança e constância."
+          }
+        },
+        "meter": {
+          "pct": 81,
+          "block": 5,
+          "blockName": "Seu plano"
+        }
+      }
+    },
+    {
+      "id": "event",
+      "template": "question-single",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "event",
+      "next": {
+        "default": "event-date",
+        "cases": [
+          {
+            "when": {
+              "key": "event",
+              "op": "eq",
+              "value": "nenhum"
+            },
+            "goto": "i-alinhamento"
+          }
+        ]
+      },
+      "payload": {
+        "headline": "Você tem algum evento importante chegando?",
+        "subheadline": "Ter algo pelo qual esperar pode ser um grande motivador para atingir sua meta",
+        "options": [
+          {
+            "value": "ferias",
+            "label": "Férias",
+            "icon": "palm"
+          },
+          {
+            "value": "casamento",
+            "label": "Casamento",
+            "icon": "wedding"
+          },
+          {
+            "value": "praia",
+            "label": "Viagem de praia",
+            "icon": "bikini"
+          },
+          {
+            "value": "festa",
+            "label": "Festa de fim de ano",
+            "icon": "confetti"
+          },
+          {
+            "value": "reencontro",
+            "label": "Reencontro",
+            "icon": "friends"
+          },
+          {
+            "value": "aniversario",
+            "label": "Aniversário",
+            "icon": "cake"
+          },
+          {
+            "value": "outro",
+            "label": "Outro",
+            "icon": "calendar"
+          },
+          {
+            "value": "nenhum",
+            "label": "Nenhum evento por enquanto",
+            "icon": "blocked"
+          }
+        ]
+      }
+    },
+    {
+      "id": "event-date",
+      "template": "input-measure",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "eventDate",
+      "next": "i-alinhamento",
+      "guard": {
+        "key": "event",
+        "op": "neq",
+        "value": "nenhum"
+      },
+      "payload": {
+        "kind": "date",
+        "headline": "Quando é o seu evento?",
+        "subheadline": "Vamos manter essa data em mente para a sua meta",
+        "privacyNote": "Respeitamos sua privacidade e usamos essa data apenas para personalizar seu plano.",
+        "skippable": true,
+        "cta": "CONTINUAR"
+      }
+    },
+    {
+      "id": "i-alinhamento",
+      "template": "interstitial",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "projection",
+      "guard": {
+        "key": "$flag:metaAgressiva",
+        "op": "truthy"
+      },
+      "payload": {
+        "variant": "motivation",
+        "headline": "Sua meta é ambiciosa — e vamos chegar lá em etapas.",
+        "body": "Primeiro, os **resultados visíveis**: barriga mais plana e postura alinhada já nas primeiras 2 semanas. Depois, a meta completa no seu peso — com constância, sem atalhos que não duram.",
+        "cta": "CONTINUAR",
+        "heroIcon": "spine-alignment-roller",
+        "proof": {
+          "saveAs": "event",
+          "byAnswer": {
+            "ferias": {
+              "stat": "68%",
+              "text": "das usuárias que tinham férias marcadas chegaram à viagem mais confiantes."
+            },
+            "casamento": {
+              "stat": "72%",
+              "text": "das usuárias que se preparavam para um casamento seguiram o plano até o grande dia."
+            },
+            "praia": {
+              "stat": "70%",
+              "text": "das usuárias com praia no horizonte priorizaram barriga e postura — o mesmo foco do seu plano."
+            },
+            "festa": {
+              "stat": "66%",
+              "text": "das usuárias com uma festa pela frente usaram o plano como preparação."
+            },
+            "reencontro": {
+              "stat": "64%",
+              "text": "das usuárias que tinham um reencontro marcado chegaram mais confiantes."
+            },
+            "aniversario": {
+              "stat": "62%",
+              "text": "das usuárias que miravam um aniversário celebraram a data com o corpo mais leve."
+            },
+            "outro": {
+              "stat": "60%",
+              "text": "das usuárias com uma data especial em vista mantiveram o ritmo até lá."
+            },
+            "nenhum": {
+              "stat": "67%",
+              "text": "das usuárias que começaram sem data marcada criaram o hábito em 4 semanas."
+            }
+          },
+          "fallback": {
+            "stat": "66%",
+            "text": "das usuárias com metas ambiciosas chegaram lá dividindo o objetivo em etapas."
+          }
+        },
+        "meter": {
+          "pct": 85,
+          "block": 5,
+          "blockName": "Seu plano"
+        }
+      }
+    },
+    {
+      "id": "projection",
+      "template": "result",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "main-reason",
+      "payload": {
+        "variant": "projection",
+        "headline": "O plano que vai finalmente transformar o seu corpo",
+        "subheadline": {
+          "@switch": {
+            "key": "event",
+            "cases": {
+              "ferias": "Estimamos que você pode chegar a {{goalWeight}} kg até {{projectionDate}} — a tempo das suas férias*",
+              "casamento": "Estimamos que você pode chegar a {{goalWeight}} kg até {{projectionDate}} — a tempo do seu casamento*",
+              "praia": "Estimamos que você pode chegar a {{goalWeight}} kg até {{projectionDate}} — a tempo da sua viagem de praia*",
+              "festa": "Estimamos que você pode chegar a {{goalWeight}} kg até {{projectionDate}} — a tempo da festa de fim de ano*",
+              "reencontro": "Estimamos que você pode chegar a {{goalWeight}} kg até {{projectionDate}} — a tempo do seu reencontro*",
+              "aniversario": "Estimamos que você pode chegar a {{goalWeight}} kg até {{projectionDate}} — a tempo do seu aniversário*",
+              "outro": "Estimamos que você pode chegar a {{goalWeight}} kg até {{projectionDate}} — a tempo do seu evento*"
+            },
+            "default": "Estimamos que você pode chegar a {{goalWeight}} kg até {{projectionDate}}*"
+          }
+        },
+        "coach": {
+          "quote": "O nosso Plano de Pilates vai ajudar você a conquistar resultados duradouros. Ele combina treinos envolventes de baixo impacto com nutrição saudável para garantir o seu progresso.",
+          "name": "Camila Ferraz",
+          "role": "Instrutora de Pilates Certificada"
+        },
+        "cta": "VER MINHA PROJEÇÃO"
+      }
+    },
+    {
+      "id": "main-reason",
+      "template": "question-single",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "mainReason",
+      "next": "confidence",
+      "payload": {
+        "headline": "Qual é a sua principal razão para essa transformação?",
+        "options": [
+          {
+            "value": "confianca",
+            "label": "Me sentir confiante no meu corpo",
+            "icon": "sparkle"
+          },
+          {
+            "value": "saude",
+            "label": "Ter mais saúde e energia",
+            "icon": "lightning"
+          },
+          {
+            "value": "roupas",
+            "label": "Voltar a usar minhas roupas favoritas",
+            "icon": "dress"
+          },
+          {
+            "value": "pos-parto",
+            "label": "Recuperar meu corpo após a gravidez",
+            "icon": "baby"
+          },
+          {
+            "value": "dores",
+            "label": "Me livrar das dores",
+            "icon": "massage"
+          },
+          {
+            "value": "outro",
+            "label": "Outro",
+            "icon": "feather"
+          }
+        ]
+      }
+    },
+    {
+      "id": "confidence",
+      "template": "question-single",
+      "section": "quase-la",
+      "countsForProgress": true,
+      "saveAs": "confidence",
+      "next": "i-awards",
+      "payload": {
+        "headline": "Quão confiante você está em alcançar {{goalWeight}} kg até {{projectionDate}}?",
+        "options": [
+          {
+            "value": "consigo",
+            "label": "Acredito que consigo!",
+            "icon": "gold-medal"
+          },
+          {
+            "value": "tentar",
+            "label": "Vou tentar com tudo!",
+            "icon": "thinking"
+          },
+          {
+            "value": "insegura",
+            "label": "Quero provar para mim que consigo",
+            "icon": "rain"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-awards",
+      "template": "interstitial",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "loading-plan",
+      "payload": {
+        "variant": "awards",
+        "headline": "O que faz de Viva Pilates uma escolha confiável",
+        "awards": [
+          {
+            "title": "App de Bem-Estar do Ano",
+            "org": "Mobile Health Awards",
+            "year": "2024"
+          },
+          {
+            "title": "Top 3 em Saúde & Fitness",
+            "org": "App Store",
+            "year": "2024"
+          },
+          {
+            "title": "Escolha das Leitoras",
+            "org": "Revista Forma",
+            "year": "2025"
+          }
+        ],
+        "variants": {
+          "cetica": {
+            "variant": "motivation",
+            "headline": "É normal duvidar — principalmente se outras tentativas falharam.",
+            "body": "A diferença aqui: **10 minutos por dia, zero equipamento e garantia de 30 dias**. Se seguir o plano e não vir resultado, devolvemos seu dinheiro. Você só precisa começar."
+          }
+        },
+        "cta": "CONTINUAR",
+        "meter": {
+          "pct": 90,
+          "block": 5,
+          "blockName": "Seu plano"
+        }
+      }
+    },
+    {
+      "id": "loading-plan",
+      "template": "loading",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "social-proof-2",
+      "payload": {
+        "variant": "circle",
+        "headline": "Criando seu Plano de Pilates personalizado",
+        "doneHeadline": "Seu plano está 100% pronto!",
+        "social": "312.000 mulheres escolheram Viva Pilates para transformar o corpo",
+        "testimonials": [
+          {
+            "name": "Patrícia, 41",
+            "text": "Em 8 semanas minha postura mudou completamente. Minhas colegas perguntam se eu \"cresci\"."
+          },
+          {
+            "name": "Fernanda, 34",
+            "text": "Perdi 5 kg sem pisar numa academia. As aulas de 15 minutos salvaram minha rotina."
+          },
+          {
+            "name": "Luciana, 52",
+            "text": "Minha dor na lombar de 10 anos sumiu. Eu só queria isso — e ganhei um corpo novo junto."
+          }
+        ],
+        "disclaimer": "Seguir o plano de treinos e alimentação influencia significativamente os resultados. Em 4 semanas, as usuárias normalmente perdem no máximo 0,5–1 kg por semana. Resultados individuais podem variar."
+      }
+    },
+    {
+      "id": "social-proof-2",
+      "template": "interstitial",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "name",
+      "payload": {
+        "variant": "social",
+        "headline": {
+          "@switch": {
+            "key": "goal",
+            "cases": {
+              "perder-peso": "76% das mulheres com o seu objetivo viram diferença na balança em 4 semanas",
+              "tonificar": "72% das mulheres com o seu objetivo notaram firmeza nos braços e na barriga",
+              "postura": "79% das mulheres com o seu objetivo relataram menos dores no dia a dia",
+              "manter": "68% das mulheres com o seu objetivo mantêm a rotina há mais de 3 meses"
+            },
+            "default": "76% das mulheres com o seu objetivo viram resultado nas primeiras 4 semanas"
+          }
+        },
+        "logos": [
+          "Women's Health",
+          "Vogue Fitness",
+          "Marie Claire"
+        ],
+        "cta": "CONTINUAR",
+        "heroIcon": "gold-medal",
+        "meter": {
+          "pct": 95,
+          "block": 5,
+          "blockName": "Seu plano",
+          "milestone": "Bloco Seu plano completo"
+        },
+        "body": "4,8★ de média em 12.400 avaliações — **a comunidade que caminha com você.**"
+      }
+    },
+    {
+      "id": "name",
+      "template": "input-measure",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "saveAs": "name",
+      "next": "email",
+      "payload": {
+        "kind": "name",
+        "headline": "Qual é o seu nome?",
+        "placeholder": "O seu nome",
+        "cta": "CONTINUAR"
+      }
+    },
+    {
+      "id": "email",
+      "template": "input-measure",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "saveAs": "email",
+      "next": "plan-ready",
+      "payload": {
+        "kind": "email",
+        "headline": "Digite seu e-mail para receber o plano de {{goalLabel}}",
+        "subheadline": "★★★★★ Junte-se a 312.000 mulheres que já transformaram o corpo",
+        "placeholder": "O seu e-mail",
+        "privacyNote": "Respeitamos sua privacidade e protegemos seus dados pessoais. Seus dados serão processados conforme nossa Política de Privacidade.",
+        "cta": "RECEBER MEU PLANO"
+      }
+    },
+    {
+      "id": "plan-ready",
+      "template": "result",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "next": "country",
+      "payload": {
+        "variant": "plan-ready",
+        "headline": "{{firstName}}, o seu {{planLabel}} para {{goalLabel}} está pronto!",
+        "badges": {
+          "audience": [
+            {
+              "when": {
+                "key": "$persona:mamae",
+                "op": "truthy"
+              },
+              "text": "Seguro e adaptado para o pós-parto"
+            },
+            {
+              "when": {
+                "key": "$flag:inicianteTotal",
+                "op": "truthy"
+              },
+              "text": "Feito para quem nunca treinou"
+            },
+            {
+              "text": "Perfeito para iniciantes"
+            }
+          ],
+          "extra": [
+            {
+              "text": "Feito para {{diagnosisCardLabel}}"
+            },
+            {
+              "text": "Personalizado com base nas suas respostas"
+            },
+            {
+              "when": {
+                "all": [
+                  {
+                    "key": "secondaryGoals",
+                    "op": "not-empty"
+                  },
+                  {
+                    "key": "secondaryGoals",
+                    "op": "excludes",
+                    "value": "nenhum"
+                  }
+                ]
+              },
+              "text": "Também vamos trabalhar: {{secundarios}}"
+            }
+          ]
+        },
+        "cta": "DESBLOQUEAR MEU PLANO"
+      }
+    },
+    {
+      "id": "country",
+      "template": "question-single",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "saveAs": "country",
+      "next": "scratch",
+      "payload": {
+        "headline": "Você é do Brasil?",
+        "subheadline": "Pedimos seu país para personalizar sua oferta",
+        "options": [
+          {
+            "value": "brasil",
+            "label": "Sim, sou",
+            "icon": "brazil"
+          },
+          {
+            "value": "outro",
+            "label": "Não, mudar meu país",
+            "icon": "globe-earth"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scratch",
+      "template": "scratch",
+      "section": "quase-la",
+      "countsForProgress": false,
+      "payload": {
+        "headline": "Raspe para revelar seu desconto especial!",
+        "subheadline": "Queremos que você comece sua jornada com uma boa surpresa",
+        "discount": "30%",
+        "code": "pilates_jul26"
+      }
+    }
+  ],
+  "checkout": {
+    "brandLine": "Viva Pilates",
+    "planReady": "Seu Plano de Pilates está pronto — criado com base nas suas respostas.",
+    "headlines": {
+      "confianca": "Pronta para se olhar no espelho com orgulho?",
+      "saude": "Mais saúde e energia começam hoje.",
+      "roupas": "Suas roupas favoritas vão voltar a servir.",
+      "pos-parto": "Seu corpo de volta, no seu tempo.",
+      "dores": "Viver sem dor começa hoje.",
+      "outro": "Sua transformação começa hoje.",
+      "default": "Seu Plano de Pilates está pronto!"
+    },
+    "heroNowLabel": "Postura desalinhada · core inativo",
+    "dreamLabels": {
+      "esguia": "Esguia e alongada · \"corpo de bailarina\"",
+      "tonificada": "Tonificada e definida",
+      "curvas": "Com curvas e firme",
+      "media": "Média e em forma",
+      "default": "Postura ereta · abdômen ativado"
+    },
+    "bars": [
+      {
+        "label": "Gordura corporal",
+        "from": "Alta",
+        "to": "Normal",
+        "pct": 72,
+        "fromWhen": [
+          {
+            "when": {
+              "key": "bodyType",
+              "op": "eq",
+              "value": "magra"
+            },
+            "from": "Normal",
+            "pct": 60
+          }
+        ]
+      },
+      {
+        "label": "Postura",
+        "from": "Desalinhada",
+        "to": "Ereta e alongada",
+        "pct": 80
+      },
+      {
+        "label": "Nível de Pilates",
+        "from": "{{pilatesLevel}}",
+        "to": "Intermediário",
+        "pct": 65,
+        "fromWhen": [
+          {
+            "when": {
+              "key": "experience",
+              "op": "eq",
+              "value": "sim"
+            },
+            "from": "Básico",
+            "pct": 55
+          }
+        ]
+      },
+      {
+        "label": "Flexibilidade",
+        "from": "Baixa",
+        "to": "Boa",
+        "pct": 70,
+        "fromWhen": [
+          {
+            "when": {
+              "key": "flexibility",
+              "op": "eq",
+              "value": "bastante"
+            },
+            "from": "Boa",
+            "pct": 55
+          }
+        ]
+      }
+    ],
+    "painBar": {
+      "when": {
+        "key": "$flag:dorCronica",
+        "op": "truthy"
+      },
+      "labelTpl": "Dor na região {{dorAlvo}}",
+      "from": "Frequente",
+      "to": "Aliviada",
+      "pct": 75
+    },
+    "included": [
+      {
+        "icon": "home",
+        "title": "Treinos de Pilates em casa",
+        "desc": "Para emagrecer, tonificar e alinhar a postura"
+      },
+      {
+        "icon": "sparkles",
+        "title": "Exercícios de baixo impacto",
+        "desc": "Para iniciantes — barriga mais plana e coluna protegida",
+        "descWhen": [
+          {
+            "when": {
+              "key": "$persona:mamae",
+              "op": "truthy"
+            },
+            "desc": "Seguros para o pós-parto — core profundo e assoalho pélvico"
+          }
+        ]
+      },
+      {
+        "icon": "timer",
+        "title": "Rotinas de 10–20 min",
+        "desc": "Que cabem na sua agenda, todos os dias"
+      },
+      {
+        "icon": "leaf",
+        "title": "Zero equipamento",
+        "desc": "Só você e um tapete"
+      },
+      {
+        "icon": "salad",
+        "title": "Plano alimentar personalizado",
+        "desc": "Receitas rápidas e saborosas para o seu objetivo",
+        "descWhen": [
+          {
+            "when": {
+              "any": [
+                {
+                  "key": "water",
+                  "op": "eq",
+                  "value": "cafe"
+                },
+                {
+                  "key": "water",
+                  "op": "eq",
+                  "value": "2-copos"
+                }
+              ]
+            },
+            "desc": "Receitas rápidas + lembretes de hidratação no plano diário"
+          }
+        ]
+      },
+      {
+        "icon": "wind",
+        "title": "Respiração e relaxamento",
+        "desc": "Para reduzir o estresse e dormir melhor",
+        "boostWhen": {
+          "key": "stress",
+          "op": "eq",
+          "value": "muito-alto"
+        }
+      }
+    ],
+    "plans": [
+      {
+        "id": "1w",
+        "name": "Teste de 1 semana",
+        "weeks": 1,
+        "regular": 59.99,
+        "price": 41.99,
+        "perDay": 6.0,
+        "cycle": "semana",
+        "discountPct": 30
+      },
+      {
+        "id": "4w",
+        "name": "Plano de 4 semanas",
+        "weeks": 4,
+        "regular": 171.41,
+        "price": 119.99,
+        "perDay": 4.29,
+        "cycle": "4 semanas",
+        "popular": true,
+        "discountPct": 30
+      },
+      {
+        "id": "12w",
+        "name": "Plano de 12 semanas",
+        "weeks": 12,
+        "regular": 342.84,
+        "price": 239.99,
+        "perDay": 2.86,
+        "cycle": "12 semanas",
+        "discountPct": 30
+      }
+    ],
+    "stories": [
+      {
+        "persona": "executiva",
+        "name": "Mariana, 38",
+        "kg": "-6 kg",
+        "text": "Comecei sem conseguir segurar 20 segundos de prancha. Em 60 dias de sessões de 15 minutos, minha barriga diminuiu, minha dor na lombar sumiu e minha postura mudou completamente."
+      },
+      {
+        "persona": "mamae",
+        "name": "Carla, 33",
+        "kg": "-4 kg",
+        "text": "Depois da gravidez, achei que meu corpo nunca mais seria o mesmo. O Pilates reconstruiu meu core, minha autoestima e me devolveu minhas roupas favoritas."
+      },
+      {
+        "persona": "madura",
+        "name": "Sônia, 54",
+        "kg": "-7 kg",
+        "text": "Aos 54, com dor no joelho, achei que não podia treinar. O baixo impacto do Pilates mudou tudo — emagreci sem uma única dor."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Tenho dor na região {{dorAlvo}}. Posso fazer?",
+        "a": "Sim. O Pilates é de baixo impacto e todas as aulas do seu plano trazem variações que protegem essa região. Ainda assim, consulte seu médico antes de iniciar qualquer programa de exercícios.",
+        "when": {
+          "key": "$flag:dorCronica",
+          "op": "truthy"
+        },
+        "openWhen": {
+          "key": "$flag:dorCronica",
+          "op": "truthy"
+        }
+      },
+      {
+        "q": "Posso fazer após a gravidez?",
+        "a": "O plano pós-parto é progressivo e focado na reconstrução do core profundo e do assoalho pélvico. Comece somente após a liberação do seu médico — e o plano respeita o seu ritmo.",
+        "when": {
+          "key": "$persona:mamae",
+          "op": "truthy"
+        }
+      },
+      {
+        "q": "Como este plano vai me ajudar a emagrecer?",
+        "a": "Sequências de Pilates que elevam o gasto calórico com baixo impacto, combinadas a um plano alimentar personalizado. Treinos de 10–20 minutos por dia, progressivos semana a semana."
+      },
+      {
+        "q": "Nunca fiz Pilates. Vou conseguir acompanhar?",
+        "a": "Sim. Todas as aulas são guiadas por vídeo, no nível iniciante, com progressão gradual. Cada exercício tem variação simplificada."
+      },
+      {
+        "q": "E se eu perder a motivação?",
+        "a": "Lembretes diários, sequências de apenas 10 minutos, registro de progresso e metas semanais mantêm você no ritmo — mesmo nos dias difíceis."
+      }
+    ],
+    "reviews": [
+      {
+        "name": "Aline R.",
+        "text": "O app mais fácil de seguir que já usei. As aulas são curtas e eu sinto diferença na postura toda semana."
+      },
+      {
+        "name": "Beatriz M.",
+        "text": "Estava cética, mas a garantia de 30 dias me convenceu. Não precisei: perdi 3,5 kg no primeiro mês."
+      },
+      {
+        "name": "Denise F.",
+        "text": "Tenho 57 anos e nunca tinha conseguido manter uma rotina. Com o Viva Pilates já são 3 meses seguidos."
+      }
+    ],
+    "media": [
+      "Women's Health",
+      "Vogue Fitness",
+      "Marie Claire",
+      "Boa Forma"
+    ],
+    "rating": {
+      "score": "4.8",
+      "line1": "450 mil avaliações · 380 mil de 5 estrelas",
+      "line2": "App Store e Google Play"
+    },
+    "trustLine": "Mais de 2 milhões de mulheres confiam na Viva Pilates",
+    "plansHeadline2": "Resultados visíveis em 4 semanas!",
+    "guaranteeDays": 30,
+    "guaranteeEarlyWhen": {
+      "key": "$persona:cetica",
+      "op": "truthy"
+    },
+    "legal": {
+      "company": "Viva Pilates Ltda.",
+      "cnpj": "00.000.000/0001-00",
+      "city": "São Paulo, Brasil"
+    },
+    "countdownMin": 10,
+    "heroNowLabelWhen": [
+      {
+        "when": {
+          "key": "bodyType",
+          "op": "eq",
+          "value": "magra"
+        },
+        "label": "Pouco tônus · core inativo"
+      }
+    ]
+  },
+  "qa": {
+    "base": {
+      "ageBucket": "35-44",
+      "experience": "nao",
+      "goal": "perder-peso",
+      "secondaryGoals": [
+        "flexibilidade"
+      ],
+      "bodyType": "media",
+      "dreamBody": "tonificada",
+      "bestShape": "mais-3",
+      "weightPattern": "dificil",
+      "flexibility": "comecando",
+      "frequency": "nunca",
+      "focusZones": [
+        "barriga",
+        "gluteos"
+      ],
+      "plank": "menos-30",
+      "toeTouch": "quase",
+      "balance": "dificuldade",
+      "painPoints": [
+        "nenhuma"
+      ],
+      "workRoutine": "9-18",
+      "typicalDay": "sentada",
+      "energy": "almoco",
+      "water": "2-copos",
+      "sleep": "5-6",
+      "stress": "moderado",
+      "breakfast": "8-10",
+      "lunch": "12-14",
+      "dinner": "18-20",
+      "dietType": "tradicional",
+      "badHabits": [
+        "demais"
+      ],
+      "cravings": [
+        "doces"
+      ],
+      "height": 165,
+      "weight": 70,
+      "goalWeight": 60,
+      "ageYears": 38,
+      "weightTriggers": [
+        "nenhum"
+      ],
+      "event": "nenhum",
+      "mainReason": "confianca",
+      "confidence": "consigo",
+      "email": "qa@teste.com",
+      "name": "QA",
+      "country": "brasil"
+    },
+    "personas": {
+      "linear": {},
+      "mamae": {
+        "weightTriggers": [
+          "gravidez"
+        ],
+        "mainReason": "pos-parto",
+        "painPoints": [
+          "lombar"
+        ]
+      },
+      "menopausa": {
+        "ageBucket": "45-54",
+        "weightTriggers": [
+          "menopausa"
+        ],
+        "ageYears": 51
+      },
+      "madura55": {
+        "ageBucket": "55+",
+        "ageYears": 61,
+        "weightTriggers": [
+          "nenhum"
+        ]
+      },
+      "dor": {
+        "painPoints": [
+          "lombar"
+        ]
+      },
+      "cetica": {
+        "confidence": "insegura",
+        "bestShape": "nunca"
+      },
+      "jejum": {
+        "breakfast": "pula"
+      },
+      "metaAgressiva": {
+        "weight": 90,
+        "goalWeight": 60,
+        "event": "casamento",
+        "eventDate": "2026-09-15"
+      },
+      "inicianteTotal": {
+        "ageBucket": "25-34",
+        "experience": "nao",
+        "frequency": "nunca",
+        "dreamBody": "esguia"
+      },
+      "vegana": {
+        "dietType": "vegana"
+      }
+    },
+    "expect": [
+      {
+        "persona": "*",
+        "terminal": "scratch"
+      },
+      {
+        "persona": "*",
+        "maxExtra": 3,
+        "vs": "linear"
+      },
+      {
+        "persona": "*",
+        "includes": [
+          "i-foco",
+          "i-jejum"
+        ]
+      },
+      {
+        "persona": "mamae",
+        "includes": [
+          "i-mamae",
+          "q-liberacao"
+        ],
+        "diagnosis": "D1b"
+      },
+      {
+        "persona": "menopausa",
+        "excludes": [
+          "i-mamae"
+        ],
+        "includes": [
+          "i-menopausa"
+        ],
+        "diagnosis": "D2b",
+        "plan": "12w"
+      },
+      {
+        "persona": "dor",
+        "includes": [
+          "i-adaptacao"
+        ]
+      },
+      {
+        "persona": "linear",
+        "excludes": [
+          "i-adaptacao",
+          "i-alinhamento"
+        ]
+      },
+      {
+        "persona": "jejum",
+        "includes": [
+          "i-jejum"
+        ]
+      },
+      {
+        "persona": "metaAgressiva",
+        "includes": [
+          "i-alinhamento"
+        ],
+        "plan": "12w"
+      },
+      {
+        "persona": "inicianteTotal",
+        "plan": "1w"
+      },
+      {
+        "persona": "cetica",
+        "variant": "cetica"
+      },
+      {
+        "persona": "madura55",
+        "variant": "55plus",
+        "plan": "4w"
+      },
+      {
+        "persona": "vegana",
+        "variant": "diet-vegana"
+      }
+    ]
+  }
+}

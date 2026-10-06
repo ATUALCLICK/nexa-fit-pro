@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapa Visual — Antes/Depois das 8 telas densas</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root { --bg:#F7F3ED; --ink:#1C1917; --accent:#B57E5B; --green:#7D8F74; --deepgreen:#4A7C59; --muted:#78716C; }
+  body { background:#0F0E0C; font-family: ui-sans-serif, system-ui, sans-serif; }
+  .phone { width:300px; background:var(--bg); border-radius:28px; overflow:hidden; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+  .phone-bar { height:6px; background:linear-gradient(90deg,var(--green) var(--p,40%), #E7E0D4 var(--p,40%)); }
+  .prosa { font-size:11px; line-height:1.55; color:#57534E; }
+  .hero-num { font-size:44px; font-weight:800; color:var(--ink); line-height:1; font-variant-numeric:tabular-nums; }
+  .hero-txt { font-size:22px; font-weight:800; color:var(--ink); line-height:1.15; }
+  .chip { font-size:9px; font-weight:700; padding:2px 8px; border-radius:99px; letter-spacing:.04em; }
+  .chip-dsl { background:#EFE6DA; color:var(--accent); }
+  .chip-motor { background:#E7EBE2; color:var(--deepgreen); }
+  /* stagger */
+  .stg > * { opacity:0; animation:fadeUp .5s ease forwards; }
+  .stg > *:nth-child(1){animation-delay:.05s} .stg > *:nth-child(2){animation-delay:.2s}
+  .stg > *:nth-child(3){animation-delay:.35s} .stg > *:nth-child(4){animation-delay:.5s}
+  @keyframes fadeUp { from{opacity:0; transform:translateY(10px)} to{opacity:1; transform:none} }
+  /* bar fill */
+  .fill { width:0; animation:fill 1.4s cubic-bezier(.2,.8,.2,1) .3s forwards; }
+  @keyframes fill { to { width:var(--w) } }
+  /* curve draw */
+  .curve { stroke-dasharray:400; stroke-dashoffset:400; animation:draw 1.8s ease .3s forwards; }
+  @keyframes draw { to { stroke-dashoffset:0 } }
+  /* pulse */
+  .pulse { animation:pulse 1.6s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
+  /* confetti */
+  .confetti span { position:absolute; width:6px; height:10px; top:-12px; opacity:0; border-radius:2px; animation:fall 2.6s ease-in infinite; }
+  @keyframes fall { 0%{opacity:1; transform:translateY(0) rotate(0)} 100%{opacity:0; transform:translateY(150px) rotate(540deg)} }
+  /* stars */
+  .star { color:#D8D2C4; } .star.on { color:#D9A05B; opacity:0; animation:starPop .3s ease forwards; }
+  @keyframes starPop { from{opacity:0; transform:scale(.4)} to{opacity:1; transform:scale(1)} }
+  .check-ico { width:14px; height:14px; border-radius:99px; background:var(--deepgreen); color:#fff; font-size:9px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+  .minicard { background:#fff; border:1px solid #EDE7DC; border-radius:12px; padding:8px 10px; display:flex; gap:8px; align-items:center; }
+  .opt { background:#fff; border:1.5px solid #EDE7DC; border-radius:12px; padding:8px 10px; display:flex; gap:8px; align-items:center; }
+  .opt.sel { border-color:var(--green); background:#F2F5EF; }
+  .wall { background:#fff; border:1px solid #EDE7DC; border-radius:12px; padding:10px 12px; }
+  .lbl { font-size:9px; font-weight:800; letter-spacing:.12em; color:var(--muted); text-transform:uppercase; }
+</style>
+</head>
+<body class="py-14 px-6">
+<div class="mx-auto max-w-6xl">
+
+  <header class="text-center mb-14">
+    <p class="text-xs font-bold tracking-[.3em] text-[#B57E5B] uppercase mb-3">Viva Forge · Jornada 62 slots + checkout</p>
+    <h1 class="text-4xl font-extrabold text-[#F7F3ED]">Mapa Visual — Antes / Depois</h1>
+    <p class="mt-3 text-sm text-[#A8A29E] max-w-2xl mx-auto">As 8 telas mais densas do funil e como elas ficam escaneáveis — zero-asset: só tipografia, ícones, data-viz e CSS.</p>
+    <div class="mt-6 flex justify-center gap-3 flex-wrap">
+      <span class="chip chip-dsl">DSL — 7 fragmentos novos (gerador)</span>
+      <span class="chip chip-motor">MOTOR — 10 evoluções de template</span>
+      <span class="chip" style="background:#292524;color:#D6D3D1">74 posições mapeadas · 0 assets de imagem</span>
+    </div>
+  </header>
+
+  <!-- ═══ 1. PROJECTION ═══ -->
+  <section class="mb-16">
+    <div class="flex items-baseline gap-3 mb-1"><span class="text-2xl font-extrabold text-[#F7F3ED]">1 · projection</span><span class="text-xs text-[#A8A29E]">slot 52 · result · 1090 chars · papel: projecao ★</span></div>
+    <p class="text-xs text-[#78716C] mb-5">A tela mais importante do funil. Hoje é lida; depois, é assistida.</p>
+    <div class="flex gap-8 flex-wrap items-start">
+      <div><p class="lbl mb-2 text-center">Antes</p>
+        <div class="phone"><div class="phone-bar" style="--p:84%"></div>
+          <div class="p-4">
+            <p class="hero-txt mb-2" style="font-size:17px">Você pode chegar aos 60 kg até novembro</p>
+            <div class="wall"><p class="prosa">Com base nas suas respostas, montamos uma projeção realista considerando seu nível atual, sua rotina e o seu objetivo. Seguindo o plano de pilates em casa combinado com o ajuste alimentar, a estimativa é que você alcance sua meta de peso até o mês de novembro, a tempo do seu casamento. O plano respeita seu ritmo: sequências curtas de 15 a 20 minutos, progressão semanal e refeições que cabem na sua rotina. Lembre-se: resultados variam de pessoa para pessoa e dependem da consistência...</p></div>
+            <div class="wall mt-2 h-20 flex items-end gap-1 px-3 pb-2">
+              <div class="w-full bg-[#E7E0D4] rounded-t" style="height:80%"></div><div class="w-full bg-[#E7E0D4] rounded-t" style="height:70%"></div><div class="w-full bg-[#E7E0D4] rounded-t" style="height:62%"></div><div class="w-full bg-[#B57E5B] rounded-t" style="height:48%"></div>
+            </div>
+          </div></div></div>
+      <div><p class="lbl mb-2 text-center">Depois <span class="chip chip-dsl ml-1">D-contador</span><span class="chip chip-dsl ml-1">D-destaqueHero</span><span class="chip chip-motor ml-1">M-animPreench</span><span class="chip chip-dsl ml-1">D-confettiWhen</span></p>
+        <div class="phone relative"><div class="confetti">
+            <span style="left:10%;background:#B57E5B;animation-delay:.1s"></span><span style="left:30%;background:#7D8F74;animation-delay:.4s"></span><span style="left:55%;background:#D9A05B;animation-delay:.2s"></span><span style="left:75%;background:#4A7C59;animation-delay:.6s"></span><span style="left:90%;background:#B57E5B;animation-delay:.8s"></span>
+          </div><div class="phone-bar" style="--p:84%"></div>
+          <div class="p-4 text-center stg">
+            <p class="lbl">Sua projeção</p>
+            <p class="hero-num mt-1"><span class="cnt" data-to="60">0</span><span class="text-lg font-bold text-[#78716C]"> kg</span></p>
+            <p class="text-[11px] text-[#57534E]">até <b style="color:var(--accent)">novembro</b> — a tempo do seu casamento</p>
+            <svg viewBox="0 0 260 80" class="mt-3 w-full"><path class="curve" d="M10 20 C 80 22, 150 45, 250 62" fill="none" stroke="#4A7C59" stroke-width="3" stroke-linecap="round"/><circle cx="10" cy="20" r="4" fill="#B57E5B"/><circle cx="250" cy="62" r="4" fill="#4A7C59"/></svg>
+            <div class="flex justify-between text-[9px] text-[#78716C] font-bold"><span>hoje · 74 kg</span><span>meta · 60 kg</span></div>
+            <div class="minicard mt-2 justify-center"><div class="check-ico">✓</div><p class="text-[10px] font-semibold text-left">15–20 min/dia · progressão semanal · refeições da sua rotina</p></div>
+          </div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 2. I-MEAL-PREVIEW ═══ -->
+  <section class="mb-16">
+    <div class="flex items-baseline gap-3 mb-1"><span class="text-2xl font-extrabold text-[#F7F3ED]">2 · i-meal-preview</span><span class="text-xs text-[#A8A29E]">slot 35 · interstitial · 826 chars · papel: tangibilizacao ★</span></div>
+    <p class="text-xs text-[#78716C] mb-5">A prova concreta do produto — de parede de texto para 4 cards escaneáveis em 3s.</p>
+    <div class="flex gap-8 flex-wrap items-start">
+      <div><p class="lbl mb-2 text-center">Antes</p>
+        <div class="phone"><div class="phone-bar" style="--p:56%"></div>
+          <div class="p-4"><p class="hero-txt mb-2" style="font-size:16px">Assim serão suas refeições</p>
+            <div class="wall"><p class="prosa">O seu plano alimentar foi montado para a sua rotina. No café da manhã, opções rápidas com proteína para segurar a fome até o almoço, como ovos mexidos com queijo e fruta. No almoço, pratos completos com carboidrato na medida certa, pensados para quem almoça em casa ou marmita. À tarde, lanches práticos que cabem na bolsa e evitam o ataque ao doce no fim do dia. No jantar, refeições leves que não pesam na hora de dormir e ajudam na recuperação muscular dos treinos. Tudo com ingredientes de mercado, sem restrições malucas e com substituições para o que você não gosta...</p></div>
+          </div></div></div>
+      <div><p class="lbl mb-2 text-center">Depois <span class="chip chip-dsl ml-1">D-miniCards</span><span class="chip chip-motor ml-1">M-stagger</span></p>
+        <div class="phone"><div class="phone-bar" style="--p:56%"></div>
+          <div class="p-4"><p class="hero-txt mb-3" style="font-size:16px">Assim serão suas refeições</p>
+            <div class="space-y-2 stg">
+              <div class="minicard"><span class="text-base">🍳</span><div><p class="text-[11px] font-bold">Café da manhã</p><p class="text-[9px] text-[#78716C]">Proteína que segura a fome até o almoço</p></div></div>
+              <div class="minicard"><span class="text-base">🍽️</span><div><p class="text-[11px] font-bold">Almoço</p><p class="text-[9px] text-[#78716C]">Completo, na medida — casa ou marmita</p></div></div>
+              <div class="minicard"><span class="text-base">🥜</span><div><p class="text-[11px] font-bold">Lanche</p><p class="text-[9px] text-[#78716C]">Cabe na bolsa, evita o ataque ao doce</p></div></div>
+              <div class="minicard"><span class="text-base">🥗</span><div><p class="text-[11px] font-bold">Jantar</p><p class="text-[9px] text-[#78716C]">Leve, recupera o músculo do treino</p></div></div>
+            </div>
+            <p class="text-[9px] text-[#78716C] mt-2 text-center">Ingredientes de mercado · sem restrição maluca · com substituições</p>
+          </div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 3. I-ENERGY ═══ -->
+  <section class="mb-16">
+    <div class="flex items-baseline gap-3 mb-1"><span class="text-2xl font-extrabold text-[#F7F3ED]">3 · i-energy</span><span class="text-xs text-[#A8A29E]">slot 26 · interstitial · 723 chars · papel: eco</span></div>
+    <p class="text-xs text-[#78716C] mb-5">O eco vira estrutura: número-chave + 3 checks.</p>
+    <div class="flex gap-8 flex-wrap items-start">
+      <div><p class="lbl mb-2 text-center">Antes</p>
+        <div class="phone"><div class="phone-bar" style="--p:42%"></div>
+          <div class="p-4"><p class="hero-txt mb-2" style="font-size:16px">Dias cansados pedem outro ritmo</p>
+            <div class="wall"><p class="prosa">Você contou que seus dias são puxados e que a energia acaba antes do dia terminar. Isso é mais comum do que parece: a maioria das alunas que começa o programa relata a mesma sensação. Por isso as sequências foram pensadas para devolver energia em vez de drenar: movimentos que ativam a circulação, alongamentos que aliviam a tensão acumulada nos ombros e na lombar, e um ritmo que respeita o seu condicionamento atual. Em poucas semanas, a disposição para o fim da tarde muda — e é o corpo pedindo movimento, não o contrário...</p></div>
+          </div></div></div>
+      <div><p class="lbl mb-2 text-center">Depois <span class="chip chip-dsl ml-1">D-statCallout</span><span class="chip chip-dsl ml-1">D-checklist</span></p>
+        <div class="phone"><div class="phone-bar" style="--p:42%"></div>
+          <div class="p-4 text-center stg">
+            <p class="hero-num"><span class="cnt" data-to="78">0</span><span class="text-lg font-bold text-[#78716C]">%</span></p>
+            <p class="text-[10px] text-[#57534E] mb-3">das alunas relatam <b>mais disposição</b> nas primeiras semanas</p>
+            <div class="space-y-2 text-left">
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Sequências que devolvem energia, não drenam</p></div>
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Alívio da tensão de ombros e lombar</p></div>
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Ritmo que respeita seu condicionamento</p></div>
+            </div>
+          </div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 4. LOADING-PLAN ═══ -->
+  <section class="mb-16">
+    <div class="flex items-baseline gap-3 mb-1"><span class="text-2xl font-extrabold text-[#F7F3ED]">4 · loading-plan</span><span class="text-xs text-[#A8A29E]">slot 56 · loading · 628 chars · papel: recompensa</span></div>
+    <p class="text-xs text-[#78716C] mb-5">O teatro ganha roteiro visível: steps com check + % sincronizado + confete no 100%.</p>
+    <div class="flex gap-8 flex-wrap items-start">
+      <div><p class="lbl mb-2 text-center">Antes</p>
+        <div class="phone"><div class="phone-bar" style="--p:90%"></div>
+          <div class="p-4 text-center"><p class="hero-txt mb-3" style="font-size:15px">Montando seu plano...</p>
+            <svg width="110" height="110" viewBox="0 0 110 110" class="mx-auto"><circle cx="55" cy="55" r="46" fill="none" stroke="#E7E0D4" stroke-width="8"/><circle cx="55" cy="55" r="46" fill="none" stroke="#B57E5B" stroke-width="8" stroke-dasharray="289" stroke-dashoffset="90" stroke-linecap="round" transform="rotate(-90 55 55)"/></svg>
+            <p class="prosa mt-3">"Perdi 8 kg em 3 meses sem sair de casa. As aulas são curtas e cabem na minha rotina." — Mariana, 38</p>
+          </div></div></div>
+      <div><p class="lbl mb-2 text-center">Depois <span class="chip chip-motor ml-1">M-steps</span><span class="chip chip-motor ml-1">M-animContador</span><span class="chip chip-motor ml-1">M-confetti</span></p>
+        <div class="phone relative"><div class="confetti">
+            <span style="left:15%;background:#B57E5B;animation-delay:.2s"></span><span style="left:45%;background:#7D8F74;animation-delay:.5s"></span><span style="left:70%;background:#D9A05B;animation-delay:.1s"></span><span style="left:88%;background:#4A7C59;animation-delay:.7s"></span>
+          </div><div class="phone-bar" style="--p:90%"></div>
+          <div class="p-4 stg">
+            <p class="hero-num text-center"><span class="cnt" data-to="100">0</span><span class="text-lg font-bold text-[#78716C]">%</span></p>
+            <div class="space-y-2 mt-2">
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Respostas analisadas</p></div>
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Sequências montadas para o seu nível</p></div>
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Projeção calculada até novembro</p></div>
+              <div class="minicard" style="border-color:#B57E5B"><div class="check-ico pulse" style="background:#B57E5B">★</div><p class="text-[10px] font-bold" style="color:#B57E5B">Seu plano está pronto!</p></div>
+            </div>
+          </div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 5. I-GOAL ═══ -->
+  <section class="mb-16">
+    <div class="flex items-baseline gap-3 mb-1"><span class="text-2xl font-extrabold text-[#F7F3ED]">5 · i-goal</span><span class="text-xs text-[#A8A29E]">slot 6 · interstitial · 625 chars · papel: eco</span></div>
+    <p class="text-xs text-[#78716C] mb-5">O objetivo que ela declarou volta em tipografia hero — o eco vira espelho.</p>
+    <div class="flex gap-8 flex-wrap items-start">
+      <div><p class="lbl mb-2 text-center">Antes</p>
+        <div class="phone"><div class="phone-bar" style="--p:10%"></div>
+          <div class="p-4"><p class="hero-txt mb-2" style="font-size:16px">Ótima escolha</p>
+            <div class="wall"><p class="prosa">Perder peso e tonificar a barriga são objetivos que caminham juntos quando o método é certo. O pilates em casa trabalha o core de forma profunda — aqueles músculos que a academia tradicional quase não alcança — e, combinado com o ajuste na alimentação, acelera a queima de gordura na região abdominal. Você não precisa de equipamentos, nem de horas por dia: sequências curtas e consistentes trazem resultado visível em poucas semanas. Vamos te mostrar exatamente como isso funciona para o seu corpo e a sua rotina...</p></div>
+          </div></div></div>
+      <div><p class="lbl mb-2 text-center">Depois <span class="chip chip-dsl ml-1">D-destaqueHero</span><span class="chip chip-dsl ml-1">D-checklist</span></p>
+        <div class="phone"><div class="phone-bar" style="--p:10%"></div>
+          <div class="p-4 stg">
+            <p class="lbl text-center">Seu objetivo</p>
+            <p class="hero-txt text-center mt-1 mb-3">"Perder peso<br>e tonificar a <span style="color:var(--accent)">barriga</span>"</p>
+            <div class="space-y-2">
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Core profundo — onde a academia não alcança</p></div>
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Sem equipamento, sem horas por dia</p></div>
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Sequências curtas, resultado em semanas</p></div>
+            </div>
+          </div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 6. DIET-TYPE ═══ -->
+  <section class="mb-16">
+    <div class="flex items-baseline gap-3 mb-1"><span class="text-2xl font-extrabold text-[#F7F3ED]">6 · diet-type</span><span class="text-xs text-[#A8A29E]">slot 34 · question-single · 527 chars · papel: medicao</span></div>
+    <p class="text-xs text-[#78716C] mb-5">A pergunta mais densa do F5: opção rica = ícone + título + 1 linha.</p>
+    <div class="flex gap-8 flex-wrap items-start">
+      <div><p class="lbl mb-2 text-center">Antes</p>
+        <div class="phone"><div class="phone-bar" style="--p:55%"></div>
+          <div class="p-4"><p class="hero-txt mb-3" style="font-size:15px">Como você descreveria sua alimentação hoje?</p>
+            <div class="space-y-2">
+              <div class="opt"><p class="prosa">Como de tudo, sem restrições — não sigo nenhuma dieta específica e como o que tiver vontade</p></div>
+              <div class="opt sel"><p class="prosa">Tento me controlar, mas acabo exagerando nos doces e beliscos entre as refeições</p></div>
+              <div class="opt"><p class="prosa">Já tentei várias dietas (low carb, jejum, contar calorias) mas nunca consigo manter por muito tempo</p></div>
+              <div class="opt"><p class="prosa">Como bem na maior parte do tempo, só tenho dificuldade nos fins de semana e eventos sociais</p></div>
+            </div>
+          </div></div></div>
+      <div><p class="lbl mb-2 text-center">Depois <span class="chip chip-dsl ml-1">D-iconOpcao</span></p>
+        <div class="phone"><div class="phone-bar" style="--p:55%"></div>
+          <div class="p-4"><p class="hero-txt mb-3" style="font-size:15px">Como é sua alimentação hoje?</p>
+            <div class="space-y-2 stg">
+              <div class="opt"><span>🍽️</span><div><p class="text-[11px] font-bold">Como de tudo</p><p class="text-[9px] text-[#78716C]">Sem restrições, como o que tenho vontade</p></div></div>
+              <div class="opt sel"><span>🍫</span><div><p class="text-[11px] font-bold">Me controlo, mas exagero</p><p class="text-[9px] text-[#78716C]">Doces e beliscos entre refeições</p></div></div>
+              <div class="opt"><span>🔄</span><div><p class="text-[11px] font-bold">Já tentei de tudo</p><p class="text-[9px] text-[#78716C]">Low carb, jejum… nunca mantive</p></div></div>
+              <div class="opt"><span>📅</span><div><p class="text-[11px] font-bold">Como bem, exceto fds</p><p class="text-[9px] text-[#78716C]">Difícil em eventos sociais</p></div></div>
+            </div>
+          </div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 7. I-AWARDS ═══ -->
+  <section class="mb-16">
+    <div class="flex items-baseline gap-3 mb-1"><span class="text-2xl font-extrabold text-[#F7F3ED]">7 · i-awards</span><span class="text-xs text-[#A8A29E]">slot 55 · interstitial · 427 chars · papel: autoridade</span></div>
+    <p class="text-xs text-[#78716C] mb-5">Autoridade se prova com número, não com adjetivo.</p>
+    <div class="flex gap-8 flex-wrap items-start">
+      <div><p class="lbl mb-2 text-center">Antes</p>
+        <div class="phone"><div class="phone-bar" style="--p:89%"></div>
+          <div class="p-4"><p class="hero-txt mb-2" style="font-size:16px">Um método reconhecido</p>
+            <div class="wall"><p class="prosa">Nosso programa foi desenvolvido por fisioterapeutas e educadoras físicas especializadas em pilates clínico, com mais de uma década de experiência em reabilitação e emagrecimento feminino. Ao longo dos anos, o método já ajudou centenas de milhares de mulheres em mais de 30 países a recuperar a forma e a confiança, e recebeu reconhecimento de publicações especializadas em saúde e bem-estar. A avaliação média das alunas nas lojas de aplicativo é de 4,8 estrelas, com milhares de avaliações verificadas...</p></div>
+          </div></div></div>
+      <div><p class="lbl mb-2 text-center">Depois <span class="chip chip-dsl ml-1">D-statCallout ×3</span><span class="chip chip-motor ml-1">M-stagger</span></p>
+        <div class="phone"><div class="phone-bar" style="--p:89%"></div>
+          <div class="p-4 text-center"><p class="hero-txt mb-3" style="font-size:16px">Um método reconhecido</p>
+            <div class="grid grid-cols-3 gap-2 stg">
+              <div class="wall"><p class="hero-num" style="font-size:26px"><span class="cnt" data-to="300">0</span>k</p><p class="text-[8px] font-bold text-[#78716C]">ALUNAS</p></div>
+              <div class="wall"><p class="hero-num" style="font-size:26px"><span class="cnt" data-to="12">0</span></p><p class="text-[8px] font-bold text-[#78716C]">ANOS DE MÉTODO</p></div>
+              <div class="wall"><p class="hero-num" style="font-size:26px"><span class="cnt" data-to="48" data-div="10">0</span></p><p class="text-[8px] font-bold text-[#78716C]">NOTA MÉDIA ★</p></div>
+            </div>
+            <div class="minicard mt-3 stg"><div class="check-ico">✓</div><p class="text-[10px] font-semibold text-left">Criado por fisioterapeutas de pilates clínico</p></div>
+          </div></div></div>
+    </div>
+  </section>
+
+  <!-- ═══ 8. I-JEJUM ═══ -->
+  <section class="mb-16">
+    <div class="flex items-baseline gap-3 mb-1"><span class="text-2xl font-extrabold text-[#F7F3ED]">8 · i-jejum</span><span class="text-xs text-[#A8A29E]">slot 33 · interstitial · 403 chars · papel: eco</span></div>
+    <p class="text-xs text-[#78716C] mb-5">Mesmo padrão dos ecos densos: statCallout + checklist.</p>
+    <div class="flex gap-8 flex-wrap items-start">
+      <div><p class="lbl mb-2 text-center">Antes</p>
+        <div class="phone"><div class="phone-bar" style="--p:53%"></div>
+          <div class="p-4"><p class="hero-txt mb-2" style="font-size:16px">Sem jejum obrigatório</p>
+            <div class="wall"><p class="prosa">Se você já tentou jejum intermitente e não se adaptou, aqui vai um alívio: o nosso plano alimentar não depende de longas horas sem comer. A ciência mostra que o que mais importa para o emagrecimento sustentável é a consistência ao longo das semanas, não janelas de horário. Você vai comer em todas as refeições, com pratos montados para manter a saciedade e a energia estáveis ao longo do dia — sem passar fome e sem culpa...</p></div>
+          </div></div></div>
+      <div><p class="lbl mb-2 text-center">Depois <span class="chip chip-dsl ml-1">D-statCallout</span><span class="chip chip-dsl ml-1">D-checklist</span></p>
+        <div class="phone"><div class="phone-bar" style="--p:53%"></div>
+          <div class="p-4 text-center stg">
+            <p class="hero-num" style="font-size:38px"><span class="cnt" data-to="0">0</span><span class="text-lg font-bold text-[#78716C]">h</span></p>
+            <p class="text-[10px] text-[#57534E] mb-3">de jejum obrigatório no seu plano</p>
+            <div class="space-y-2 text-left">
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Todas as refeições, todos os dias</p></div>
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Saciedade e energia estáveis</p></div>
+              <div class="minicard"><div class="check-ico">✓</div><p class="text-[10px] font-semibold">Sem fome, sem culpa</p></div>
+            </div>
+          </div></div></div>
+    </div>
+  </section>
+
+  <footer class="mt-20 border-t border-[#292524] pt-8 text-center">
+    <p class="text-xs text-[#78716C] max-w-3xl mx-auto leading-relaxed">
+      <b class="text-[#A8A29E]">Anti-padrões:</b> confete no diagnóstico · animar texto legal · ícone em conceito não-visual · mais de 1 statCallout por tela leve · animação decorativa · stagger em tela de input.
+      <br><br>Especificação completa em <b class="text-[#B57E5B]">mapa-visual.md</b> · contrato por slot em <b class="text-[#B57E5B]">journey-skeleton.json</b> (campo <code>upgradeVisual</code>)
+    </p>
+  </footer>
+</div>
+
+<script>
+// contadores animados (zero-asset, ~20 linhas)
+const obs = new IntersectionObserver((es) => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  const el = e.target, to = +el.dataset.to, div = +(el.dataset.div || 1);
+  obs.unobserve(el);
+  const t0 = performance.now(), dur = 1400;
+  (function tick(t) {
+    const p = Math.min((t - t0) / dur, 1), ease = 1 - Math.pow(1 - p, 3);
+    const v = to * ease / div;
+    el.textContent = div > 1 ? v.toFixed(1).replace('.', ',') : Math.round(v);
+    if (p < 1) requestAnimationFrame(tick);
+  })(t0);
+}), { threshold: .4 });
+document.querySelectorAll('.cnt').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

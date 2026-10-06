@@ -1,0 +1,19 @@
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    # Roda todos os dias às 10:00 da manhã (UTC)
+    - cron: '0 10 * * *'
+  # Permite rodar o script manualmente se precisar
+  workflow_dispatch:
+
+jobs:
+  ping-supabase:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Realizando chamada à API do Supabase
+        run: |
+          curl -s -o /dev/null -w "Status da Resposta: %{http_code}\n" \
+          -H "apikey: sb_publishable_wLYMf9X2A5nDtdR3kcT87g_z8FUpseM" \
+          -H "Authorization: Bearer sb_publishable_wLYMf9X2A5nDtdR3kcT87g_z8FUpseM" \
+          "https://zebunzuydwsudexdvmhu.supabase.co/rest/v1/profiles?limit=1"
