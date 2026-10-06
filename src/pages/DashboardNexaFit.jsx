@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import FitnessCalendar from '../components/FitnessCalendar'
 import RunningTrackerModal from '../components/RunningTrackerModal'
+import InitialProfileSetupModal from '../components/InitialProfileSetupModal'
 import { getDayLog, getFormattedDate } from '../lib/dailyLogs'
 
 /* ========================================================
@@ -14,6 +15,11 @@ export default function DashboardNexaFit() {
   const [name, setName] = useState('')
   const [isRunModalOpen, setIsRunModalOpen] = useState(false)
   const [runModalMode, setRunModalMode] = useState('running')
+  const [isSetupModalOpen, setIsSetupModalOpen] = useState(() => {
+    const configured = localStorage.getItem('nexafit_profile_configured') === 'true'
+    const hasAnswers = localStorage.getItem('nexafit_answers')
+    return !configured && !hasAnswers
+  })
   const [waterMl, setWaterMl] = useState(() => {
     return Number(localStorage.getItem('nexafit_water_ml')) || 1750
   })
@@ -21,9 +27,9 @@ export default function DashboardNexaFit() {
   const [todayLog, setTodayLog] = useState(() => getDayLog(getFormattedDate()))
 
   useEffect(() => {
-    setName(localStorage.getItem('nexafit_name') || 'Welington')
+    setName(localStorage.getItem('nexafit_name') || 'Guerreiro')
     setTodayLog(getDayLog(getFormattedDate()))
-  }, [isRunModalOpen])
+  }, [isRunModalOpen, isSetupModalOpen])
 
   const addWater = (amount) => {
     setWaterMl(prev => {
@@ -366,6 +372,16 @@ export default function DashboardNexaFit() {
         onClose={() => setIsRunModalOpen(false)}
         onRunSaved={(run) => {
           setTodayLog(getDayLog(getFormattedDate()))
+        }}
+      />
+
+      {/* ── MODAL DE CONFIGURAÇÃO RÁPIDA DE PERFIL (1º LOGIN) ── */}
+      <InitialProfileSetupModal
+        isOpen={isSetupModalOpen}
+        onClose={() => setIsSetupModalOpen(false)}
+        onConfigured={(newAnswers) => {
+          setName(newAnswers.name || 'Guerreiro')
+          setIsSetupModalOpen(false)
         }}
       />
 
