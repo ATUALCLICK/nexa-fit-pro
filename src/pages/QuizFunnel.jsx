@@ -2825,11 +2825,13 @@ function RadioQuizPreview({ onUnlockClick }) {
   const audioRef = useRef(null)
 
   const STATIONS = [
+    { name: 'Psytrance / Full-On', genre: '145 BPM • Alta Intensidade', url: 'https://hirschmilch.de:7001/psytrance.mp3', icon: '👽', color: '#8B5CF6' },
+    { name: 'Pagode & Funk', genre: '115-130 BPM • Pagode & Funk Hits', url: 'https://stream.laut.fm/pagode', icon: '🎉', color: '#F59E0B' },
     { name: 'EDM & Eletrônica', genre: '130 BPM • Energia Máxima', url: 'https://stream.laut.fm/dance', icon: '⚡', color: '#06B6D4' },
     { name: 'Hip Hop & Phonk', genre: '140 BPM • Peso & Força', url: 'https://stream.laut.fm/hiphop', icon: '🔥', color: '#EF4444' },
     { name: 'Rock Adrenalina', genre: '150 BPM • Motivação Pura', url: 'https://stream.laut.fm/rock', icon: '🎸', color: '#E11D48' },
     { name: 'Sertanejo Hits', genre: '128 BPM • Alto Astral', url: 'https://cast.mgtradio.net/radio/8020/aac', icon: '🤠', color: '#10B981' },
-    { name: 'Lo-Fi & Foco', genre: '80 BPM • Concentração', url: 'https://stream.laut.fm/lofi', icon: '🎧', color: '#8B5CF6' }
+    { name: 'Lo-Fi & Foco', genre: '80 BPM • Concentração', url: 'https://stream.laut.fm/lofi', icon: '🎧', color: '#6366F1' }
   ]
 
   useEffect(() => {
