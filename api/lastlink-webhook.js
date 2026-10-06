@@ -46,8 +46,16 @@ export default async function handler(req, res) {
 
   try {
     const queryToken = req.query?.token
+    let body = req.body || {}
+    if (typeof body === 'string') {
+      try {
+        body = JSON.parse(body)
+      } catch (e) {
+        console.warn('Could not parse string body as JSON:', e)
+      }
+    }
+
     const headerToken = req.headers['x-lastlink-token'] || req.headers['token'] || req.headers['authorization']?.replace('Bearer ', '')
-    const body = req.body || {}
 
     // Validação de Token de Segurança
     const receivedToken = headerToken || queryToken || body.token || body.secret
