@@ -2751,6 +2751,277 @@ function PlanReadyScreen({ answers, onContinue }) {
   )
 }
 
+// ── PRÉVIA INTERATIVA DE RÁDIO FITNESS (DEGUSTAÇÃO COM LIMITE DE 60s) ──
+function RadioQuizPreview({ onUnlockClick }) {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [selectedStation, setSelectedStation] = useState(0)
+  const [secondsRemaining, setSecondsRemaining] = useState(60)
+  const [isExpired, setIsExpired] = useState(false)
+  const audioRef = useRef(null)
+
+  const STATIONS = [
+    { name: 'EDM & Eletrônica', genre: '130 BPM • Energia Máxima', url: 'https://stream.laut.fm/dance', icon: '⚡', color: '#06B6D4' },
+    { name: 'Hip Hop & Phonk', genre: '140 BPM • Peso & Força', url: 'https://stream.laut.fm/hiphop', icon: '🔥', color: '#EF4444' },
+    { name: 'Rock Adrenalina', genre: '150 BPM • Motivação Pura', url: 'https://stream.laut.fm/rock', icon: '🎸', color: '#E11D48' },
+    { name: 'Sertanejo Hits', genre: '128 BPM • Alto Astral', url: 'https://cast.mgtradio.net/radio/8020/aac', icon: '🤠', color: '#10B981' },
+    { name: 'Lo-Fi & Foco', genre: '80 BPM • Concentração', url: 'https://stream.laut.fm/lofi', icon: '🎧', color: '#8B5CF6' }
+  ]
+
+  useEffect(() => {
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current.src = ''
+        audioRef.current = null
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    let interval = null
+    if (isPlaying && secondsRemaining > 0 && !isExpired) {
+      interval = setInterval(() => {
+        setSecondsRemaining(prev => {
+          if (prev <= 1) {
+            clearInterval(interval)
+            setIsPlaying(false)
+            setIsExpired(true)
+            if (audioRef.current) {
+              audioRef.current.pause()
+            }
+            return 0
+          }
+          return prev - 1
+        })
+      }, 1000)
+    }
+    return () => clearInterval(interval)
+  }, [isPlaying, secondsRemaining, isExpired])
+
+  const handleStationSelect = (idx) => {
+    if (isExpired) return
+    setSelectedStation(idx)
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.src = STATIONS[idx].url
+    } else {
+      audioRef.current = new Audio(STATIONS[idx].url)
+    }
+    audioRef.current.play().then(() => {
+      setIsPlaying(true)
+    }).catch(e => {
+      console.warn('Audio play error:', e)
+      setIsPlaying(false)
+    })
+  }
+
+  const togglePlay = () => {
+    if (isExpired) return
+
+    if (isPlaying) {
+      if (audioRef.current) audioRef.current.pause()
+      setIsPlaying(false)
+    } else {
+      if (!audioRef.current) {
+        audioRef.current = new Audio(STATIONS[selectedStation].url)
+      }
+      audioRef.current.play().then(() => {
+        setIsPlaying(true)
+      }).catch(e => {
+        console.warn('Audio play error:', e)
+        setIsPlaying(false)
+      })
+    }
+  }
+
+  const activeStation = STATIONS[selectedStation]
+  const progressPercent = ((60 - secondsRemaining) / 60) * 100
+
+  return (
+    <div style={{ padding: '0 16px', marginBottom: 24 }}>
+      <div style={{
+        background: 'linear-gradient(135deg, rgba(163,230,53,0.08) 0%, #121212 100%)',
+        border: '1.5px solid rgba(163,230,53,0.35)',
+        borderRadius: 22,
+        padding: '18px 16px',
+        boxShadow: '0 10px 30px rgba(0,0,0,0.6)',
+        position: 'relative',
+        overflow: 'hidden'
+      }}>
+        
+        {/* Top Header com Badge Degustação */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ fontSize: 18 }}>🎧</span>
+            <div>
+              <span style={{ fontSize: 10, fontWeight: 900, color: 'var(--neon)', textTransform: 'uppercase', letterSpacing: 1 }}>
+                DEGUSTAÇÃO EXCLUSIVA
+              </span>
+              <h3 style={{ fontSize: 15, fontWeight: 900, color: '#fff', margin: 0 }}>
+                Rádio Fitness 24h Ao Vivo
+              </h3>
+            </div>
+          </div>
+          
+          <div style={{
+            background: isExpired ? 'rgba(239,68,68,0.2)' : 'rgba(163,230,53,0.15)',
+            border: isExpired ? '1px solid #EF4444' : '1px solid var(--neon)',
+            borderRadius: 12,
+            padding: '4px 8px',
+            textAlign: 'right'
+          }}>
+            <span style={{ fontSize: 9, color: isExpired ? '#EF4444' : 'var(--neon)', fontWeight: 900, display: 'block' }}>
+              {isExpired ? '🔒 ENCERRADA' : '⏱️ PRÉVIA'}
+            </span>
+            <span style={{ fontSize: 13, fontWeight: 900, color: '#fff', fontFamily: 'monospace' }}>
+              {secondsRemaining}s
+            </span>
+          </div>
+        </div>
+
+        {/* Barra de Progresso dos 60s */}
+        <div style={{ width: '100%', height: 4, background: '#222', borderRadius: 4, overflow: 'hidden', marginBottom: 14 }}>
+          <div style={{
+            width: `${progressPercent}%`,
+            height: '100%',
+            background: isExpired ? '#EF4444' : 'var(--neon)',
+            transition: 'width 1s linear'
+          }} />
+        </div>
+
+        {/* Seletor de Estações de Rádio */}
+        <div style={{ display: 'flex', gap: 6, overflowX: 'auto', paddingBottom: 6, marginBottom: 14, scrollbarWidth: 'none' }}>
+          {STATIONS.map((station, idx) => {
+            const isCurrent = selectedStation === idx
+            return (
+              <button
+                key={idx}
+                onClick={() => handleStationSelect(idx)}
+                style={{
+                  background: isCurrent ? 'rgba(255,255,255,0.12)' : '#1a1a1a',
+                  border: isCurrent ? `1.5px solid ${station.color}` : '1px solid #2a2a2a',
+                  borderRadius: 12,
+                  padding: '6px 10px',
+                  color: isCurrent ? '#fff' : '#888',
+                  fontSize: 11,
+                  fontWeight: 800,
+                  whiteSpace: 'nowrap',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 5,
+                  cursor: isExpired ? 'not-allowed' : 'pointer',
+                  opacity: isExpired && !isCurrent ? 0.4 : 1,
+                  transition: 'all 0.2s'
+                }}
+              >
+                <span>{station.icon}</span>
+                <span>{station.name}</span>
+              </button>
+            )
+          })}
+        </div>
+
+        {/* Player Box Principal */}
+        <div style={{
+          background: '#0d0d0d',
+          borderRadius: 16,
+          padding: '12px 14px',
+          border: '1px solid #222',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: 12
+        }}>
+          
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            {/* Botão Play / Pause */}
+            <button
+              onClick={togglePlay}
+              disabled={isExpired}
+              style={{
+                width: 44,
+                height: 44,
+                borderRadius: '50%',
+                background: isExpired ? '#333' : 'var(--neon)',
+                color: '#000',
+                border: 'none',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 18,
+                fontWeight: 900,
+                cursor: isExpired ? 'not-allowed' : 'pointer',
+                boxShadow: isPlaying ? '0 0 15px rgba(163,230,53,0.5)' : 'none',
+                transition: 'all 0.2s'
+              }}
+            >
+              {isExpired ? '🔒' : isPlaying ? '⏸' : '▶'}
+            </button>
+
+            <div>
+              <div style={{ fontSize: 13, fontWeight: 900, color: '#fff' }}>
+                {activeStation.name}
+              </div>
+              <div style={{ fontSize: 11, color: activeStation.color, fontWeight: 700 }}>
+                {activeStation.genre}
+              </div>
+            </div>
+          </div>
+
+          {/* Equalizer Wave / Status */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 3, height: 20 }}>
+            {isPlaying ? (
+              <>
+                <span style={{ width: 3, height: 16, background: 'var(--neon)', borderRadius: 2 }} />
+                <span style={{ width: 3, height: 22, background: 'var(--neon)', borderRadius: 2 }} />
+                <span style={{ width: 3, height: 12, background: 'var(--neon)', borderRadius: 2 }} />
+                <span style={{ width: 3, height: 18, background: 'var(--neon)', borderRadius: 2 }} />
+              </>
+            ) : (
+              <span style={{ fontSize: 10, color: '#666', fontWeight: 700 }}>
+                {isExpired ? 'BLOQUEADO' : 'TOQUE NO PLAY'}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Mensagem Pós-60s ou Chamada para Ação */}
+        {isExpired ? (
+          <div style={{ marginTop: 12, textAlign: 'center' }}>
+            <p style={{ fontSize: 12, color: '#F87171', fontWeight: 800, margin: '0 0 8px' }}>
+              🔒 Sua degustação de 60 segundos encerrou!
+            </p>
+            <button
+              onClick={onUnlockClick}
+              style={{
+                width: '100%',
+                background: 'linear-gradient(90deg, var(--neon), #84cc16)',
+                color: '#000',
+                border: 'none',
+                borderRadius: 12,
+                padding: '12px 14px',
+                fontSize: 13,
+                fontWeight: 900,
+                cursor: 'pointer',
+                textTransform: 'uppercase',
+                letterSpacing: 0.5,
+                boxShadow: '0 4px 15px rgba(163,230,53,0.4)'
+              }}
+            >
+              DESBLOQUEAR STREAMING ILIMITADO 24H ⚡
+            </button>
+          </div>
+        ) : (
+          <p style={{ fontSize: 11, color: '#888', textAlign: 'center', margin: '10px 0 0' }}>
+            {isPlaying ? '⚡ Curta a energia! O app inclui acesso ilimitado sem anúncios.' : '👉 Toque no Play para testar o som do app antes de escolher seu plano.'}
+          </p>
+        )}
+
+      </div>
+    </div>
+  )
+}
+
 // ── PÁGINA DE OFERTA / CHECKOUT VALIDADA DE ALTA CONVERSÃO ──
 function CheckoutScreen({ answers, onPurchase }) {
   const [timer, setTimer] = useState(1591) // 26:31 countdown
@@ -3159,6 +3430,9 @@ function CheckoutScreen({ answers, onPurchase }) {
           </div>
         </div>
       </div>
+
+      {/* ── 8.5 PRÉVIA INTERATIVA DA RÁDIO FITNESS (DEGUSTAÇÃO 60s) ── */}
+      <RadioQuizPreview onUnlockClick={scrollToPlans} />
 
       {/* ── 9. SELEÇÃO DE PLANOS & TABELA DE PREÇOS (ÂNCORA) ── */}
       <div id="planos-section" style={{ padding: '0 16px', marginBottom: 28, scrollMarginTop: 60 }}>
