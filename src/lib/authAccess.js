@@ -6,28 +6,34 @@
 
 import { supabase } from './supabase'
 
-// Definição dos Planos Disponíveis
+// Definição dos Planos Disponíveis com Links da Lastlink
 export const PLANS_CONFIG = {
   '1m': {
     id: '1m',
+    productId: 'C29E63DD9',
     name: 'Plano Mensal (30 dias)',
     durationDays: 30,
     durationMonths: 1,
-    priceFormatted: 'R$ 29,90'
+    priceFormatted: 'R$ 29,90',
+    checkoutUrl: 'https://lastlink.com/p/C29E63DD9/checkout-payment/'
   },
   '6m': {
     id: '6m',
+    productId: 'CD478083B',
     name: 'Plano Semestral (180 dias)',
     durationDays: 180,
     durationMonths: 6,
-    priceFormatted: 'R$ 47,90'
+    priceFormatted: 'R$ 47,90',
+    checkoutUrl: 'https://lastlink.com/p/CD478083B/checkout-payment/'
   },
   '12m': {
     id: '12m',
+    productId: 'C3DFDBF21',
     name: 'Plano Anual Completo (365 dias)',
     durationDays: 365,
     durationMonths: 12,
-    priceFormatted: 'R$ 78,46'
+    priceFormatted: 'R$ 78,46',
+    checkoutUrl: 'https://lastlink.com/p/C3DFDBF21/checkout-payment/'
   }
 }
 

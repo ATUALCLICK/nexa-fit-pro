@@ -2778,6 +2778,7 @@ function CheckoutScreen({ answers, onPurchase }) {
       daily: 'R$ 0,99/dia',
       discount: '',
       isBest: false,
+      checkoutUrl: 'https://lastlink.com/p/C29E63DD9/checkout-payment/',
       features: [
         'Acesso completo a todos os treinos em vídeo',
         'Protocolo de cardápios e substituições',
@@ -2794,6 +2795,7 @@ function CheckoutScreen({ answers, onPurchase }) {
       daily: 'R$ 0,26/dia',
       discount: '42% de desconto',
       isBest: false,
+      checkoutUrl: 'https://lastlink.com/p/CD478083B/checkout-payment/',
       features: [
         'Acesso semestral completo por 6 meses',
         'Mais de 600 treinos e cardápios flexíveis',
@@ -2811,6 +2813,7 @@ function CheckoutScreen({ answers, onPurchase }) {
       daily: 'R$ 0,21/dia',
       discount: '65% de desconto',
       isBest: true,
+      checkoutUrl: 'https://lastlink.com/p/C3DFDBF21/checkout-payment/',
       features: [
         'Acesso completo por 1 ano sem mensalidade',
         'Mais de 600 treinos e cardápios flexíveis',
@@ -2833,9 +2836,25 @@ function CheckoutScreen({ answers, onPurchase }) {
     }
   }
 
-  const handleCheckout = () => {
+  const handleCheckout = (customPlanId) => {
     playQuizBeep(880, 0.1)
-    onPurchase()
+    const targetId = customPlanId || selectedPlan
+    const plan = plans.find(p => p.id === targetId) || plans[2]
+    
+    // Salva rascunho temporário do quiz para montar o plano pós-compra
+    try {
+      localStorage.setItem('nexafit_pending_plan', plan.id)
+      if (answers) {
+        localStorage.setItem('nexafit_quiz_draft', JSON.stringify(answers))
+      }
+    } catch (e) {}
+
+    // Redireciona imediatamente para o checkout da Lastlink
+    if (plan.checkoutUrl) {
+      window.location.href = plan.checkoutUrl
+    } else {
+      onPurchase()
+    }
   }
 
   const testimonials = [
