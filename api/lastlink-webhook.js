@@ -155,21 +155,44 @@ export default async function handler(req, res) {
       updatedAt: purchasedAt
     }
 
-    // Salva ou atualiza no Supabase na tabela 'profiles'
-    const { data: profile, error: profileErr } = await supabase
-      .from('profiles')
-      .upsert({
-        email: buyerEmail,
-        nome: buyerName,
-        daily_logs: {
-          subscription: subscriptionRecord,
-          updated_at: purchasedAt
-        }
-      }, { onConflict: 'email' })
-      .select()
+    // Salva ou atualiza no Supabase na tabela 'profiles' (sem dependência de restrição ON CONFLICT)
+    try {
+      const { data: existingProfile } = await supabase
+        .from('profiles')
+        .select('id, daily_logs')
+        .eq('email', buyerEmail)
+        .maybeSingle()
 
-    if (profileErr) {
-      console.error('Supabase profile upsert error:', profileErr)
+      if (existingProfile?.id) {
+        const currentLogs = existingProfile.daily_logs || {}
+        await supabase
+          .from('profiles')
+          .update({
+            nome: buyerName,
+            daily_logs: {
+              ...currentLogs,
+              subscription: subscriptionRecord,
+              updated_at: purchasedAt
+            },
+            updated_at: purchasedAt
+          })
+          .eq('id', existingProfile.id)
+      } else {
+        await supabase
+          .from('profiles')
+          .insert({
+            email: buyerEmail,
+            nome: buyerName,
+            daily_logs: {
+              subscription: subscriptionRecord,
+              updated_at: purchasedAt
+            },
+            created_at: purchasedAt,
+            updated_at: purchasedAt
+          })
+      }
+    } catch (profileErr) {
+      console.error('Supabase profile save error:', profileErr)
     }
 
     // Grava também na tabela de histórico 'webhook_logs' no Supabase
