@@ -1,0 +1,158 @@
+Instruções para traqueamento do facabook 
+
+Etapa 1: criar suas instruções personalizadas
+Selecione os eventos e os detalhes dos eventos que você deseja enviar por meio da API de Conversões, e nós criaremos instruções passo a passo personalizadas para concluir o processo de implementação.
+Etapa 2: implementar a API de Conversões
+Para começar a enviar seus eventos selecionados por meio da API de Conversões, siga as etapas nas suas instruções personalizadas ou envie-as para um desenvolvedor que concluirá as etapas para você. Você pode monitorar o progresso da sua implementação no Gerenciador de Eventos.
+Etapa 3: não se esqueça de monitorar as métricas do seu evento
+Depois de enviar dados suficientes pela API de Conversões, você poderá monitorar4 métricas que indicam a integridade dos seus eventos. O monitoramento de cada métrica permite avaliar o desempenho e saber como é possível contribuir para melhorar os resultados com boas práticas, que podem melhorar o desempenho do anúncio e ajudar a reduzir o custo por resultado.
+Qualidade da correspondência de eventos
+Essa métrica avalia a eficácia das informações do cliente na correspondência de instâncias de eventos com uma conta do Facebook.
+Taxa de desduplicação
+Essa métrica mostra a porcentagem de eventos do pixel e da API de Conversões que foram desduplicados para obter a contagem precisa.
+Atualidade dos dados
+Essa métrica mostra a diferença entre a hora em que o evento ocorreu e quando o recebemos para avaliar a probabilidade de uma pessoa realizar a ação desejada após ver seu anúncio.
+Cobertura de eventos da API de Conversões
+O envio dos mesmos eventos tanto do navegador quanto do servidor fornece dados mais precisos. Dessa forma, você pode melhorar o direcionamento do público e ajudar a reduzir o custo por resultado.
+Acesse a Central de Ajuda para saber mais sobre cada métrica e suas boas práticas. Veja cada métrica em sua respectiva aba na página de detalhes do evento.
+
+API de Conversões
+Updated: 28 de set de 2026
+Observação: para eventos do site, você também pode configurar a API de Conversões com a Meta em um clique no Gerenciador de Eventos da Meta, sem código, configuração ou taxas de configuração.
+A API de Conversões conecta os dados de marketing do anunciante (como eventos do site, evento do app, eventos de mensagens empresariais e conversões offline) de um servidor, site, plataforma, app ou CRM aos sistemas da Meta que otimizam o direcionamento de anúncios, reduzem os custos e mensuram resultados.
+Em vez de manter pontos de conexão separados para cada fonte de dados, os anunciantes podem usar a API de Conversões para enviar vários tipos de eventos e reduzir o número de integrações separadas. No caso de integrações diretas, isso envolve estabelecer uma conexão entre o servidor de um anunciante e o ponto de extremidade da API de Conversões da Meta.
+Os eventos do servidor estão vinculados ao ID de um conjunto de dados e são processados como eventos enviados por meio do Pixel da Meta, SDK do Facebook para iOS ou Android, SDK do Parceiro de Métricas para Aplicativos, conjunto de eventos offline ou carregamento de CSV. Isso significa que os eventos do servidor podem ser usados para mensuração, relatórios e otimização de maneira semelhante a outros canais de conexão. Os eventos offline podem ser usados para mensuração de eventos offline atribuídos, além da criação ou mensuração de públicos personalizados offline.
+Para otimizar o desempenho e a mensuração dos anúncios, siga as boas práticas da API de Conversões.
+Etapas recomendadas
+Primeiros passos: escolha o método de integração mais adequado para você, veja os pré-requisitos para usar a API e entenda como começar.
+Implemente a API e comece a enviar solicitações: comece a fazer solicitações POST e saiba mais sobre eventos descartados, solicitações em lote e o tempo de transação de eventos.
+Verifique sua configuração: confirme se a Meta recebeu seus eventos e se eles foram desduplicados e correspondidos corretamente.
+Documentação
+Parâmetros da API
+Conheça os parâmetros obrigatórios e opcionais que podem ser usados para melhorar a atribuição de anúncios e otimizar a veiculação.
+Auxiliar de carga
+Veja como seu payload deve ser estruturado quando é enviado do seu servidor à Meta.
+Solução de problemas
+Saiba como gerenciar códigos de erro retornados pela API de Conversões.
+Recursos
+Eventos do Pixel da Meta
+Saiba mais sobre os eventos padrão e os eventos personalizados do Pixel da Meta.
+Central de Ajuda para Empresas
+Na nossa Central de Ajuda, leia Sobre a API de Conversões⁠ e Testar os eventos do servidor usando a ferramenta Eventos de Teste⁠.
+Manual
+Consulte o Manual de integração direta para desenvolvedores (PDF)⁠.
+Opções de processamento de dados
+Saiba mais sobre o recurso Uso Limitado de Dados e a implementação para a API de Conversões.
+
+Parâmetros
+Updated: 30 de jun de 2026
+Esta página agrupa os parâmetros da API de Conversões por família, abrangendo os parâmetros de dados de eventos necessários e os parâmetros adicionais que são compatíveis com a atribuição de anúncios e a otimização da veiculação de anúncios.
+Agora a API de Conversões é compatível com eventos de mensagens empresariais, da web, do app e offline.
+Os eventos de sites compartilhados por meio da API de Conversões exigirão os parâmetros client_user_agent, action_source e event_source_url. Já os eventos que não são da web precisarão apenas de action_source. Esses parâmetros ajudam a melhorar a qualidade dos eventos usados na veiculação de anúncios e podem aprimorar o desempenho da campanha.
+Ao usar a API de Conversões, você concorda que o parâmetro action_source seja preciso conforme seu conhecimento.
+Parâmetros de corpo principal
+data
+test_event_code
+Parâmetros de informações do cliente
+em: Email — Hashing obrigatório
+ph: número de telefone — Hashing obrigatório
+fn: nome — Hashing obrigatório
+ln: sobrenome — Hashing obrigatório
+ge: gênero — Hashing obrigatório
+db: data de nascimento — Hashing obrigatório
+ct: cidade — Hashing obrigatório
+st: estado — Hashing obrigatório
+zp: código postal — Hashing obrigatório
+country: país — Hashing obrigatório
+external_id: ID externo — Hashing recomendado
+client_ip_address: endereço IP do cliente — Não converter em hashes
+client_user_agent: agente do usuário do cliente — Não converter em hashes
+fbc: identificação do clique — Não converter em hashes
+fbp: ID do navegador — Não converter em hashes
+subscription_id: ID da assinatura — Não converter em hashes
+fb_login_id: ID de Login do Facebook — Não converter em hashes
+lead_id: identificação do lead — Não converter em hashes
+anon_id: ID de instalação — Não converter em hashes (Observação: parâmetro válido somente para eventos do app)
+madid: identificação do anunciante da plataforma móvel — Não converter em hashes (Observação: parâmetro válido somente para eventos do app)
+page_id: identificação da página — Não converter em hashes
+page_scoped_user_id: número de identificação do usuário no escopo da Página — Não converter em hashes
+ctwa_clid: ID do clique para o WhatsApp — Não converter em hashes
+ig_account_id: identificação da conta do Instagram — Não converter em hashes
+ig_sid: identificação do clique para o Instagram — Não converter em hashes
+Parâmetros de eventos do servidor
+event_name
+event_time
+user_data
+custom_data
+event_source_url
+opt_out
+event_id
+action_source
+data_processing_options
+data_processing_options_country
+data_processing_options_state
+referrer_url
+customer_segmentation
+Parâmetros de dados do app
+advertiser_tracking_enabled
+application_tracking_enabled
+extinfo
+campaign_ids
+install_referrer
+installer_package
+url_schemes
+windows_attribution_id
+anon_id
+madid
+vendor_id
+Observação: consulte a documentação API de Conversões para eventos do app para saber como integrar eventos do app.
+Parâmetros padrão
+Consulte uma lista com todos os parâmetros padrão que os usuários podem enviar à Meta.
+Parâmetros de dados originais para eventos
+event_name
+event_time
+order_id
+event_id
+
+# Payload Helper
+
+
+
+Fill out the required and recommended data parameter fields to see how your payload should be structured when it's sent to Facebook from your server.
+
+**Note:** Web, app, and physical store events shared using the Conversions API require specific parameters. The list of [required parameters is available here](https://developers.facebook.com/documentation/ads-commerce/conversions-api/parameters).
+
+
+
+{
+    "data": [
+        {
+            "event_name": "Purchase",
+            "event_time": 1791333108,
+            "action_source": "website",
+            "user_data": {
+                "em": [
+                    "7b17fb0bd173f625b58636fb796407c22b3d16fc78302d79f0fd30c2fc2fc068"
+                ],
+                "ph": [
+                    null
+                ]
+            },
+            "attribution_data": {
+                "attribution_share": "0.3"
+            },
+            "custom_data": {
+                "currency": "USD",
+                "value": "142.52"
+            },
+            "original_event_data": {
+                "event_name": "Purchase",
+                "event_time": 1791333108
+            }
+        }
+    ]
+}
+
+
+
+

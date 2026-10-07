@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { trackInitiateCheckout, trackLead, trackViewContent, getFbp, getFbc } from '../lib/metaTracking'
 
 /* ========================================================
    NEXA FIT PRO — Funil de Quiz de Alta Conversão
@@ -437,6 +438,28 @@ export default function QuizFunnel({ onComplete }) {
   const setAnswer = (key, value) => {
     setAnswers(prev => ({ ...prev, [key]: value }))
   }
+
+  // ─── Meta Tracking: eventos por estágio do funil ──────────────
+  useEffect(() => {
+    if (!screen) return
+    const userData = {
+      email: answers?.email || localStorage.getItem('nexafit_email') || undefined,
+      firstName: answers?.name || localStorage.getItem('nexafit_name') || undefined,
+    }
+
+    if (screen.type === 'result' || screen.type === 'projection') {
+      // Usuário chegou nos resultados = demonstrou alto interesse
+      trackViewContent('Quiz Result', 'Funnel', undefined, 'BRL', userData)
+    }
+
+    if (screen.type === 'checkout') {
+      // Usuário chegou na tela de checkout = Lead qualificado
+      trackLead(userData, {
+        content_name: 'Nexa FIT PRO - Checkout',
+        content_category: 'Fitness Plan',
+      })
+    }
+  }, [currentScreen])
 
   const handleGenderSelect = (gender) => {
     playQuizBeep(650, 0.08)
@@ -3187,9 +3210,31 @@ function CheckoutScreen({ answers, onPurchase }) {
       }
     } catch (e) {}
 
-    // Redireciona imediatamente para o checkout da Lastlink correspondente
+    // ─── Meta Tracking: InitiateCheckout ───
+    const priceValue = plan.price ? parseFloat(plan.price.replace(/[^\d,]/g, '').replace(',', '.')) : 0
+    const userData = {
+      email: answers?.email || localStorage.getItem('nexafit_email') || undefined,
+      firstName: answers?.name || localStorage.getItem('nexafit_name') || undefined,
+    }
+    trackInitiateCheckout(priceValue, 'BRL', userData, {
+      content_name: `Plano ${plan.title}`,
+      content_ids: [plan.id],
+      content_type: 'product',
+      num_items: 1,
+    })
+
+    // Redireciona para o checkout da Lastlink, adicionando fbp/fbc para rastreamento cross-domain
     if (plan && plan.checkoutUrl) {
-      window.location.href = plan.checkoutUrl
+      try {
+        const checkoutUrl = new URL(plan.checkoutUrl)
+        const fbp = getFbp()
+        const fbc = getFbc()
+        if (fbp) checkoutUrl.searchParams.set('fbp', fbp)
+        if (fbc) checkoutUrl.searchParams.set('fbc', fbc)
+        window.location.href = checkoutUrl.toString()
+      } catch (e) {
+        window.location.href = plan.checkoutUrl
+      }
     } else {
       onPurchase()
     }

@@ -25,3 +25,6 @@ dist-ssr
 Kimi_*
 *.mp4
 !public/videos/*.mp4
+
+# Supabase temp
+supabase/.temp/

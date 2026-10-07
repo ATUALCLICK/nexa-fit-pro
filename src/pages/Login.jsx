@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { validatePurchaseEmail, registerWebhookPurchase, PLANS_CONFIG } from '../lib/authAccess'
+import { trackCompleteRegistration } from '../lib/metaTracking'
 
 /* ========================================================
    NEXA FIT PRO — Portal de Acesso do Aluno (Login por E-mail de Compra)
@@ -33,6 +34,18 @@ export default function Login() {
 
       if (result.success) {
         setSuccessInfo(result.subscription)
+
+        // ─── Meta Tracking: CompleteRegistration (login confirmou compra) ───
+        trackCompleteRegistration(
+          { email: email.trim() },
+          {
+            content_name: result.subscription?.planName || 'Nexa FIT PRO',
+            status: 'complete',
+            value: result.subscription?.value || '0',
+            currency: 'BRL',
+          }
+        )
+
         setTimeout(() => {
           navigate('/')
         }, 1200)

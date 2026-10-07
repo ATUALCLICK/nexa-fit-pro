@@ -11,6 +11,7 @@ import Musica from './pages/Musica'
 import Corrida from './pages/Corrida'
 import Login from './pages/Login'
 import { getCurrentAuthSession } from './lib/authAccess'
+import { initMetaTracking, trackPageView } from './lib/metaTracking'
 
 /* ========================================================
    NEXA FIT PRO — Roteamento Principal
@@ -20,11 +21,23 @@ import { getCurrentAuthSession } from './lib/authAccess'
    ======================================================== */
 
 function AppRoutes() {
+  const location = useLocation()
+
   const [hasPurchased, setHasPurchased] = useState(() => {
     const purchased = localStorage.getItem('nexafit_purchased') === 'true'
     const session = getCurrentAuthSession()
     return purchased || (session && session.subscription?.isValid)
   })
+
+  // ─── Meta Tracking: inicializa _fbp, captura fbclid da URL ────
+  useEffect(() => {
+    initMetaTracking()
+  }, [])
+
+  // ─── Meta Tracking: PageView via CAPI a cada mudança de rota ──
+  useEffect(() => {
+    trackPageView()
+  }, [location.pathname])
 
   useEffect(() => {
     const checkAuth = () => {
