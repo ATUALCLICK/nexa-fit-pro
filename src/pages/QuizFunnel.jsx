@@ -678,7 +678,7 @@ function IntroScreen({ onStart }) {
         Muito mais que uma simples planilha ou dieta: tenha no seu celular o <strong style={{ color: '#fff' }}>ecossistema completo</strong> com treinos em vídeo para <strong style={{ color: 'var(--neon)' }}>casa ou academia</strong>, cardápio inteligente com IA, rastreador de corrida GPS e rádios exclusivas.
       </p>
 
-      {/* Prova Social da Comunidade Nexa FIT PRO (Foto Oficial de Membros) */}
+      {/* Vídeo Hero do Aplicativo (quiz-result.mp4) */}
       <div style={{
         position: 'relative',
         borderRadius: 20,
@@ -686,24 +686,25 @@ function IntroScreen({ onStart }) {
         border: '1.5px solid rgba(163,230,53,0.35)',
         boxShadow: '0 0 30px rgba(163,230,53,0.25)',
         marginBottom: 18,
-        background: '#0A0A0A'
+        background: '#000',
+        maxHeight: 280
       }}>
-        <img
-          src="/comunidade_nexafit.jpg"
-          alt="Comunidade Oficial Nexa FIT PRO"
-          style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+        <video
+          src="/videos/quiz-result.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
         />
         <div style={{
-          position: 'absolute', bottom: 10, left: 10, right: 10,
+          position: 'absolute', bottom: 8, left: 10, right: 10,
           background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
-          borderRadius: 12, padding: '8px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          borderRadius: 10, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
           border: '1px solid rgba(163,230,53,0.3)'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span style={{ color: 'var(--neon)', fontSize: 13 }}>👥</span>
-            <span style={{ fontSize: 11.5, fontWeight: 800, color: '#fff' }}>Comunidade Oficial Nexa FIT PRO</span>
-          </div>
-          <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 900 }}>+147.000 MEMBROS</span>
+          <span style={{ color: 'var(--neon)', fontSize: 12 }}>⚡</span>
+          <span style={{ fontSize: 11.5, fontWeight: 700, color: '#fff' }}>Treine onde quiser: em casa ou na academia (15–30 min/dia)</span>
         </div>
       </div>
 
@@ -744,6 +745,32 @@ function IntroScreen({ onStart }) {
             <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
             <span><strong>Comunidade VIP</strong> e suporte ativo</span>
           </div>
+        </div>
+      </div>
+
+      {/* Prova Social da Comunidade Nexa FIT PRO (Foto Oficial) */}
+      <div style={{
+        position: 'relative',
+        borderRadius: 18,
+        overflow: 'hidden',
+        border: '1.5px solid rgba(163,230,53,0.35)',
+        boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
+        marginBottom: 18,
+        background: '#0A0A0A'
+      }}>
+        <img
+          src="/comunidade_nexafit.jpg"
+          alt="Comunidade Oficial Nexa FIT PRO"
+          style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+        />
+        <div style={{
+          position: 'absolute', bottom: 8, left: 10, right: 10,
+          background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
+          borderRadius: 10, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          border: '1px solid rgba(163,230,53,0.3)'
+        }}>
+          <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 800 }}>👥 COMUNIDADE OFICIAL DE ALUNOS</span>
+          <span style={{ fontSize: 11, color: '#fff', fontWeight: 700 }}>+147.000 Membros</span>
         </div>
       </div>
 
