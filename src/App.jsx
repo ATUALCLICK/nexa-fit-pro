@@ -10,6 +10,7 @@ import Perfil from './pages/Perfil'
 import Musica from './pages/Musica'
 import Corrida from './pages/Corrida'
 import Login from './pages/Login'
+import DashFunnel from './pages/DashFunnel'
 import { getCurrentAuthSession } from './lib/authAccess'
 import { initMetaTracking, trackPageView } from './lib/metaTracking'
 
@@ -64,6 +65,9 @@ function AppRoutes() {
 
       {/* 2. Funil do Quiz de Alta Conversão */}
       <Route path="/quiz" element={<QuizFunnel onComplete={handleQuizComplete} />} />
+
+      {/* 3. Painel Privilegiado de Métricas, Funil Inlead & Remarketing (/dash) */}
+      <Route path="/dash" element={<DashFunnel />} />
 
       {/* 3. Aplicação Completa Protegida */}
       <Route

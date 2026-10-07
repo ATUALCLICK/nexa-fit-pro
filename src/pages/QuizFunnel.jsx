@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { trackInitiateCheckout, trackLead, trackViewContent, getFbp, getFbc } from '../lib/metaTracking'
+import { trackQuizStep, trackQuizCheckout, getOrInitSession, captureUtms } from '../lib/quizTracker'
 
 /* ========================================================
    NEXA FIT PRO — Funil de Quiz de Alta Conversão
@@ -489,6 +490,15 @@ export default function QuizFunnel({ onComplete }) {
       })
     }
   }, [currentScreen])
+
+  // ─── Quiz Inlead Tracking: Rastreia cada etapa, respostas e UTMs ───
+  useEffect(() => {
+    captureUtms()
+    getOrInitSession()
+    if (screen) {
+      trackQuizStep(screen, currentScreen, SCREENS.length, answers)
+    }
+  }, [currentScreen, answers])
 
   const handleGenderSelect = (gender) => {
     playQuizBeep(650, 0.08)
@@ -3296,6 +3306,11 @@ function CheckoutScreen({ answers, onPurchase }) {
       content_type: 'product',
       num_items: 1,
     })
+
+    // Rastreia no Inlead Quiz Tracker
+    try {
+      trackQuizCheckout(plan, answers)
+    } catch (e) {}
 
     // Redireciona para o checkout da Lastlink, adicionando fbp/fbc para rastreamento cross-domain
     if (plan && plan.checkoutUrl) {
