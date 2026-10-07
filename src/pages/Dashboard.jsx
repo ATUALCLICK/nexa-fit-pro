@@ -67,7 +67,7 @@ export default function Dashboard() {
   const [refeicaoLembrete, setRefeicaoLembrete] = useState(null)
   const [showInstallGuide, setShowInstallGuide] = useState(() => {
     if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return false
-    return localStorage.getItem('bronks_hide_install') !== 'true'
+    return localStorage.getItem('nexafit_hide_install') !== 'true'
   })
   const [atividadesHoje, setAtividadesHoje] = useState([])
   const [treinoHoje, setTreinoHoje] = useState({ key: 'A', titulo: 'Carregando...' })
@@ -560,32 +560,25 @@ export default function Dashboard() {
 
       {showInstallGuide && (
         <div style={{ padding: '0 20px', marginBottom: '24px' }}>
-          <div style={{ background: 'linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,165,0,0.05))', border: '1px solid rgba(255,215,0,0.2)', borderRadius: '20px', padding: '16px', position: 'relative' }}>
-            <button onClick={() => { setShowInstallGuide(false); localStorage.setItem('bronks_hide_install', 'true') }} style={{ position: 'absolute', top: '12px', right: '12px', background: 'transparent', border: 'none', color: '#888', cursor: 'pointer', fontSize: '18px', padding: '4px' }}>×</button>
-            <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-start' }}>
-              <div style={{ width: '40px', height: '40px', background: 'linear-gradient(135deg, #FFD700, #FFA500)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: '2px' }}>
-                {/android/i.test(navigator.userAgent) ? <Download size={20} color="#000" /> : <Zap size={20} color="#000" />}
-              </div>
+          <div style={{ background: 'linear-gradient(135deg, rgba(163,230,53,0.12), rgba(163,230,53,0.04))', border: '1px solid rgba(163,230,53,0.3)', borderRadius: '20px', padding: '16px', position: 'relative' }}>
+            <button onClick={() => { setShowInstallGuide(false); localStorage.setItem('nexafit_hide_install', 'true') }} style={{ position: 'absolute', top: '12px', right: '12px', background: 'transparent', border: 'none', color: '#888', cursor: 'pointer', fontSize: '18px', padding: '4px' }}>×</button>
+            <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+              <img src="/app-icon.png" alt="Nexa FIT PRO" style={{ width: '48px', height: '48px', borderRadius: '12px', objectFit: 'cover', border: '1.5px solid var(--neon)', flexShrink: 0 }} />
               <div>
-                {/android/i.test(navigator.userAgent) ? (
-                  <>
-                    <h3 style={{ color: '#FFD700', fontSize: '15px', fontWeight: 'bold', margin: '0 0 6px' }}>Baixe o Aplicativo (APK)</h3>
-                    <p style={{ color: '#aaa', fontSize: '12px', margin: '0 0 10px', lineHeight: 1.4 }}>Instale o app nativo para ter notificações e a melhor performance.</p>
-                    <a href="/bronks-gym.apk" download style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', background: '#FFD700', color: '#000', padding: '6px 12px', borderRadius: '12px', textDecoration: 'none', fontSize: '13px', fontWeight: 'bold' }}>
-                      <Download size={14} /> Baixar Agora
-                    </a>
-                  </>
-                ) : (
-                  <>
-                    <h3 style={{ color: '#FFD700', fontSize: '15px', fontWeight: 'bold', margin: '0 0 6px' }}>Instalar Aplicativo</h3>
-                    <p style={{ color: '#aaa', fontSize: '12px', margin: '0 0 10px', lineHeight: 1.4 }}>Tenha a melhor experiência de treino. Adicione à sua tela inicial:</p>
-                    <ol style={{ color: '#ccc', fontSize: '12px', margin: 0, paddingLeft: '16px', lineHeight: 1.6 }}>
-                      <li>Toque no ícone de <strong>Compartilhar</strong> (iOS) ou nos <strong>3 pontos</strong> (Android)</li>
-                      <li>Selecione <strong>"Adicionar à Tela de Início"</strong></li>
-                      <li>Acesse o <strong>Bronks Gym</strong> direto do celular!</li>
-                    </ol>
-                  </>
-                )}
+                <h3 style={{ color: '#fff', fontSize: '15px', fontWeight: 'bold', margin: '0 0 4px', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  Instalar <span style={{ color: 'var(--neon)' }}>Nexa FIT PRO</span>
+                </h3>
+                <p style={{ color: '#ccc', fontSize: '12px', margin: '0 0 8px', lineHeight: 1.4 }}>
+                  Acesse seus treinos e dietas com 1 toque na sua tela inicial:
+                </p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, fontSize: '11px', color: '#aaa' }}>
+                  <span style={{ background: 'rgba(255,255,255,0.06)', padding: '3px 8px', borderRadius: '6px' }}>
+                    📱 <strong>iOS:</strong> Compartilhar ➔ "Adicionar à Tela de Início"
+                  </span>
+                  <span style={{ background: 'rgba(255,255,255,0.06)', padding: '3px 8px', borderRadius: '6px' }}>
+                    🤖 <strong>Android:</strong> 3 Pontos ➔ "Instalar Aplicativo"
+                  </span>
+                </div>
               </div>
             </div>
           </div>

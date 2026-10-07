@@ -547,12 +547,12 @@ export default function QuizFunnel({ onComplete }) {
         }}>
           <div style={{ maxWidth: 480, margin: '0 auto' }}>
             
-            {/* Linha de Navegação: Voltar à Esquerda, Seção à Direita */}
+            {/* Linha de Navegação: Voltar à Esquerda, Logo Centralizado, Seção à Direita */}
             <div style={{
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              minHeight: 34,
+              minHeight: 36,
               marginBottom: screen.section !== null ? 6 : 0
             }}>
               <button
@@ -575,10 +575,20 @@ export default function QuizFunnel({ onComplete }) {
                 <span>Voltar</span>
               </button>
 
-              {screen.progress !== false && screen.section !== null && (
+              {/* Logo Centralizado Discreto e Premium */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                <img src="/favicon.svg" alt="Nexa FIT PRO" style={{ height: 20, width: 20 }} />
+                <span style={{ fontSize: 13, fontWeight: 900, letterSpacing: '0.04em', color: '#fff' }}>
+                  NEXA <span style={{ color: 'var(--neon)' }}>FIT PRO</span>
+                </span>
+              </div>
+
+              {screen.progress !== false && screen.section !== null ? (
                 <span style={{ fontSize: 10, fontWeight: 900, color: 'var(--neon)', textTransform: 'uppercase', letterSpacing: 1 }}>
                   {QUIZ_DATA.sections[screen.section]}
                 </span>
+              ) : (
+                <div style={{ width: 60 }} />
               )}
             </div>
 
@@ -619,32 +629,32 @@ export default function QuizFunnel({ onComplete }) {
 // SUB-COMPONENTES
 // ══════════════════════════════════════════════
 
-// ── 0. INTRO SCREEN COM PROMOÇÃO DE 15KG EM 60 DIAS E BOTÃO DE AVALIAÇÃO GRÁTIS ──
+// ── 0. INTRO SCREEN: APRESENTAÇÃO DO APLICATIVO COMPLETO NEXA FIT PRO ──
 function IntroScreen({ onStart }) {
   return (
     <div style={{ maxWidth: 520, margin: '0 auto', textAlign: 'center', padding: '10px 16px 40px' }}>
       
-      {/* Logo Grande Centralizado Sem Sombra Verde */}
-      <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: 16 }}>
+      {/* Logo Grande Centralizado */}
+      <div style={{ width: '100%', display: 'flex', justifyContent: 'center', marginBottom: 14 }}>
         <img
           src="/logo.png"
           alt="NEXA FIT PRO"
-          style={{ width: '84%', maxWidth: 280, height: 'auto', display: 'block', filter: 'none' }}
+          style={{ width: '84%', maxWidth: 290, height: 'auto', display: 'block', filter: 'none' }}
         />
       </div>
 
-      {/* Badge */}
+      {/* Badge de Aplicativo */}
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 6,
         padding: '6px 16px', borderRadius: 999,
         background: 'rgba(163,230,53,0.15)', border: '1px solid rgba(163,230,53,0.4)',
-        color: 'var(--neon)', fontSize: 12, fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.05em',
+        color: 'var(--neon)', fontSize: 11.5, fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.06em',
         marginBottom: 14
       }}>
-        ⚡ PROTOCOLO CIENTÍFICO 2026
+        📱 APLICATIVO FITNESS COMPLETO • PROTOCOLO 2026
       </div>
 
-      {/* Headline Agressiva com 15kg em 60 dias */}
+      {/* Headline de Alto Impacto: Foco no Aplicativo */}
       <h1 style={{
         fontFamily: 'var(--font-primary)',
         fontSize: 'clamp(22px, 5.8vw, 30px)',
@@ -654,65 +664,90 @@ function IntroScreen({ onStart }) {
         marginBottom: 12,
         textTransform: 'uppercase'
       }}>
-        CONSTRUA O CORPO DOS SEUS SONHOS E ELIMINE ATÉ <span style={{ color: 'var(--neon)', textShadow: '0 0 20px rgba(163,230,53,0.6)' }}>15KG EM 60 DIAS</span>
+        SEU APLICATIVO DEFINITIVO DE <span style={{ color: 'var(--neon)', textShadow: '0 0 20px rgba(163,230,53,0.6)' }}>TREINO, DIETA &amp; RESULTADOS</span>
       </h1>
 
-      {/* Subheadline com ênfase em Treinar em Casa */}
+      {/* Subheadline Clara */}
       <p style={{
-        fontSize: 'clamp(13px, 3.6vw, 15px)',
-        color: 'var(--text-secondary)',
+        fontSize: 'clamp(13.5px, 3.8vw, 15px)',
+        color: '#CBD5E1',
+        fontWeight: 500,
         lineHeight: 1.5,
         marginBottom: 18
       }}>
-        Descubra o protocolo 100% individualizado para secar até <strong style={{ color: '#fff' }}>15kg de gordura pura</strong> treinando <strong style={{ color: 'var(--neon)' }}>em casa ou na academia</strong>, sem passar fome e sem gastar com mensalidades caras.
+        Muito mais que uma simples planilha ou dieta: tenha no seu celular o <strong style={{ color: '#fff' }}>ecossistema completo</strong> com treinos em vídeo para <strong style={{ color: 'var(--neon)' }}>casa ou academia</strong>, cardápio inteligente com IA, rastreador de corrida GPS e rádios exclusivas.
       </p>
 
-      {/* Vídeo Hero (GIF Style) */}
+      {/* Prova Social da Comunidade Nexa FIT PRO (Foto Oficial de Membros) */}
       <div style={{
         position: 'relative',
         borderRadius: 20,
         overflow: 'hidden',
-        border: '1.5px solid rgba(163,230,53,0.3)',
-        boxShadow: '0 0 30px rgba(163,230,53,0.2)',
+        border: '1.5px solid rgba(163,230,53,0.35)',
+        boxShadow: '0 0 30px rgba(163,230,53,0.25)',
         marginBottom: 18,
-        background: '#000',
-        maxHeight: 260
+        background: '#0A0A0A'
       }}>
-        <video
-          src="/videos/quiz-intro.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{ width: '100%', height: '100%', display: 'block', objectFit: 'cover' }}
+        <img
+          src="/comunidade_nexafit.jpg"
+          alt="Comunidade Oficial Nexa FIT PRO"
+          style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
         />
         <div style={{
-          position: 'absolute', bottom: 8, left: 10, right: 10,
-          background: 'rgba(0,0,0,0.75)', backdropFilter: 'blur(8px)',
-          borderRadius: 8, padding: '4px 10px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6
+          position: 'absolute', bottom: 10, left: 10, right: 10,
+          background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
+          borderRadius: 12, padding: '8px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          border: '1px solid rgba(163,230,53,0.3)'
         }}>
-          <span style={{ color: 'var(--neon)', fontSize: 11 }}>🏠</span>
-          <span style={{ fontSize: 11, fontWeight: 700, color: '#fff' }}>Treine na sua sala ou na academia (15–30 min/dia)</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ color: 'var(--neon)', fontSize: 13 }}>👥</span>
+            <span style={{ fontSize: 11.5, fontWeight: 800, color: '#fff' }}>Comunidade Oficial Nexa FIT PRO</span>
+          </div>
+          <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 900 }}>+147.000 MEMBROS</span>
         </div>
       </div>
 
-      {/* Lista de Vantagens */}
-      <div style={{ background: '#121212', borderRadius: 16, padding: '14px 16px', marginBottom: 18, border: '1px solid rgba(255,255,255,0.06)', textAlign: 'left' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, fontSize: 13, color: '#ddd' }}>
-          <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
-          <span>Plano 100% individualizado para o seu biotipo</span>
+      {/* 6 Recursos Exclusivos do Aplicativo */}
+      <div style={{
+        background: '#111215',
+        borderRadius: 18,
+        padding: '16px',
+        marginBottom: 18,
+        border: '1px solid rgba(255,255,255,0.08)',
+        textAlign: 'left'
+      }}>
+        <div style={{ fontSize: 11, fontWeight: 900, color: 'var(--neon)', textTransform: 'uppercase', letterSpacing: 0.8, marginBottom: 12 }}>
+          ⚡ O QUE VOCÊ DESBLOQUEIA NO APLICATIVO:
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 8, fontSize: 13, color: '#ddd' }}>
-          <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
-          <span>Exercícios em vídeo guiados para fazer em casa ou academia</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 13, color: '#ddd' }}>
-          <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
-          <span>Rádio Fitness 24h sem anúncios & Cardápios flexíveis</span>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 12.5, color: '#E2E8F0', lineHeight: 1.35 }}>
+            <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
+            <span><strong>Treinos em Vídeo</strong> (casa ou academia)</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 12.5, color: '#E2E8F0', lineHeight: 1.35 }}>
+            <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
+            <span><strong>Dieta &amp; Macros IA</strong> individualizada</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 12.5, color: '#E2E8F0', lineHeight: 1.35 }}>
+            <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
+            <span><strong>Modo Corrida &amp; GPS</strong> integrado</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 12.5, color: '#E2E8F0', lineHeight: 1.35 }}>
+            <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
+            <span><strong>Rádio Fitness 24h</strong> sem anúncios</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 12.5, color: '#E2E8F0', lineHeight: 1.35 }}>
+            <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
+            <span><strong>Controle de Água</strong> e métricas diárias</span>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 8, fontSize: 12.5, color: '#E2E8F0', lineHeight: 1.35 }}>
+            <span style={{ color: 'var(--neon)', fontSize: 14 }}>✓</span>
+            <span><strong>Comunidade VIP</strong> e suporte ativo</span>
+          </div>
         </div>
       </div>
 
-      {/* BOTÃO PRINCIPAL DE FAZER AVALIAÇÃO GRÁTIS */}
+      {/* BOTÃO PRINCIPAL DE ACESSO AO APP */}
       <button
         onClick={() => {
           playQuizBeep(750, 0.08)
@@ -721,8 +756,8 @@ function IntroScreen({ onStart }) {
         className="quiz-cta"
         style={{
           width: '100%',
-          maxWidth: 440,
-          margin: '0 0 14px',
+          maxWidth: 460,
+          margin: '0 0 12px',
           padding: '18px 20px',
           fontSize: '16px',
           fontWeight: 900,
@@ -732,13 +767,17 @@ function IntroScreen({ onStart }) {
           animation: 'pulse 2s infinite'
         }}
       >
-        FAZER AVALIAÇÃO GRÁTIS ⚡
+        DESBLOQUEAR MEU ACESSO AO APP ⚡
       </button>
+
+      <p style={{ fontSize: 12, color: '#94A3B8', margin: '0 0 14px', fontWeight: 500 }}>
+        ⏱️ Avaliação de 1 minuto para calibrar seus treinos e metas no aplicativo
+      </p>
 
       {/* Social Proof */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
         <span style={{ color: '#F59E0B' }}>⭐⭐⭐⭐⭐</span>
-        <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>+147.000 vidas transformadas</span>
+        <span style={{ fontSize: 12.5, color: '#CBD5E1', fontWeight: 600 }}>Nota 4.9/5 • Mais de 147.000 alunos ativos</span>
       </div>
     </div>
   )
@@ -748,12 +787,11 @@ function IntroScreen({ onStart }) {
 function GenderSelectScreen({ onSelect }) {
   return (
     <div style={{ maxWidth: 520, margin: '0 auto', textAlign: 'center', padding: '16px 16px 40px' }}>
-      <img src="/logo.png" alt="NEXA FIT PRO" style={{ height: 38, marginBottom: 16, display: 'block', margin: '0 auto 16px' }} />
       
-      <h2 style={{ fontSize: 22, fontWeight: 900, color: '#fff', marginBottom: 6, textTransform: 'uppercase' }}>
+      <h2 style={{ fontSize: 'clamp(22px, 5.5vw, 26px)', fontWeight: 900, color: '#fff', marginBottom: 8, textTransform: 'uppercase', letterSpacing: '-0.02em' }}>
         QUAL É O SEU <span style={{ color: 'var(--neon)' }}>GÊNERO BIOLÓGICO?</span>
       </h2>
-      <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 24 }}>
+      <p style={{ fontSize: 14.5, color: '#CBD5E1', fontWeight: 500, marginBottom: 28 }}>
         Calibração metabólica para queima acelerada e tônus muscular
       </p>
 
@@ -1280,8 +1318,7 @@ function AgeSelect({ answers, onSelect }) {
   }
 
   return (
-    <div className="quiz-question" style={{ paddingTop: 16 }}>
-      <img src="/logo.png" alt="NEXA FIT PRO" className="quiz-logo" style={{ marginBottom: 16 }} />
+    <div className="quiz-question" style={{ paddingTop: 8 }}>
       <h1 className="quiz-question-title">PLANO DE TREINO<br /><span style={{ color: 'var(--neon)' }}>{isMale ? 'MASCULINO' : 'FEMININO'} PERSONALIZADO</span></h1>
       <p className="quiz-question-subtitle" style={{ marginBottom: 20 }}>Qual é a sua faixa etária?</p>
       
@@ -1649,29 +1686,30 @@ function Interstitial({ screen, answers, onContinue }) {
 
   return (
     <div className="quiz-interstitial" style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center', paddingBottom: 10 }}>
-      {/* Se for prova social, exibe a foto real do antes/depois do gênero */}
+      {/* Prova Social Oficial: Foto da Comunidade Nexa FIT PRO */}
       {isSocialProof && (
         <div style={{
-          borderRadius: 18,
+          borderRadius: 20,
           overflow: 'hidden',
-          border: '2px solid rgba(163,230,53,0.4)',
+          border: '1.5px solid rgba(163,230,53,0.35)',
           boxShadow: '0 8px 30px rgba(0,0,0,0.6)',
           marginBottom: 16,
-          background: '#111',
+          background: '#0A0A0A',
           position: 'relative'
         }}>
           <img
-            src={isMale ? '/images/male-transformation.jpg' : '/images/jennifer-transformation.jpg'}
-            alt="Resultado Real de Aluno"
-            style={{ width: '100%', height: 260, objectFit: 'cover', display: 'block' }}
+            src="/comunidade_nexafit.jpg"
+            alt="Comunidade Oficial Nexa FIT PRO"
+            style={{ width: '100%', height: 'auto', maxHeight: 280, objectFit: 'cover', display: 'block' }}
           />
           <div style={{
             position: 'absolute', bottom: 8, left: 10, right: 10,
             background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
-            borderRadius: 10, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between'
+            borderRadius: 10, padding: '7px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            border: '1px solid rgba(163,230,53,0.3)'
           }}>
-            <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 800 }}>⚡ CASO REAL DE SUCESSO</span>
-            <span style={{ fontSize: 11, color: '#fff', fontWeight: 700 }}>-15kg em 60 dias</span>
+            <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 800 }}>👥 COMUNIDADE OFICIAL NEXA FIT PRO</span>
+            <span style={{ fontSize: 11, color: '#fff', fontWeight: 700 }}>+147.000 Membros Ativos</span>
           </div>
         </div>
       )}
@@ -3713,9 +3751,35 @@ function CheckoutScreen({ answers, onPurchase }) {
           <h2 style={{ fontSize: 18, fontWeight: 900, color: '#fff' }}>
             Pessoas como você obtiveram ótimos resultados
           </h2>
-          <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>
+          <p style={{ fontSize: 13, color: '#CBD5E1', fontWeight: 500 }}>
             Estamos orgulhosos destes resultados e ansiosos para ver os seus!
           </p>
+        </div>
+
+        {/* Banner da Comunidade Oficial Nexa FIT PRO */}
+        <div style={{
+          borderRadius: 20,
+          overflow: 'hidden',
+          border: '1.5px solid rgba(163,230,53,0.35)',
+          marginBottom: 18,
+          background: '#000',
+          position: 'relative',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.5)'
+        }}>
+          <img
+            src="/comunidade_nexafit.jpg"
+            alt="Comunidade Oficial Nexa FIT PRO"
+            style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+          />
+          <div style={{
+            position: 'absolute', bottom: 8, left: 10, right: 10,
+            background: 'rgba(0,0,0,0.88)', backdropFilter: 'blur(8px)',
+            borderRadius: 10, padding: '7px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            border: '1px solid rgba(163,230,53,0.3)'
+          }}>
+            <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 800 }}>👥 COMUNIDADE EXCLUSIVA DE MEMBROS</span>
+            <span style={{ fontSize: 11, color: '#fff', fontWeight: 700 }}>+147.000 Alunos</span>
+          </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>

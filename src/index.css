@@ -26,8 +26,8 @@
 
   /* Text */
   --text-primary: #FFFFFF;
-  --text-secondary: #A1A1AA;
-  --text-muted: #71717A;
+  --text-secondary: #E2E8F0;
+  --text-muted: #94A3B8;
   --text-on-neon: #0A0A0A;
 
   /* Semantic */
@@ -343,10 +343,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .quiz-question-subtitle {
-  font-size: 14px;
-  color: var(--text-secondary);
+  font-size: 14.5px;
+  color: #CBD5E1;
+  font-weight: 500;
   margin-bottom: 24px;
   line-height: 1.5;
+  letter-spacing: -0.01em;
 }
 
 /* -- Option Cards -- */

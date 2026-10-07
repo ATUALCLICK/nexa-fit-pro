@@ -25,6 +25,10 @@ export default function DashboardNexaFit() {
   })
   const [waterGoal] = useState(2500)
   const [todayLog, setTodayLog] = useState(() => getDayLog(getFormattedDate()))
+  const [showInstallGuide, setShowInstallGuide] = useState(() => {
+    if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return false
+    return localStorage.getItem('nexafit_hide_install') !== 'true'
+  })
 
   useEffect(() => {
     setName(localStorage.getItem('nexafit_name') || 'Guerreiro')
@@ -153,6 +157,69 @@ export default function DashboardNexaFit() {
           </button>
         </div>
       </div>
+
+      {/* ── BANNER INSTALAR APLICATIVO NEXA FIT PRO ── */}
+      {showInstallGuide && (
+        <div style={{
+          background: 'linear-gradient(135deg, rgba(163,230,53,0.14) 0%, rgba(163,230,53,0.03) 100%)',
+          border: '1px solid rgba(163,230,53,0.35)',
+          borderRadius: 18,
+          padding: '14px 16px',
+          marginBottom: 20,
+          position: 'relative'
+        }}>
+          <button
+            onClick={() => {
+              setShowInstallGuide(false)
+              localStorage.setItem('nexafit_hide_install', 'true')
+            }}
+            style={{
+              position: 'absolute',
+              top: 10,
+              right: 12,
+              background: 'transparent',
+              border: 'none',
+              color: '#888',
+              cursor: 'pointer',
+              fontSize: 18,
+              padding: '2px 6px'
+            }}
+          >
+            ×
+          </button>
+          <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+            <img
+              src="/app-icon.png"
+              alt="Nexa FIT PRO"
+              style={{
+                width: 46,
+                height: 46,
+                borderRadius: 12,
+                border: '1.5px solid var(--neon)',
+                objectFit: 'cover',
+                flexShrink: 0,
+                boxShadow: '0 0 12px rgba(163,230,53,0.3)'
+              }}
+            />
+            <div style={{ flex: 1 }}>
+              <div style={{ fontSize: 14, fontWeight: 900, color: '#fff', marginBottom: 2 }}>
+                Instalar <span style={{ color: 'var(--neon)' }}>Nexa FIT PRO</span>
+              </div>
+              <div style={{ fontSize: 11, color: '#D4D4D8', lineHeight: 1.3, marginBottom: 6 }}>
+                Instale o app na sua tela de início para treinar mais rápido:
+              </div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, fontSize: 10.5, color: '#A1A1AA' }}>
+                <span style={{ background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: 6 }}>
+                  📱 <strong>iOS:</strong> Compartilhar ➔ "Tela de Início"
+                </span>
+                <span style={{ background: 'rgba(255,255,255,0.06)', padding: '2px 7px', borderRadius: 6 }}>
+                  🤖 <strong>Android:</strong> Menu ➔ "Instalar app"
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ── CARDS DE CORRIDA E CICLISMO OUTDOOR (IMAGENS DE ALTA PERFORMANCE) ── */}
       <div style={{ marginBottom: 20 }}>
