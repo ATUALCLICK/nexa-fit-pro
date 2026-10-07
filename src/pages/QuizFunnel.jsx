@@ -748,30 +748,20 @@ function IntroScreen({ onStart }) {
         </div>
       </div>
 
-      {/* Prova Social da Comunidade Nexa FIT PRO (Foto Oficial) */}
+      {/* Imagem Oficial do Aplicativo & Comunidade Nexa FIT PRO */}
       <div style={{
-        position: 'relative',
         borderRadius: 18,
         overflow: 'hidden',
         border: '1.5px solid rgba(163,230,53,0.35)',
         boxShadow: '0 8px 30px rgba(0,0,0,0.5)',
         marginBottom: 18,
-        background: '#0A0A0A'
+        background: '#000'
       }}>
         <img
-          src="/comunidade_nexafit.jpg"
+          src="/comunidade_app_intro.jpg"
           alt="Comunidade Oficial Nexa FIT PRO"
-          style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+          style={{ width: '100%', height: 'auto', display: 'block' }}
         />
-        <div style={{
-          position: 'absolute', bottom: 8, left: 10, right: 10,
-          background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
-          borderRadius: 10, padding: '6px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          border: '1px solid rgba(163,230,53,0.3)'
-        }}>
-          <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 800 }}>👥 COMUNIDADE OFICIAL DE ALUNOS</span>
-          <span style={{ fontSize: 11, color: '#fff', fontWeight: 700 }}>+147.000 Membros</span>
-        </div>
       </div>
 
       {/* BOTÃO PRINCIPAL DE ACESSO AO APP */}
@@ -804,7 +794,7 @@ function IntroScreen({ onStart }) {
       {/* Social Proof */}
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
         <span style={{ color: '#F59E0B' }}>⭐⭐⭐⭐⭐</span>
-        <span style={{ fontSize: 12.5, color: '#CBD5E1', fontWeight: 600 }}>Nota 4.9/5 • Mais de 147.000 alunos ativos</span>
+        <span style={{ fontSize: 12.5, color: '#CBD5E1', fontWeight: 600 }}>Nota 4.9/5 • Mais de 147.000 usuários ativos</span>
       </div>
     </div>
   )
@@ -1713,7 +1703,7 @@ function Interstitial({ screen, answers, onContinue }) {
 
   return (
     <div className="quiz-interstitial" style={{ maxWidth: 480, margin: '0 auto', textAlign: 'center', paddingBottom: 10 }}>
-      {/* Prova Social Oficial: Foto da Comunidade Nexa FIT PRO */}
+      {/* Prova Social Oficial: Foto da Comunidade Nexa FIT PRO (100% visível, sem cortes) */}
       {isSocialProof && (
         <div style={{
           borderRadius: 20,
@@ -1721,23 +1711,13 @@ function Interstitial({ screen, answers, onContinue }) {
           border: '1.5px solid rgba(163,230,53,0.35)',
           boxShadow: '0 8px 30px rgba(0,0,0,0.6)',
           marginBottom: 16,
-          background: '#0A0A0A',
-          position: 'relative'
+          background: '#000'
         }}>
           <img
             src="/comunidade_nexafit.jpg"
             alt="Comunidade Oficial Nexa FIT PRO"
-            style={{ width: '100%', height: 'auto', maxHeight: 280, objectFit: 'cover', display: 'block' }}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
           />
-          <div style={{
-            position: 'absolute', bottom: 8, left: 10, right: 10,
-            background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(8px)',
-            borderRadius: 10, padding: '7px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            border: '1px solid rgba(163,230,53,0.3)'
-          }}>
-            <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 800 }}>👥 COMUNIDADE OFICIAL NEXA FIT PRO</span>
-            <span style={{ fontSize: 11, color: '#fff', fontWeight: 700 }}>+147.000 Membros Ativos</span>
-          </div>
         </div>
       )}
 
@@ -3783,30 +3763,20 @@ function CheckoutScreen({ answers, onPurchase }) {
           </p>
         </div>
 
-        {/* Banner da Comunidade Oficial Nexa FIT PRO */}
+        {/* Banner da Comunidade Oficial Nexa FIT PRO (100% visível) */}
         <div style={{
           borderRadius: 20,
           overflow: 'hidden',
           border: '1.5px solid rgba(163,230,53,0.35)',
           marginBottom: 18,
           background: '#000',
-          position: 'relative',
           boxShadow: '0 8px 30px rgba(0,0,0,0.5)'
         }}>
           <img
             src="/comunidade_nexafit.jpg"
             alt="Comunidade Oficial Nexa FIT PRO"
-            style={{ width: '100%', height: 'auto', display: 'block', objectFit: 'cover' }}
+            style={{ width: '100%', height: 'auto', display: 'block' }}
           />
-          <div style={{
-            position: 'absolute', bottom: 8, left: 10, right: 10,
-            background: 'rgba(0,0,0,0.88)', backdropFilter: 'blur(8px)',
-            borderRadius: 10, padding: '7px 12px', display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-            border: '1px solid rgba(163,230,53,0.3)'
-          }}>
-            <span style={{ fontSize: 11, color: 'var(--neon)', fontWeight: 800 }}>👥 COMUNIDADE EXCLUSIVA DE MEMBROS</span>
-            <span style={{ fontSize: 11, color: '#fff', fontWeight: 700 }}>+147.000 Alunos</span>
-          </div>
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
