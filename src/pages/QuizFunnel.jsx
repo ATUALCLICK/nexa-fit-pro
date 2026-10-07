@@ -1347,12 +1347,12 @@ function SingleQuestion({ screen, answers, onSelect }) {
   const getCardImage = (screenId, optId) => {
     if (screenId === 'body-type') {
       if (isMale) {
-        if (optId === 'magro') return '/images/man-status-1.png'
+        if (optId === 'magro') return '/images/body-fit-man.png'
         if (optId === 'medio') return '/images/man-status-2.png'
         if (optId === 'grande') return '/images/man-status-3.png'
         return '/images/body-fat-man.png'
       } else {
-        if (optId === 'magro') return '/images/woman-status-1.png'
+        if (optId === 'magro') return '/images/body-fit-woman.png'
         if (optId === 'medio') return '/images/woman-status-2.png'
         if (optId === 'grande') return '/images/woman-status-3.png'
         return '/images/body-fat-woman.png'
