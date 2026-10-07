@@ -178,13 +178,13 @@ function getDiagnosis(answers) {
     title: 'Metabolismo Bloqueado & Gordura Visceral',
     text: 'Seu organismo acumulou gordura resistente devido a treinos genéricos ou dietas restritivas. O protocolo NEXA FIT PRO **desbloqueia os receptores lipolíticos** para eliminar até **15kg em 60 dias** treinando em casa ou na academia.',
     icon: '🔥',
-    image: '/images/visceral-fat.png'
+    image: '/images/visceral-fat.jpg'
   }
   if (answers.plank === 'nao' || answers.plank === 'menos30') return {
     title: 'Core Desativado & Perda de Tônus',
     text: 'Os músculos profundos do abdômen e lombar estão inibidos, projetando a barriga para frente. Nosso método reativa o **cinturão abdominal profundo** em menos de 14 dias com sessões curtas em casa.',
     icon: '🎯',
-    image: isMale ? '/images/genetic-male.png' : '/images/genetic-female.png'
+    image: isMale ? '/images/genetic-male.jpg' : '/images/genetic-female.jpg'
   }
   if (answers.goal === 'massa' || answers.dreamBody === 'forte') return {
     title: 'Potencial Anabólico Inexplorado',
@@ -196,7 +196,7 @@ function getDiagnosis(answers) {
     title: 'Fase de Transformação Acelerada',
     text: 'Você está no momento ideal para remodelar a composição corporal e queimar gordura aceleradamente com treinos dinâmicos.',
     icon: '✨',
-    image: isMale ? '/images/transform-male.png' : '/images/transform-female.png'
+    image: isMale ? '/images/transform-male.jpg' : '/images/woman-muscular.jpg'
   }
 }
 
@@ -397,6 +397,35 @@ export default function QuizFunnel({ onComplete }) {
   const [currentScreen, setCurrentScreen] = useState(0)
   const [answers, setAnswers] = useState({ gender: 'female' })
   const contentRef = useRef(null)
+
+  // ── Pré-carregamento imediato das imagens cruciais do quiz ──
+  useEffect(() => {
+    const criticalImages = [
+      '/comunidade_app_intro.jpg',
+      '/comunidade_nexafit.jpg',
+      '/images/body-fit-man.png',
+      '/images/body-fit-woman.png',
+      '/images/healthy-man.jpg',
+      '/images/healthy-woman.jpg',
+      '/images/transform-male.jpg',
+      '/images/woman-muscular.jpg',
+      '/images/genetic-male.jpg',
+      '/images/genetic-female.jpg',
+      '/images/visceral-fat.jpg',
+      '/images/man-18-29.png',
+      '/images/woman-18-29.png',
+      '/images/man-status-2.png',
+      '/images/man-status-3.png',
+      '/images/woman-status-2.png',
+      '/images/woman-status-3.png',
+      '/images/male-transformation.jpg',
+      '/images/jennifer-transformation.jpg'
+    ]
+    criticalImages.forEach(src => {
+      const img = new Image()
+      img.src = src
+    })
+  }, [])
 
   const screen = SCREENS[currentScreen] || SCREENS[0]
   const totalQuestions = SCREENS.filter(s => s.type !== 'intro' && s.type !== 'gender-select' && s.type !== 'interstitial' && s.type !== 'video-interstitial' && s.type !== 'loading' && s.type !== 'loading-plan' && s.type !== 'diagnosis' && s.type !== 'result' && s.type !== 'projection' && s.type !== 'plan-ready' && s.type !== 'checkout' && s.type !== 'age-select' && s.progress !== false).length
@@ -1378,14 +1407,14 @@ function SingleQuestion({ screen, answers, onSelect }) {
     if (screenId === 'dream-body') {
       if (isMale) {
         if (optId === 'atletico') return '/images/body-fit-man.png'
-        if (optId === 'tonificado') return '/images/genetic-male.png'
-        if (optId === 'forte') return '/images/transform-male.png'
+        if (optId === 'tonificado') return '/images/genetic-male.jpg'
+        if (optId === 'forte') return '/images/transform-male.jpg'
         if (optId === 'saudavel') return '/images/healthy-man.jpg'
         return '/images/healthy-man.jpg'
       } else {
         if (optId === 'atletico') return '/images/body-fit-woman.png'
         if (optId === 'tonificado') return '/images/woman-ab-tone.jpg'
-        if (optId === 'forte') return '/images/transform-female.png'
+        if (optId === 'forte') return '/images/woman-muscular.jpg'
         if (optId === 'saudavel') return '/images/healthy-woman.jpg'
         return '/images/healthy-woman.jpg'
       }
@@ -1393,12 +1422,12 @@ function SingleQuestion({ screen, answers, onSelect }) {
     if (screenId === 'goal') {
       if (isMale) {
         if (optId === 'emagrecer') return '/images/man-status-3.png'
-        if (optId === 'massa') return '/images/transform-male.png'
-        if (optId === 'definir') return '/images/genetic-male.png'
+        if (optId === 'massa') return '/images/transform-male.jpg'
+        if (optId === 'definir') return '/images/genetic-male.jpg'
         return '/images/man-18-29.png'
       } else {
         if (optId === 'emagrecer') return '/images/woman-status-3.png'
-        if (optId === 'massa') return '/images/transform-female.png'
+        if (optId === 'massa') return '/images/woman-muscular.jpg'
         if (optId === 'definir') return '/images/woman-ab-tone.jpg'
         return '/images/body-fit-woman.png'
       }
@@ -1415,7 +1444,7 @@ function SingleQuestion({ screen, answers, onSelect }) {
         <div className="quiz-age-cards">
           {options.map(opt => (
             <div key={opt.id} className={`quiz-age-card ${answers[ansKey] === opt.id ? 'selected' : ''}`} onClick={() => onSelect(opt.id)}>
-              <img src={getCardImage(screen.id, opt.id)} alt={opt.label} className="quiz-age-card-bg" style={{ objectFit: 'cover' }} />
+              <img src={getCardImage(screen.id, opt.id)} alt={opt.label} className="quiz-age-card-bg" loading="eager" decoding="async" style={{ objectFit: 'cover' }} />
               <div className="quiz-age-card-label" style={{ fontSize: 13, padding: '10px 8px' }}>{opt.label}</div>
             </div>
           ))}
